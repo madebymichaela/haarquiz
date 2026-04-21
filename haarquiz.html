@@ -1310,6 +1310,7 @@
     <div class="q-card active" id="q1">
       <span class="q-step">Frage 01 · Struktur</span>
       <h3 class="q-text">Wie beschreibst du deine Haarstruktur?</h3>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 2.</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q1','glatt')">
           <span class="opt-icon">〰️</span>
@@ -1345,7 +1346,7 @@
     <div class="q-card" id="q2">
       <span class="q-step">Frage 02 · Haartyp</span>
       <h3 class="q-text">Wie beschreibst du deinen Haartyp?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 2.</p>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle alles, was auf dich zutrifft.</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q2','fein')">
           <span class="opt-icon">🪶</span>
@@ -1384,7 +1385,7 @@
     <div class="q-card" id="q3">
       <span class="q-step">Frage 03 · Kopfhaut</span>
       <h3 class="q-text">Wie fühlt sich deine Kopfhaut an?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 2.</p>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle alles, was auf dich zutrifft.</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q3','nein')">
           <span class="opt-icon">🙌</span>
@@ -1423,6 +1424,7 @@
     <div class="q-card" id="q4">
       <span class="q-step">Frage 04 · Dein Alltag</span>
       <h3 class="q-text">Wie gehst du mit deinem Haar um?</h3>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 2.</p>
       <div class="opts">
         <button class="opt" onclick="pick(this,'q4','farbe')">
           <span class="opt-icon">🎨</span>
@@ -1461,7 +1463,7 @@
     <div class="q-card" id="q5">
       <span class="q-step">Frage 05 · Deine Wünsche</span>
       <h3 class="q-text">Was wünschst du dir am meisten für dein Haar?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle deine Top 3.</p>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 6.</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q5','reparatur')">
           <span class="opt-icon">💚</span>
@@ -1747,16 +1749,16 @@
 <!-- ═══════════ JAVASCRIPT ═══════════ -->
 <script>
   // State
-  // q1 (Struktur) und q4 (Behandlungen) = Single-Select (null / string)
-  // q2 (Haartyp), q3 (Kopfhaut), q5 (Ziele) = Multi-Select (array)
-  const A = { q1: null, q2: [], q3: [], q4: null, q5: [] };
+  // Alle 5 Fragen sind Multi-Select (array). Limits variieren pro Frage.
+  const A = { q1: [], q2: [], q3: [], q4: [], q5: [] };
   const TOTAL = 5;
 
-  // Multi-Select Konfiguration: welche Fragen, wie viele max
-  const MULTI_LIMITS = { q2: 2, q3: 2, q5: 3 };
+  // Multi-Select Konfiguration: wie viele Antworten pro Frage maximal
+  // Q2 und Q3 haben je 4 Optionen — max=4 entspricht "alles kann zutreffen"
+  const MULTI_LIMITS = { q1: 2, q2: 4, q3: 4, q4: 2, q5: 6 };
 
-  // Reihenfolge der Auswahl pro Multi-Frage — für "älteste rausschmeissen" bei Limit
-  const selectedOrder = { q2: [], q3: [], q5: [] };
+  // Reihenfolge der Auswahl pro Frage — für "älteste rausschmeissen" bei Limit
+  const selectedOrder = { q1: [], q2: [], q3: [], q4: [], q5: [] };
 
   // Helpers
   function scrollTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
@@ -2029,10 +2031,14 @@
     d.tips.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
 
     // Multi-Goal Note: zeigen, wenn Kundin mehrere Ziele gewählt hat
+    // Formatiert als saubere deutsche Aufzählung: "X, Y und Z"
     const multiGoalEl = document.getElementById('r-multi-goal');
     if (Array.isArray(A.q5) && A.q5.length > 1) {
       const extras = A.q5.slice(1).map(v => lblZiel[v]).filter(Boolean);
-      document.getElementById('r-multi-goal-list').textContent = extras.join(' und ');
+      const formatted = extras.length > 1
+        ? extras.slice(0, -1).join(', ') + ' und ' + extras[extras.length - 1]
+        : extras[0] || '';
+      document.getElementById('r-multi-goal-list').textContent = formatted;
       multiGoalEl.style.display = 'block';
     } else {
       multiGoalEl.style.display = 'none';
@@ -2089,10 +2095,9 @@
   }
 
   function restart(){
-    // State zurücksetzen — Single = null, Multi = leere Arrays
-    A.q1 = null; A.q4 = null;
-    A.q2 = []; A.q3 = []; A.q5 = [];
-    selectedOrder.q2 = []; selectedOrder.q3 = []; selectedOrder.q5 = [];
+    // State zurücksetzen — alle Fragen sind Multi-Select (Arrays)
+    A.q1 = []; A.q2 = []; A.q3 = []; A.q4 = []; A.q5 = [];
+    selectedOrder.q1 = []; selectedOrder.q2 = []; selectedOrder.q3 = []; selectedOrder.q4 = []; selectedOrder.q5 = [];
 
     document.querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
     document.querySelectorAll('.btn-next').forEach(b => b.disabled = true);
