@@ -1,0 +1,51 @@
+# Netlify-Konfiguration — wird automatisch beim Deploy gelesen.
+# Quelle: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Kein Build-Schritt — wir deployen statisches HTML direkt aus dem deploy/-Ordner.
+  publish = "deploy"
+
+# ── Security Headers für alle Seiten ──────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Verhindert Clickjacking (Quiz darf nicht in iframes fremder Seiten)
+    X-Frame-Options = "DENY"
+    # Verhindert MIME-Sniffing-Angriffe
+    X-Content-Type-Options = "nosniff"
+    # Moderne, datenschutzfreundliche Referrer-Policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Keine Kamera/Mikrofon/Geolocation-Anfragen zulassen
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # HTTPS für 1 Jahr erzwingen (HSTS)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# ── Caching ────────────────────────────────────────────────────────────
+# HTML-Seiten: kurzes Caching, damit Updates schnell live gehen
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+# Statische Assets: langes Caching (CSS/JS ändern sich praktisch nie hier)
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ── Redirects für alternative URL-Pfade ──────────────────────────────
+# z.B. haarquiz.ch/quiz → haarquiz.ch
+[[redirects]]
+  from = "/quiz"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/haarquiz"
+  to = "/"
+  status = 301

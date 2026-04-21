@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impressum · Michaelas MONAT Academy</title>
+  <meta name="description" content="Impressum und rechtliche Angaben zu haarquiz.ch." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:              #f8faf3;
+      --surface:         #ffffff;
+      --surface-low:     #f1f5ec;
+      --primary:         #1d6a63;
+      --primary-dim:     #0f4d47;
+      --on-surface:      #2d342c;
+      --on-surface-soft: #55605a;
+      --border:          rgba(45, 52, 44, 0.08);
+      --font-display:    'Lexend', sans-serif;
+      --font-body:       'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--on-surface);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top-nav {
+      padding: 24px 32px;
+      background: var(--bg);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: gap 0.25s ease;
+    }
+    .back-link:hover {
+      gap: 12px;
+    }
+    .back-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    main {
+      flex: 1;
+      padding: 32px 24px 80px;
+    }
+
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--surface);
+      padding: 64px 56px;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 24px rgba(45, 52, 44, 0.04);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--on-surface-soft);
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-top: 40px;
+      margin-bottom: 14px;
+      letter-spacing: -0.015em;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--on-surface);
+      margin-bottom: 16px;
+    }
+
+    .address {
+      background: var(--surface-low);
+      padding: 24px 28px;
+      border-radius: 1rem;
+      margin-bottom: 24px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .address strong {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 16px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover { text-decoration: underline; }
+
+    .updated-note {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--on-surface-soft);
+    }
+
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 32px 20px;
+      text-align: center;
+    }
+    footer p {
+      font-size: 12px;
+      color: var(--on-surface-soft);
+      letter-spacing: 0.02em;
+      margin: 0;
+    }
+    footer a {
+      color: var(--primary);
+      font-weight: 500;
+      margin: 0 6px;
+    }
+
+    @media (max-width: 640px) {
+      .content { padding: 40px 28px; }
+      .top-nav { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/" class="back-link">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+    Zurück zum Quiz
+  </a>
+</nav>
+
+<main>
+  <article class="content">
+    <h1>Impressum</h1>
+    <p class="subtitle">Rechtliche Angaben zu <strong>haarquiz.ch</strong>.</p>
+
+    <h2>Betreiberin</h2>
+    <div class="address">
+      <strong>mibo GmbH</strong>
+      Panoramastrasse 7A<br/>
+      4665 Oftringen<br/>
+      Schweiz<br/><br/>
+      UID-Nummer: CHE-358.511.012<br/>
+      Kontakt: <a href="mailto:info@haarquiz.ch">info@haarquiz.ch</a>
+    </div>
+
+    <h2>Inhaltliche Verantwortung</h2>
+    <p>
+      Diese Website wird im Auftrag von Michaela Antoniadis (MONAT Market Partner) durch die mibo GmbH betrieben.
+      Die auf dieser Website dargestellten Informationen, Produktbeschreibungen und Empfehlungen dienen der
+      allgemeinen Orientierung. Die persönliche Produkt-Empfehlung erfolgt individuell durch Michaela Antoniadis
+      nach Auswertung des Haar-Quiz.
+    </p>
+
+    <h2>Haftungsausschluss</h2>
+    <p>
+      Die mibo GmbH übernimmt trotz sorgfältiger inhaltlicher Kontrolle keine Haftung für die Richtigkeit,
+      Vollständigkeit und Aktualität der bereitgestellten Inhalte. Die Informationen auf dieser Website stellen
+      keine medizinische oder dermatologische Beratung dar. Bei anhaltenden Kopfhaut- oder Haarproblemen
+      empfehlen wir die Konsultation einer Fachperson (Dermatologie, Hausarzt, Frauenarzt).
+    </p>
+
+    <h2>Haftung für externe Links</h2>
+    <p>
+      Diese Website verweist auf externe Inhalte, insbesondere auf Instagram-Profile und auf Produktseiten von
+      MONAT Global Corp. Für den Inhalt dieser externen Seiten sind ausschliesslich deren Betreiber
+      verantwortlich. Zum Zeitpunkt der Verlinkung waren keine rechtswidrigen Inhalte erkennbar.
+    </p>
+
+    <h2>Urheberrechte</h2>
+    <p>
+      Die Inhalte dieser Website (Texte, Gestaltung, Layout, Code) sind urheberrechtlich geschützt. Eine
+      Wiedergabe, Weiterverwendung oder Bearbeitung ausserhalb der engen Grenzen des Urheberrechts bedarf
+      der vorherigen schriftlichen Zustimmung der mibo GmbH. Produktnamen und Markenzeichen von MONAT
+      Global Corp. sind Eigentum ihrer jeweiligen Inhaber.
+    </p>
+
+    <p class="updated-note">Stand: 21. April 2026</p>
+  </article>
+</main>
+
+<footer>
+  <p>© 2026 · Michaelas MONAT Academy · <a href="/">Quiz</a> · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Dependencies (falls später npm/node dazukommt)
+node_modules/
+.pnpm-store/
+
+# Environment / Secrets
+.env
+.env.local
+.env.*.local
+
+# Netlify build cache
+.netlify/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp files
+*.tmp
+.cache/

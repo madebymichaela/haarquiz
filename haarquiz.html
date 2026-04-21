@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dein Haar-Moment · Michaelas MONAT Academy</title>
+  <meta name="description" content="In 2 Minuten eine persönliche, ehrliche Pflege-Empfehlung für dein Haar — ohne Verkaufsdruck, ganz auf dich zugeschnitten." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Organic Clarity Palette */
+      --bg:              #f8faf3;
+      --surface-low:     #f1f5ec;
+      --surface-high:    #dee5d8;
+      --surface-lowest:  #ffffff;
+      --primary:         #1d6a63;
+      --primary-dim:     #0f4d47;
+      --primary-cont:    #a8f0e7;
+      --tertiary:        #356579;
+      --tertiary-cont:   #b7e7ff;
+      --on-surface:      #2d342c;
+      --on-surface-soft: #55605a;
+      --on-primary:      #ffffff;
+      --outline:         #adb4a8;
+
+      --radius-xl: 1.5rem;
+      --radius-md: 0.75rem;
+      --radius-full: 9999px;
+
+      --shadow-soft: 0 20px 40px rgba(45, 52, 44, 0.06);
+      --shadow-card: 0 4px 24px rgba(45, 52, 44, 0.04);
+
+      --transition: all 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+      --font-display: 'Lexend', sans-serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--on-surface);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════ */
+    #hero {
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 96px 24px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* soft organic background blobs */
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 720px; height: 720px;
+      background: radial-gradient(circle, rgba(168, 240, 231, 0.38) 0%, transparent 65%);
+      top: -180px; right: -180px;
+      border-radius: 50%;
+      filter: blur(10px);
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(183, 231, 255, 0.22) 0%, transparent 65%);
+      bottom: -120px; left: -120px;
+      border-radius: 50%;
+      filter: blur(10px);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-h1 em {
+      font-style: normal;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 18px);
+      color: var(--on-surface-soft);
+      max-width: 540px;
+      margin: 0 auto 44px;
+      line-height: 1.75;
+    }
+
+    .hero-sub strong {
+      color: var(--on-surface);
+      font-weight: 600;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-lowest);
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      color: var(--on-surface-soft);
+      font-weight: 500;
+    }
+
+    .badge svg {
+      width: 16px; height: 16px;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dim) 100%);
+      color: var(--on-primary);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 18px 40px;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-soft);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 24px 50px rgba(29, 106, 99, 0.25);
+    }
+    .btn-primary svg {
+      width: 18px; height: 18px;
+      transition: transform 0.3s;
+    }
+    .btn-primary:hover svg { transform: translateX(5px); }
+
+    .hero-note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--on-surface-soft);
+      opacity: 0.75;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       QUIZ SECTION
+       ═══════════════════════════════════════════════════════ */
+    #quiz-section {
+      display: none;
+      background: var(--bg);
+      min-height: 100vh;
+      padding: 64px 20px 96px;
+    }
+    #quiz-section.active { display: block; }
+
+    .quiz-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Progress */
+    .progress-wrap {
+      margin-bottom: 44px;
+      padding: 0 4px;
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .progress-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--on-surface-soft);
+      font-weight: 500;
+    }
+    .progress-pct {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .progress-track {
+      height: 4px;
+      background: var(--surface-high);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--primary-cont), var(--primary));
+      border-radius: var(--radius-full);
+      transition: width 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Question Cards */
+    .q-card {
+      background: var(--surface-lowest);
+      padding: 48px 52px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      display: none;
+      animation: fadeUp 0.45s ease;
+    }
+    .q-card.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .q-step {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .q-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.3;
+      margin-bottom: 32px;
+      letter-spacing: -0.015em;
+    }
+
+    .q-hint {
+      font-size: 13px;
+      color: var(--on-surface-soft);
+      margin-top: -22px;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    /* Options */
+    .opts {
+      display: grid;
+      gap: 12px;
+    }
+    .opts.cols2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 22px;
+      background: var(--surface-low);
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--on-surface);
+    }
+
+    .opt:hover {
+      background: var(--surface-high);
+      transform: translateX(3px);
+    }
+
+    .opt.sel {
+      background: var(--primary-cont);
+      color: var(--on-surface);
+    }
+    .opt.sel .chk {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .opt-icon {
+      font-size: 22px;
+      width: 32px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .opt-label {
+      flex: 1;
+      line-height: 1.4;
+    }
+    .opt-label strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--on-surface);
+    }
+    .opt-label span {
+      font-size: 13px;
+      color: var(--on-surface-soft);
+      margin-top: 2px;
+      display: block;
+    }
+
+    .chk {
+      width: 22px;
+      height: 22px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: scale(0.4);
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .chk svg { width: 12px; height: 12px; color: #fff; }
+
+    /* Navigation */
+    .q-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 28px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-high);
+      border: none;
+      border-radius: var(--radius-full);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-back:hover {
+      transform: scale(1.02);
+      background: var(--outline);
+      color: var(--on-surface);
+    }
+    .btn-back svg { width: 14px; height: 14px; }
+
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dim) 100%);
+      color: var(--on-primary);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 14px 28px;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-next:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(29, 106, 99, 0.22);
+    }
+    .btn-next:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .btn-next svg { width: 15px; height: 15px; }
+
+    /* ═══════════════════════════════════════════════════════
+       EMAIL CAPTURE
+       ═══════════════════════════════════════════════════════ */
+    #email-section {
+      display: none;
+      background: var(--bg);
+      min-height: 100vh;
+      padding: 64px 20px 96px;
+    }
+    #email-section.active { display: block; }
+
+    .email-wrap {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--surface-lowest);
+      padding: 56px 52px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      animation: fadeUp 0.45s ease;
+    }
+
+    .email-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      background: var(--primary-cont);
+      border-radius: 50%;
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+
+    .email-eyebrow {
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .email-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.28;
+      margin-bottom: 16px;
+      letter-spacing: -0.015em;
+    }
+
+    .email-sub {
+      font-size: 15px;
+      color: var(--on-surface-soft);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .field-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field-label {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--on-surface-soft);
+      font-weight: 500;
+    }
+
+    .field-input {
+      padding: 16px 18px;
+      background: var(--surface-high);
+      border: 2px solid transparent;
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--on-surface);
+      outline: none;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    .field-input:focus {
+      background: var(--surface-lowest);
+      border-color: rgba(29, 106, 99, 0.4);
+    }
+    .field-input::placeholder { color: var(--on-surface-soft); opacity: 0.6; }
+
+    .btn-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dim) 100%);
+      color: var(--on-primary);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 18px 32px;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 12px;
+      width: 100%;
+      box-shadow: var(--shadow-soft);
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 16px 40px rgba(29, 106, 99, 0.25);
+    }
+    .btn-submit svg { width: 18px; height: 18px; }
+
+    .email-privacy {
+      font-size: 12px;
+      color: var(--on-surface-soft);
+      text-align: center;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+    .email-privacy a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESULT
+       ═══════════════════════════════════════════════════════ */
+    #result-section { display: none; }
+    #result-section.active { display: block; }
+
+    .result-hero {
+      background: var(--bg);
+      padding: 96px 24px 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(168, 240, 231, 0.35) 0%, transparent 65%);
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      filter: blur(10px);
+    }
+
+    .result-eyebrow {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: block;
+      position: relative;
+      font-weight: 500;
+    }
+
+    .result-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--on-surface-soft);
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .result-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.18;
+      max-width: 640px;
+      margin: 0 auto 24px;
+      position: relative;
+      letter-spacing: -0.02em;
+    }
+
+    .result-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--on-primary);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border-radius: var(--radius-full);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .result-tagline {
+      font-size: 17px;
+      color: var(--on-surface-soft);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+      font-style: italic;
+    }
+
+    .result-body {
+      background: var(--surface-low);
+      padding: 64px 24px 96px;
+    }
+
+    .result-container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Insights Row */
+    .insights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .insight {
+      background: var(--surface-lowest);
+      padding: 24px 22px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+    }
+
+    .insight-ico {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--primary-cont);
+      border-radius: 50%;
+    }
+
+    .insight-lbl {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--on-surface-soft);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .insight-val {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      letter-spacing: -0.01em;
+    }
+
+    /* Description */
+    .result-desc {
+      background: var(--surface-lowest);
+      padding: 44px 44px;
+      margin-bottom: 28px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+    }
+
+    .desc-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-bottom: 16px;
+      letter-spacing: -0.015em;
+    }
+
+    .desc-text {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--on-surface);
+      margin-bottom: 24px;
+    }
+
+    .tip-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tip-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 15px;
+      color: var(--on-surface);
+      line-height: 1.65;
+    }
+
+    .tip-list li::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      margin-top: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Product Suggestions */
+    .product-hint {
+      background: var(--primary-cont);
+      border-radius: var(--radius-xl);
+      padding: 32px 36px;
+      margin-bottom: 28px;
+    }
+
+    .product-hint-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary-dim);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .product-hint-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-bottom: 12px;
+    }
+
+    .product-hint-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--on-surface);
+    }
+
+    /* Multi-Goal Note */
+    .multi-goal-note {
+      background: var(--surface-lowest);
+      border-radius: var(--radius-xl);
+      padding: 28px 36px;
+      margin-bottom: 28px;
+      border-left: 4px solid var(--primary);
+      box-shadow: var(--shadow-card);
+    }
+
+    .multi-goal-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .multi-goal-text {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--on-surface);
+    }
+
+    .multi-goal-text strong {
+      color: var(--primary-dim);
+      font-weight: 600;
+    }
+
+    /* CTA Block */
+    .cta-block {
+      background: linear-gradient(150deg, var(--primary) 0%, var(--primary-dim) 100%);
+      padding: 64px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+    }
+
+    .cta-block::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(168, 240, 231, 0.25) 0%, transparent 65%);
+      top: -80px; right: -80px;
+      border-radius: 50%;
+    }
+
+    .cta-eyebrow {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--primary-cont);
+      margin-bottom: 16px;
+      display: block;
+      position: relative;
+      font-weight: 500;
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 600;
+      color: var(--on-primary);
+      line-height: 1.28;
+      margin-bottom: 16px;
+      position: relative;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 440px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 480px;
+      margin: 32px auto 36px;
+      text-align: left;
+      position: relative;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-cont);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary-dim);
+    }
+
+    .step-text-head {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--on-primary);
+      margin-bottom: 4px;
+    }
+
+    .step-text-body {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.6;
+    }
+
+    .step-text-body a {
+      color: var(--primary-cont);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .cta-trust {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .trust-i {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .trust-i svg {
+      width: 14px; height: 14px;
+      color: var(--primary-cont);
+    }
+
+    .btn-restart {
+      display: block;
+      margin: 28px auto 0;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.55);
+      font-family: var(--font-body);
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .btn-restart:hover { color: rgba(255, 255, 255, 0.9); }
+
+    /* Download button (dark variant, on gradient bg) */
+    .download-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 28px;
+      position: relative;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface-lowest);
+      color: var(--primary);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 15px 32px;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-download:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    }
+    .btn-download svg { width: 17px; height: 17px; }
+    .btn-download.loading { opacity: 0.6; cursor: wait; }
+
+    .download-hint {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 12px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid rgba(45, 52, 44, 0.06);
+      padding: 32px 20px;
+      text-align: center;
+    }
+    footer p {
+      font-size: 12px;
+      color: var(--on-surface-soft);
+      letter-spacing: 0.02em;
+    }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    /* ═══════════════════════════════════════════════════════
+       LOADER
+       ═══════════════════════════════════════════════════════ */
+    .loader-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    .loader-overlay.active { display: flex; }
+
+    .loader-text {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--on-surface);
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+
+    .loader-dots {
+      display: flex;
+      gap: 10px;
+    }
+    .loader-dots span {
+      width: 10px; height: 10px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: dot 0.9s ease-in-out infinite;
+    }
+    .loader-dots span:nth-child(2) { animation-delay: 0.15s; }
+    .loader-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes dot {
+      0%, 100% { opacity: 0.3; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(-8px); }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SHARE CARD (off-screen, captured by html2canvas)
+       ═══════════════════════════════════════════════════════ */
+    #share-card {
+      position: fixed;
+      left: -9999px;
+      top: 0;
+      width: 800px;
+      height: 1200px;
+      background: var(--bg);
+      font-family: var(--font-body);
+      overflow: hidden;
+    }
+
+    .sc-header {
+      background: linear-gradient(135deg, var(--primary-cont) 0%, var(--bg) 100%);
+      padding: 48px 60px 40px;
+    }
+
+    .sc-body {
+      padding: 40px 60px 52px;
+    }
+
+    .sc-eyebrow {
+      font-size: 12px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .sc-brand {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--on-surface-soft);
+      margin-bottom: 36px;
+      font-weight: 500;
+    }
+
+    .sc-name {
+      font-size: 16px;
+      color: var(--on-surface-soft);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .sc-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .sc-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--on-primary);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+    }
+
+    .sc-insights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .sc-insight {
+      background: var(--surface-lowest);
+      border-radius: var(--radius-xl);
+      padding: 22px 24px;
+    }
+
+    .sc-ilbl {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--on-surface-soft);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .sc-ival {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--on-surface);
+      letter-spacing: -0.015em;
+    }
+
+    .sc-tagline {
+      font-size: 15px;
+      color: var(--on-surface-soft);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 36px;
+    }
+
+    .sc-steps-title {
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .sc-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .sc-step {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .sc-step-num {
+      width: 34px;
+      height: 34px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--on-primary);
+      flex-shrink: 0;
+    }
+
+    .sc-step-text {
+      font-size: 14px;
+      color: var(--on-surface);
+      line-height: 1.5;
+    }
+
+    .sc-step-text strong {
+      font-weight: 600;
+    }
+
+    .sc-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 28px;
+      border-top: 2px solid var(--surface-high);
+    }
+
+    .sc-url {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .sc-monat {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--on-surface-soft);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      #hero { padding: 64px 20px; }
+      .q-card, .email-wrap, .result-desc, .cta-block, .product-hint { padding: 32px 24px; }
+      .opts.cols2 { grid-template-columns: 1fr; }
+      .q-nav { flex-direction: column-reverse; gap: 12px; }
+      .btn-back, .btn-next { width: 100%; justify-content: center; }
+      .result-hero { padding: 64px 20px 56px; }
+      .cta-block { padding: 48px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ LOADER ═══════════ -->
+<div class="loader-overlay" id="loader">
+  <div class="loader-text">Dein Haar-Profil wird erstellt…</div>
+  <div class="loader-dots"><span></span><span></span><span></span></div>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Michaelas MONAT Academy · Persönliche Haaranalyse</div>
+
+    <h1 class="hero-h1">
+      Dein Haar darf<br/>wieder <em>du</em> sein.
+    </h1>
+
+    <p class="hero-sub">
+      Hör auf, zwischen Produkten zu wechseln, die eigentlich für alle und niemanden gemacht sind.
+      <strong>Beantworte 5 Fragen</strong> — und erhalte eine persönliche Empfehlung,
+      die wirklich zu dir passt.
+    </p>
+
+    <div class="hero-badges">
+      <span class="badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        5 Fragen · 2 Minuten
+      </span>
+      <span class="badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Kostenlos &amp; unverbindlich
+      </span>
+      <span class="badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        Persönliche Sprachnachricht
+      </span>
+    </div>
+
+    <button class="btn-primary" onclick="startQuiz()">
+      Quiz starten
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </button>
+
+    <p class="hero-note">Kein Kauf nötig. Keine Verpflichtung. Nur für dich.</p>
+  </div>
+</section>
+
+<!-- ═══════════ QUIZ ═══════════ -->
+<section id="quiz-section">
+  <div class="quiz-wrap">
+
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label" id="step-lbl">Frage 1 von 5</span>
+        <span class="progress-pct" id="step-pct">20%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:20%"></div></div>
+    </div>
+
+    <!-- Q1: Haarstruktur -->
+    <div class="q-card active" id="q1">
+      <span class="q-step">Frage 01 · Struktur</span>
+      <h3 class="q-text">Wie beschreibst du deine Haarstruktur?</h3>
+      <div class="opts cols2">
+        <button class="opt" onclick="pick(this,'q1','glatt')">
+          <span class="opt-icon">〰️</span>
+          <span class="opt-label"><strong>Glatt</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q1','wellig')">
+          <span class="opt-icon">🌊</span>
+          <span class="opt-label"><strong>Wellig</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q1','locken')">
+          <span class="opt-icon">🌀</span>
+          <span class="opt-label"><strong>Locken</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q1','krause')">
+          <span class="opt-icon">🔱</span>
+          <span class="opt-label"><strong>Krause</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+      </div>
+      <div class="q-nav">
+        <span></span>
+        <button class="btn-next" id="nx1" disabled onclick="next(1)">
+          Weiter
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Q2: Haartyp -->
+    <div class="q-card" id="q2">
+      <span class="q-step">Frage 02 · Haartyp</span>
+      <h3 class="q-text">Wie beschreibst du deinen Haartyp?</h3>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 2.</p>
+      <div class="opts cols2">
+        <button class="opt" onclick="pick(this,'q2','fein')">
+          <span class="opt-icon">🪶</span>
+          <span class="opt-label"><strong>Fein / Dünn</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q2','normal')">
+          <span class="opt-icon">✨</span>
+          <span class="opt-label"><strong>Normal / Mittel</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q2','dick')">
+          <span class="opt-icon">💪</span>
+          <span class="opt-label"><strong>Dick / Kräftig</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q2','haarausfall')">
+          <span class="opt-icon">🍂</span>
+          <span class="opt-label"><strong>Haarausfall</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+      </div>
+      <div class="q-nav">
+        <button class="btn-back" onclick="prev(2)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Zurück
+        </button>
+        <button class="btn-next" id="nx2" disabled onclick="next(2)">
+          Weiter
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Q3: Kopfhaut -->
+    <div class="q-card" id="q3">
+      <span class="q-step">Frage 03 · Kopfhaut</span>
+      <h3 class="q-text">Wie fühlt sich deine Kopfhaut an?</h3>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 2.</p>
+      <div class="opts cols2">
+        <button class="opt" onclick="pick(this,'q3','nein')">
+          <span class="opt-icon">🙌</span>
+          <span class="opt-label"><strong>Unauffällig</strong><span>Keine spürbaren Probleme</span></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q3','trocken')">
+          <span class="opt-icon">❄️</span>
+          <span class="opt-label"><strong>Trocken / Schuppig</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q3','fettend')">
+          <span class="opt-icon">💧</span>
+          <span class="opt-label"><strong>Schnell fettend</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q3','empfindlich')">
+          <span class="opt-icon">🌸</span>
+          <span class="opt-label"><strong>Empfindlich / Juckend</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+      </div>
+      <div class="q-nav">
+        <button class="btn-back" onclick="prev(3)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Zurück
+        </button>
+        <button class="btn-next" id="nx3" disabled onclick="next(3)">
+          Weiter
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Q4: Behandlungen -->
+    <div class="q-card" id="q4">
+      <span class="q-step">Frage 04 · Dein Alltag</span>
+      <h3 class="q-text">Wie gehst du mit deinem Haar um?</h3>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'q4','farbe')">
+          <span class="opt-icon">🎨</span>
+          <span class="opt-label"><strong>Ich färbe oder blondiere regelmässig</strong><span>Colorationen, Highlights, Balayage</span></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q4','hitze')">
+          <span class="opt-icon">🔥</span>
+          <span class="opt-label"><strong>Ich nutze Hitze-Styling</strong><span>Föhn, Glätteisen oder Lockenstab regelmässig</span></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q4','beides')">
+          <span class="opt-icon">💫</span>
+          <span class="opt-label"><strong>Beides — Farbe und Hitze</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q4','nein')">
+          <span class="opt-icon">🌿</span>
+          <span class="opt-label"><strong>Natürlich — weder noch</strong><span>Keine Farbe, kaum Hitze-Styling</span></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+      </div>
+      <div class="q-nav">
+        <button class="btn-back" onclick="prev(4)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Zurück
+        </button>
+        <button class="btn-next" id="nx4" disabled onclick="next(4)">
+          Weiter
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Q5: Ziel -->
+    <div class="q-card" id="q5">
+      <span class="q-step">Frage 05 · Deine Wünsche</span>
+      <h3 class="q-text">Was wünschst du dir am meisten für dein Haar?</h3>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle deine Top 3.</p>
+      <div class="opts cols2">
+        <button class="opt" onclick="pick(this,'q5','reparatur')">
+          <span class="opt-icon">💚</span>
+          <span class="opt-label"><strong>Reparatur</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q5','gesunde-kopfhaut')">
+          <span class="opt-icon">🌿</span>
+          <span class="opt-label"><strong>Gesunde Kopfhaut</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q5','anti-frizz')">
+          <span class="opt-icon">⚡</span>
+          <span class="opt-label"><strong>Anti Frizz</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q5','mehr-glanz')">
+          <span class="opt-icon">✨</span>
+          <span class="opt-label"><strong>Mehr Glanz</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q5','mehr-volumen')">
+          <span class="opt-icon">🎈</span>
+          <span class="opt-label"><strong>Mehr Volumen</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q5','schoene-locken')">
+          <span class="opt-icon">🌀</span>
+          <span class="opt-label"><strong>Schöne Locken</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q5','ciao-schuppen')">
+          <span class="opt-icon">❄️</span>
+          <span class="opt-label"><strong>Ciao Schuppen</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q5','haarwachstum')">
+          <span class="opt-icon">🌱</span>
+          <span class="opt-label"><strong>Haarwachstum</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+      </div>
+      <div class="q-nav">
+        <button class="btn-back" onclick="prev(5)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Zurück
+        </button>
+        <button class="btn-next" id="nx5" disabled onclick="goToEmail()">
+          Zum Ergebnis
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ EMAIL CAPTURE ═══════════ -->
+<section id="email-section">
+  <div class="quiz-wrap">
+    <div class="email-wrap" style="text-align:center;">
+      <div class="email-icon">🌿</div>
+      <span class="email-eyebrow">Fast geschafft</span>
+      <h2 class="email-title">Wohin soll deine<br/>persönliche Empfehlung?</h2>
+      <p class="email-sub">
+        Michaela schaut sich deine Antworten an und schickt dir eine Sprachnachricht
+        mit ihrer persönlichen Empfehlung. Ehrlich, unverbindlich, auf dich zugeschnitten.
+      </p>
+
+      <!--
+        ╔══════════════════════════════════════════════════════════╗
+        ║  INTEGRATION: Ersetze die action-URL mit deinem          ║
+        ║  Formspree-Link: https://formspree.io/f/DEINE_ID         ║
+        ║  Oder verbinde es mit Mailchimp / ActiveCampaign.        ║
+        ╚══════════════════════════════════════════════════════════╝
+      -->
+      <form class="email-form" id="lead-form" onsubmit="submitForm(event)">
+        <input type="hidden" name="haarstruktur"  id="hf-struktur" />
+        <input type="hidden" name="haartyp"       id="hf-typ" />
+        <input type="hidden" name="kopfhaut"      id="hf-kopfhaut" />
+        <input type="hidden" name="behandlungen"  id="hf-behandlung" />
+        <input type="hidden" name="ziel"          id="hf-ziel" />
+        <input type="hidden" name="ergebnis-typ"  id="hf-ergebnis" />
+
+        <div class="field-wrap">
+          <label class="field-label">Dein Vorname</label>
+          <input class="field-input" type="text" name="vorname" id="inp-name"
+                 placeholder="z. B. Sandra" autocomplete="given-name" />
+        </div>
+        <div class="field-wrap">
+          <label class="field-label">Deine E-Mail-Adresse *</label>
+          <input class="field-input" type="email" name="email" id="inp-email"
+                 placeholder="sandra@beispiel.ch" autocomplete="email" required />
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Mein Haar-Profil erhalten
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+
+        <p class="email-privacy">
+          Kein Spam. Deine Daten bleiben bei Michaela.<br/>
+          Du kannst dich jederzeit abmelden. <a href="/datenschutz.html">Datenschutz</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ RESULT ═══════════ -->
+<section id="result-section">
+  <div class="result-hero">
+    <span class="result-eyebrow">Dein persönliches Haar-Profil</span>
+    <p class="result-name" id="r-name"></p>
+    <h2 class="result-title" id="r-title"></h2>
+    <div class="result-badge" id="r-badge"></div>
+    <p class="result-tagline" id="r-tagline"></p>
+  </div>
+
+  <div class="result-body">
+    <div class="result-container">
+
+      <div class="insights">
+        <div class="insight">
+          <div class="insight-ico">🔬</div>
+          <div class="insight-lbl">Struktur</div>
+          <div class="insight-val" id="ri-struktur">—</div>
+        </div>
+        <div class="insight">
+          <div class="insight-ico">💇</div>
+          <div class="insight-lbl">Haartyp</div>
+          <div class="insight-val" id="ri-typ">—</div>
+        </div>
+        <div class="insight">
+          <div class="insight-ico">🌿</div>
+          <div class="insight-lbl">Kopfhaut</div>
+          <div class="insight-val" id="ri-kopfhaut">—</div>
+        </div>
+        <div class="insight">
+          <div class="insight-ico">🎯</div>
+          <div class="insight-lbl">Dein Wunsch</div>
+          <div class="insight-val" id="ri-ziel">—</div>
+        </div>
+      </div>
+
+      <div class="result-desc">
+        <h3 class="desc-title">Was das für dich bedeutet</h3>
+        <p class="desc-text" id="r-desc"></p>
+        <ul class="tip-list" id="r-tips"></ul>
+      </div>
+
+      <div class="multi-goal-note" id="r-multi-goal" style="display:none;">
+        <div class="multi-goal-label">Deine weiteren Wünsche</div>
+        <p class="multi-goal-text">
+          Du hast ausserdem <strong id="r-multi-goal-list"></strong> genannt.
+          Das ist häufig — dein Haar ist vielschichtig, und deine Empfehlung soll es auch sein.
+          Michaela berücksichtigt alle deine Wünsche in ihrer persönlichen Sprachnachricht.
+        </p>
+      </div>
+
+      <div class="product-hint">
+        <div class="product-hint-label">Produkt-Richtung</div>
+        <div class="product-hint-title" id="r-product-title">Deine MONAT-Empfehlung</div>
+        <div class="product-hint-text" id="r-product-text">—</div>
+      </div>
+
+      <div class="cta-block">
+        <span class="cta-eyebrow">So geht's weiter</span>
+        <h3 class="cta-title">Drei kleine Schritte<br/>zu deiner perfekten Pflege</h3>
+
+        <div class="steps-container">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div>
+              <div class="step-text-head">Speichere dein Haar-Profil</div>
+              <div class="step-text-body">Lade dein persönliches Haar-Profil-Bild mit dem Button unten herunter.</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div>
+              <div class="step-text-head">Schicke es an Michaela</div>
+              <div class="step-text-body">Per Instagram-DM an <a href="https://www.instagram.com/made_by_michaela" target="_blank">@made_by_michaela</a>.</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-text-head">Du erhältst deine persönliche Empfehlung</div>
+              <div class="step-text-body">Michaela schickt dir eine Sprachnachricht mit ehrlichem Feedback und Produkt-Empfehlungen — damit du nicht mehr raten musst.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-trust">
+          <span class="trust-i">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Kein Kauf nötig
+          </span>
+          <span class="trust-i">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            100% persönlich
+          </span>
+          <span class="trust-i">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            Datenschutz garantiert
+          </span>
+        </div>
+
+        <div class="download-wrap">
+          <button class="btn-download" id="btn-dl" onclick="downloadCard()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Haar-Profil als Bild speichern
+          </button>
+          <p class="download-hint">Bild herunterladen &amp; per Instagram an Michaela senden</p>
+        </div>
+
+        <button class="btn-restart" onclick="restart()">Quiz nochmals machen</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SHARE CARD (off-screen) ═══════════ -->
+<div id="share-card">
+  <div class="sc-header">
+    <div class="sc-eyebrow">Mein persönliches Haar-Profil</div>
+    <div class="sc-brand">Michaelas MONAT Academy</div>
+    <div class="sc-name" id="sc-name"></div>
+    <div class="sc-title" id="sc-title"></div>
+    <div class="sc-badge" id="sc-badge"></div>
+  </div>
+  <div class="sc-body">
+    <div class="sc-insights">
+      <div class="sc-insight">
+        <div class="sc-ilbl">Struktur</div>
+        <div class="sc-ival" id="sc-struktur">—</div>
+      </div>
+      <div class="sc-insight">
+        <div class="sc-ilbl">Haartyp</div>
+        <div class="sc-ival" id="sc-typ">—</div>
+      </div>
+      <div class="sc-insight">
+        <div class="sc-ilbl">Kopfhaut</div>
+        <div class="sc-ival" id="sc-kopfhaut">—</div>
+      </div>
+      <div class="sc-insight">
+        <div class="sc-ilbl">Mein Wunsch</div>
+        <div class="sc-ival" id="sc-ziel">—</div>
+      </div>
+    </div>
+
+    <div class="sc-tagline" id="sc-tagline"></div>
+
+    <div class="sc-steps-title">Dein nächster Schritt</div>
+    <div class="sc-steps">
+      <div class="sc-step">
+        <div class="sc-step-num">1</div>
+        <div class="sc-step-text"><strong>Bild speichern</strong> — dieses Haar-Profil auf dein Gerät.</div>
+      </div>
+      <div class="sc-step">
+        <div class="sc-step-num">2</div>
+        <div class="sc-step-text"><strong>An Michaela senden</strong> — per Instagram-DM an @made_by_michaela.</div>
+      </div>
+      <div class="sc-step">
+        <div class="sc-step-num">3</div>
+        <div class="sc-step-text"><strong>Persönliche Sprachnachricht</strong> mit ehrlicher Empfehlung erhalten.</div>
+      </div>
+    </div>
+
+    <div class="sc-footer">
+      <div class="sc-url">haarquiz.ch</div>
+      <div class="sc-monat">Monat</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 · Michaelas MONAT Academy · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a> · <a href="mailto:info@haarquiz.ch">Kontakt</a></p>
+</footer>
+
+<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<script>
+  // State
+  // q1 (Struktur) und q4 (Behandlungen) = Single-Select (null / string)
+  // q2 (Haartyp), q3 (Kopfhaut), q5 (Ziele) = Multi-Select (array)
+  const A = { q1: null, q2: [], q3: [], q4: null, q5: [] };
+  const TOTAL = 5;
+
+  // Multi-Select Konfiguration: welche Fragen, wie viele max
+  const MULTI_LIMITS = { q2: 2, q3: 2, q5: 3 };
+
+  // Reihenfolge der Auswahl pro Multi-Frage — für "älteste rausschmeissen" bei Limit
+  const selectedOrder = { q2: [], q3: [], q5: [] };
+
+  // Helpers
+  function scrollTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+
+  function updateProgress(step){
+    const pct = Math.round((step/TOTAL)*100);
+    document.getElementById('prog-fill').style.width = pct+'%';
+    document.getElementById('step-lbl').textContent = 'Frage '+step+' von '+TOTAL;
+    document.getElementById('step-pct').textContent = pct+'%';
+  }
+
+  function startQuiz(){
+    document.getElementById('hero').style.display = 'none';
+    document.getElementById('quiz-section').classList.add('active');
+    scrollTop();
+  }
+
+  function pick(btn, q, val){
+    const nx = document.getElementById('nx' + q.replace('q',''));
+    const max = MULTI_LIMITS[q];
+
+    if (!max) {
+      // ── Single-Select (Q1, Q4) ─────────────────────────
+      btn.closest('.opts').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+      btn.classList.add('sel');
+      A[q] = val;
+      if (nx) nx.disabled = false;
+      return;
+    }
+
+    // ── Multi-Select (Q2, Q3, Q5) ───────────────────────
+    const idx = A[q].indexOf(val);
+    if (idx >= 0) {
+      // Bereits ausgewählt → deselektieren
+      A[q].splice(idx, 1);
+      const btnIdx = selectedOrder[q].indexOf(btn);
+      if (btnIdx >= 0) selectedOrder[q].splice(btnIdx, 1);
+      btn.classList.remove('sel');
+    } else {
+      // Neu auswählen
+      if (A[q].length >= max) {
+        // Limit erreicht — älteste Auswahl sanft rausnehmen
+        const oldestBtn = selectedOrder[q].shift();
+        A[q].shift();
+        if (oldestBtn) oldestBtn.classList.remove('sel');
+      }
+      A[q].push(val);
+      selectedOrder[q].push(btn);
+      btn.classList.add('sel');
+    }
+
+    // Weiter-Button aktivieren, sobald mindestens eine Auswahl vorliegt
+    if (nx) nx.disabled = (A[q].length === 0);
+  }
+
+  function next(cur){
+    document.getElementById('q' + cur).classList.remove('active');
+    document.getElementById('q' + (cur+1)).classList.add('active');
+    updateProgress(cur+1);
+    scrollTop();
+  }
+
+  function prev(cur){
+    document.getElementById('q' + cur).classList.remove('active');
+    document.getElementById('q' + (cur-1)).classList.add('active');
+    updateProgress(cur-1);
+    scrollTop();
+  }
+
+  function goToEmail(){
+    document.getElementById('quiz-section').classList.remove('active');
+    document.getElementById('email-section').classList.add('active');
+    scrollTop();
+  }
+
+  function submitForm(e){
+    e.preventDefault();
+    const email = document.getElementById('inp-email').value.trim();
+    if (!email){ alert('Bitte gib deine E-Mail-Adresse ein.'); return; }
+
+    const rType = getResultType();
+
+    // Hidden Fields — Arrays joinen für E-Mail an Michaela
+    const asField = (v) => Array.isArray(v) ? (v.join(', ') || '—') : (v || '—');
+    document.getElementById('hf-struktur').value   = asField(A.q1);
+    document.getElementById('hf-typ').value        = asField(A.q2);
+    document.getElementById('hf-kopfhaut').value   = asField(A.q3);
+    document.getElementById('hf-behandlung').value = asField(A.q4);
+    document.getElementById('hf-ziel').value       = asField(A.q5);
+    document.getElementById('hf-ergebnis').value   = rType;
+
+    document.getElementById('loader').classList.add('active');
+
+    setTimeout(() => {
+      document.getElementById('loader').classList.remove('active');
+      showResult(rType);
+    }, 2200);
+
+    /*
+    // ── REAL FORMSPREE INTEGRATION ──────────────────────
+    // const form = document.getElementById('lead-form');
+    // fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
+    //   method: 'POST',
+    //   body: new FormData(form),
+    //   headers: { 'Accept': 'application/json' }
+    // }).then(() => {
+    //   document.getElementById('loader').classList.remove('active');
+    //   showResult(rType);
+    // });
+    */
+  }
+
+  function getResultType(){
+    // Primäres Ziel = erste Auswahl in Q5 (Array)
+    if (Array.isArray(A.q5) && A.q5.length > 0) return A.q5[0];
+    return 'mehr-glanz';
+  }
+
+  // Result data — mit konkreten MONAT-Produkten aus dem Transkript
+  const RESULTS = {
+    'reparatur': {
+      badge: 'Reparatur & Aufbau',
+      title: 'Dein Haar darf sich wieder\nerholen — von innen heraus.',
+      tagline: 'Ein kaputtes Haar wird nie wieder ganz. Aber es lässt sich reparieren — wie ein Glas mit gutem Kleber.',
+      desc: 'Chemische Behandlungen und Hitze greifen die Keratin-Brücken in der Haarfaser an. Das Haar verliert Proteine, Lipide, Feuchtigkeit — und sieht matt und spröde aus. Der Schlüssel: Produkte, die die Risse in der Haarstruktur tatsächlich auffüllen, statt nur oberflächlich zu beschichten.',
+      tips: [
+        'Pflegemasken 1–2× pro Woche für Tiefen-Reparatur — danach immer Conditioner zum Einschliessen.',
+        'Hitzeschutz bei JEDEM Styling (gute Produkte schützen bis 232°C).',
+        'Rejuveniqe Oil als wöchentliches Scalp-Oiling vor der Wäsche.',
+        'Silikon- und alkoholfreie Produkte — nachhaltiger Aufbau statt kurzfristige Schein-Reparatur.'
+      ],
+      product: 'Bond IQ ist MONATs Reparatur-Linie — mit Lupin-Protein, das Keratin-Brücken tatsächlich wieder aufbaut. Kombiniert mit Rejuveniqe Oil für tiefe Nährstoffversorgung. Michaela schlägt dir die genaue Routine vor, passend zu deinem Alltag.'
+    },
+
+    'gesunde-kopfhaut': {
+      badge: 'Kopfhaut im Gleichgewicht',
+      title: 'Gesundes Haar beginnt\nan der Wurzel.',
+      tagline: 'Deine Kopfhaut altert 7× schneller als deine Gesichtshaut — und hat genau so viel Pflege verdient.',
+      desc: 'Viele Haarprobleme — Juckreiz, matter Glanz, Schuppen, sogar Haarausfall — beginnen an der Kopfhaut. Ein gestörtes Kopfhaut-Mikrobiom bringt alles aus dem Gleichgewicht. Mit der richtigen Pflege regulierst du das Mikrobiom, beruhigst Irritationen und schaffst das Fundament für wirklich gesundes Haar.',
+      tips: [
+        'Scrub oder sanftes Peeling alle 1–2 Wochen löst Ablagerungen.',
+        'Kopfhaut-Serum täglich oder mehrmals pro Woche — die Haarwurzel will gefüttert werden.',
+        'Kopfhautmassage beim Einwaschen des Shampoos fördert die Durchblutung.',
+        'Keine harten Sulfate — sie trocknen die Kopfhaut aus und bringen alles aus dem Gleichgewicht.'
+      ],
+      product: 'Das MONAT Kopfhaut-System — Purifying Scrub + Vinegar Rinse + IRT Clinical Serum — arbeitet in drei Schritten: reinigen, ausgleichen, nähren. Bei empfindlicher Kopfhaut auch die Scalp Comfort Linie mit Laktobazillen-Fermenten. Michaela empfiehlt dir die passende Kombi.'
+    },
+
+    'anti-frizz': {
+      badge: 'Anti Frizz & Ruhe',
+      title: 'Schluss mit Frizz.\nAuch im August.',
+      tagline: 'Frizz ist kein Schicksal — es ist ein Signal, dass dein Haar Feuchtigkeit aus der Luft saugt, weil es selbst welche braucht.',
+      desc: 'Wenn die Haarfaser nicht genug innere Feuchtigkeit hat, zieht sie sich aus der Luft — und quillt auf. Silikone kaschieren das Problem kurz, lösen es aber nicht. Die nachhaltige Antwort: Feuchtigkeit aus pflanzlichen Wirkstoffen, kombiniert mit leichten Ölen, die eine Schutzschicht gegen Luftfeuchtigkeit bilden.',
+      tips: [
+        'Ein gutes Anti-Frizz-System verwendet pflanzenbasiertes Keratin (z.B. Erbsenextrakt) + Illipe-Butter.',
+        'Föhnen mit Diffusor oder kühler Stufe — nicht gegen die Wuchsrichtung bürsten.',
+        'Für den Urlaub in warme / feuchte Länder: ein spezielles Antifrizz-Spray ins trockene Haar.',
+        'Regelmässige Intensiv-Treatments halten den Feuchtigkeits-Haushalt im Gleichgewicht.'
+      ],
+      product: 'MONAT Smoothing Antifrizz wurde genau dafür entwickelt: pflanzenbasiertes Keratin, Erbsenextrakt, Illipe- und Kurkuma-Butter. Mit Hitzeschutz bis 232°C. Perfekt für Urlaub, feuchtes Klima — oder einfach für Haare, die endlich mal ruhig bleiben wollen.'
+    },
+
+    'mehr-glanz': {
+      badge: 'Glanz & Vitalität',
+      title: 'Dein Haar hat Potenzial —\nlass es strahlen.',
+      tagline: 'Gesundes Haar reflektiert Licht. Mit der richtigen Pflege kommt der natürliche Glanz zurück.',
+      desc: 'Mattes Haar ist meist poröses Haar: Die Schuppenschicht steht offen und reflektiert Licht ungleichmässig. Hochwertige Pflege glättet die Kutikula — ohne sie mit Silikonen zu überdecken. Das Ergebnis: natürlicher, tiefer Glanz statt oberflächlichem Schimmer.',
+      tips: [
+        'Nach der Maske IMMER einen Conditioner — er säuert ab und schliesst die Schuppenschicht.',
+        'Glanz-Spülungen mit Apfelessig und Squalan sind natürliche Glanz-Booster.',
+        'Kaltes Wasser zum Abschluss schliesst die Kutikula zusätzlich.',
+        'Weniger ist mehr: Ein paar Tropfen hochwertiges Haaröl in die Längen nach dem Styling.'
+      ],
+      product: 'Die Purifying Vinegar Rinse ist Michaelas absolutes Glanz-Geheimnis — mit Apfelessig, Squalan und leichten AHA-Säuren. Dazu Rejuveniqe Oil als Finish. Silikon- und parabenfrei, für langfristigen, echten Glanz.'
+    },
+
+    'mehr-volumen': {
+      badge: 'Volumen & Leichtigkeit',
+      title: 'Dein feines Haar verdient\nmehr Volumen.',
+      tagline: 'Fein heisst nicht flach — mit den richtigen leichten Produkten wird dein Haar voluminöser, ohne beschwert zu werden.',
+      desc: 'Feines Haar wird von schweren Conditionern und Silikonen schnell platt gedrückt. Volumen entsteht nicht durch mehr Pflege, sondern durch die RICHTIGE Pflege: leicht, wasserbasiert, mit pflanzlichen Proteinen, die das einzelne Haar stärken ohne zu belasten.',
+      tips: [
+        'Shampoo nur am Ansatz — durchs Ausspülen kommt es in die Längen. Längen-Waschen zerstört Volumen.',
+        'Leichte Hyaluron-Pflege spendet Feuchtigkeit, ohne zu beschweren.',
+        'Volumen-Spray am Ansatz ins feuchte Haar, dann nach oben föhnen.',
+        'Bei Haarausfall: Kopfhaut-Serum mit Capixyl — regt Haarwachstum an, stärkt die Wurzel.'
+      ],
+      product: 'Die Revitalize Linie + Volume Spray ist für dich gemacht. Bei Haarausfall zusätzlich die IRT Clinical Serie mit Capixyl — klinisch getestet, verlängert die Wachstumsphase der Haare. Michaela schlägt dir die beste Reihenfolge vor.'
+    },
+
+    'schoene-locken': {
+      badge: 'Locken in ihrer besten Form',
+      title: 'Deine Locken sind nicht weg —\nsie sind nur müde.',
+      tagline: 'Lockiges Haar braucht eine andere Pflege als glattes. Wenn es sie bekommt, zeigt es dir, wer es wirklich ist.',
+      desc: 'Locken sind von Natur aus trockener, weil die Öle der Kopfhaut schwerer an die Spitzen gelangen. Dazu kommt: Jahre mit falscher Pflege, Hitze oder Glätten verändern die natürliche Textur — sie lassen die Locke schlafen. Mit Feuchtigkeit, Curl-Definition und Rejuveniqe-Öl als Finish kommt sie zurück.',
+      tips: [
+        'Sulfatfreie Shampoos erhalten die natürliche Feuchtigkeit deiner Locken.',
+        'Leave-in-Conditioner sind für Locken keine Kür, sondern Pflicht.',
+        'Curl-Creme oder Curl-Gelée ins nasse Haar — nicht trocken.',
+        'Zum Schluss ein paar Tropfen Haaröl in die Längen — Glanz ohne Schwere.'
+      ],
+      product: 'Die MONAT Curl Perfection Serie — Curl Cream, Curl Gelée, Refresh Spray — wurde für Locken konzipiert. Mit Wüstendattelöl, Ölkomplexen und Rejuveniqe. Viele Locken-Girls finishen mit Rejuveniqe Oil für Extra-Glanz. Deine Locken werden dich wieder lieben.'
+    },
+
+    'ciao-schuppen': {
+      badge: 'Ciao Schuppen',
+      title: 'Deine Kopfhaut verdient\nendlich Ruhe.',
+      tagline: 'Schuppen sind nicht dein Charakter — sie sind ein Signal. Eins, auf das du sanft eingehen kannst.',
+      desc: 'Schuppen entstehen entweder durch eine ausgetrocknete oder eine unausgeglichene Kopfhaut. Aggressive Anti-Schuppen-Shampoos trocknen oft weiter aus und machen das Problem langfristig schlimmer. Die nachhaltige Lösung: das Kopfhaut-Mikrobiom ausgleichen, nicht angreifen.',
+      tips: [
+        'Sanfte, balancierende Shampoos statt aggressiver Anti-Schuppen-Produkte.',
+        'Kratzen macht es schlimmer — die Kopfhaut reagiert auf Reizung mit mehr Schuppung.',
+        'Regelmässige Kopfhaut-Peelings entfernen abgestorbene Hautschüppchen.',
+        'Laktobazillen-Fermente unterstützen das Mikrobiom — der Unterschied ist oft nach wenigen Wochen spürbar.'
+      ],
+      product: 'Die Scalp Comfort Linie — Treatment + Serum — ist für empfindliche, schuppende Kopfhaut entwickelt. Mit Laktobazillen-Fermenten, pflanzlichen AHAs, Hamamelis. Kombiniert mit dem Purifying Scrub (aber nicht in derselben Wäsche!) für sanfte Tiefen-Reinigung. Michaela erklärt dir den genauen Rhythmus.'
+    },
+
+    'haarwachstum': {
+      badge: 'Haarwachstum & Stärke',
+      title: 'Dein Haar kann wieder\nvoller wachsen.',
+      tagline: 'Haarwachstum braucht Geduld — aber du kannst der Kopfhaut genau das geben, was sie für den Neustart braucht.',
+      desc: 'Haarausfall hat viele Ursachen: Stress, Hormone, Post-Partum, Nährstoffmangel, oder entzündete Haarfollikel. Was du direkt beeinflussen kannst: die Qualität deiner Kopfhaut-Pflege. Eine gut durchblutete, nährstoffreiche Kopfhaut ist die Grundlage. Wichtig zu wissen: Sichtbare Ergebnisse brauchen 3–6 Monate Geduld — aber sie kommen.',
+      tips: [
+        'Kopfhaut-Serum mit Capixyl täglich — der Wirkstoff verlängert die Wachstumsphase.',
+        'Scalp-Oiling 1× pro Woche vor der Wäsche: Rejuveniqe-Öl auftragen, einwirken lassen.',
+        'Von innen unterstützen — Biotin, Zink, Eisen (der Körper bedient zuerst andere Organe, bevor die Kopfhaut Nährstoffe bekommt).',
+        'Geduld. Auch bei scheinbar toten Haarfollikeln kann mit Durchblutung wieder etwas wachsen.'
+      ],
+      product: 'Die IRT Clinical Serie ist MONATs Bestseller für Haarwachstum — klinisch getestet, mit Capixyl, Melatonin, Koffein und Erbsenextrakt. Kombiniert mit Rejuveniqe Oil als wöchentliches Scalp-Oiling. Michaela begleitet dich durch die ersten Monate — die meisten sehen nach 8–12 Wochen die ersten Veränderungen.'
+    }
+  };
+
+  function showResult(type){
+    const d = RESULTS[type] || RESULTS['mehr-glanz'];
+    const name = document.getElementById('inp-name').value.trim();
+
+    document.getElementById('r-name').textContent =
+      name ? 'Hallo ' + name + ' — hier ist dein persönliches Haar-Profil' : '';
+    document.getElementById('r-title').textContent   = d.title.replace('\n',' ');
+    document.getElementById('r-badge').textContent   = d.badge;
+    document.getElementById('r-tagline').textContent = d.tagline;
+
+    const lblStruktur = { glatt:'Glatt', wellig:'Wellig', locken:'Lockig', krause:'Krause' };
+    const lblTyp      = { fein:'Fein', normal:'Normal', dick:'Kräftig', haarausfall:'Haarausfall' };
+    const lblKopf     = { nein:'Unauffällig', trocken:'Trocken', fettend:'Schnell fettend', empfindlich:'Empfindlich' };
+    const lblZiel     = {
+      'reparatur':'Reparatur', 'gesunde-kopfhaut':'Kopfhaut',
+      'anti-frizz':'Anti Frizz', 'mehr-glanz':'Glanz',
+      'mehr-volumen':'Volumen', 'schoene-locken':'Locken',
+      'ciao-schuppen':'Schuppen weg', 'haarwachstum':'Wachstum'
+    };
+
+    // Helper: Array oder String sauber in Label-Text umwandeln
+    const fmt = (val, dict) => {
+      if (Array.isArray(val)) {
+        return val.map(v => dict[v]).filter(Boolean).join(', ') || '—';
+      }
+      return dict[val] || '—';
+    };
+
+    document.getElementById('ri-struktur').textContent = fmt(A.q1, lblStruktur);
+    document.getElementById('ri-typ').textContent      = fmt(A.q2, lblTyp);
+    document.getElementById('ri-kopfhaut').textContent = fmt(A.q3, lblKopf);
+    document.getElementById('ri-ziel').textContent     = fmt(A.q5, lblZiel);
+
+    document.getElementById('r-desc').textContent = d.desc;
+    const ul = document.getElementById('r-tips');
+    ul.innerHTML = '';
+    d.tips.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+
+    // Multi-Goal Note: zeigen, wenn Kundin mehrere Ziele gewählt hat
+    const multiGoalEl = document.getElementById('r-multi-goal');
+    if (Array.isArray(A.q5) && A.q5.length > 1) {
+      const extras = A.q5.slice(1).map(v => lblZiel[v]).filter(Boolean);
+      document.getElementById('r-multi-goal-list').textContent = extras.join(' und ');
+      multiGoalEl.style.display = 'block';
+    } else {
+      multiGoalEl.style.display = 'none';
+    }
+
+    document.getElementById('r-product-text').textContent = d.product;
+
+    // Share card
+    document.getElementById('sc-name').textContent =
+      name ? 'Haar-Profil von ' + name : 'Mein Haar-Profil';
+    document.getElementById('sc-title').textContent   = d.title.replace('\n',' ');
+    document.getElementById('sc-badge').textContent   = d.badge;
+    document.getElementById('sc-tagline').textContent = d.tagline;
+    document.getElementById('sc-struktur').textContent = fmt(A.q1, lblStruktur);
+    document.getElementById('sc-typ').textContent      = fmt(A.q2, lblTyp);
+    document.getElementById('sc-kopfhaut').textContent = fmt(A.q3, lblKopf);
+    document.getElementById('sc-ziel').textContent     = fmt(A.q5, lblZiel);
+
+    document.getElementById('email-section').classList.remove('active');
+    document.getElementById('result-section').classList.add('active');
+    scrollTop();
+  }
+
+  function downloadCard(){
+    const btn = document.getElementById('btn-dl');
+    btn.classList.add('loading');
+    btn.innerHTML = 'Bild wird erstellt…';
+
+    const card = document.getElementById('share-card');
+    html2canvas(card, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#f8faf3',
+      logging: false,
+      width: 800,
+      height: 1200
+    }).then(canvas => {
+      const name = document.getElementById('inp-name').value.trim() || 'mein';
+      const link = document.createElement('a');
+      link.download = 'haar-profil-' + name.toLowerCase().replace(/\s+/g,'-') + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+
+      btn.classList.remove('loading');
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Bild gespeichert';
+      setTimeout(() => {
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg> Haar-Profil als Bild speichern';
+      }, 3000);
+    }).catch(() => {
+      btn.classList.remove('loading');
+      btn.innerHTML = 'Fehler — bitte nochmals versuchen';
+    });
+  }
+
+  function restart(){
+    // State zurücksetzen — Single = null, Multi = leere Arrays
+    A.q1 = null; A.q4 = null;
+    A.q2 = []; A.q3 = []; A.q5 = [];
+    selectedOrder.q2 = []; selectedOrder.q3 = []; selectedOrder.q5 = [];
+
+    document.querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+    document.querySelectorAll('.btn-next').forEach(b => b.disabled = true);
+    document.querySelectorAll('.q-card').forEach(c => c.classList.remove('active'));
+    document.getElementById('q1').classList.add('active');
+    document.getElementById('inp-name').value = '';
+    document.getElementById('inp-email').value = '';
+    document.getElementById('r-multi-goal').style.display = 'none';
+    updateProgress(1);
+    document.getElementById('result-section').classList.remove('active');
+    document.getElementById('quiz-section').classList.add('active');
+    scrollTop();
+  }
+</script>
+
+</body>
+</html>

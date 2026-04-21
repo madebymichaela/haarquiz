@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datenschutzerklärung · Michaelas MONAT Academy</title>
+  <meta name="description" content="Wie wir auf haarquiz.ch mit deinen Daten umgehen — transparent und nach Schweizer DSG sowie DSGVO." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:              #f8faf3;
+      --surface:         #ffffff;
+      --surface-low:     #f1f5ec;
+      --primary:         #1d6a63;
+      --primary-dim:     #0f4d47;
+      --primary-cont:    #a8f0e7;
+      --on-surface:      #2d342c;
+      --on-surface-soft: #55605a;
+      --border:          rgba(45, 52, 44, 0.08);
+      --font-display:    'Lexend', sans-serif;
+      --font-body:       'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--on-surface);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top-nav {
+      padding: 24px 32px;
+      background: var(--bg);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: gap 0.25s ease;
+    }
+    .back-link:hover { gap: 12px; }
+    .back-link svg { width: 16px; height: 16px; }
+
+    main {
+      flex: 1;
+      padding: 32px 24px 80px;
+    }
+
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--surface);
+      padding: 64px 56px;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 24px rgba(45, 52, 44, 0.04);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--on-surface-soft);
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .toc {
+      background: var(--surface-low);
+      padding: 24px 28px;
+      border-radius: 1rem;
+      margin-bottom: 48px;
+    }
+    .toc-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .toc ol {
+      margin: 0 0 0 20px;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+    .toc a {
+      color: var(--on-surface);
+      text-decoration: none;
+    }
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-top: 44px;
+      margin-bottom: 14px;
+      letter-spacing: -0.015em;
+      scroll-margin-top: 24px;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-top: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--on-surface);
+      margin-bottom: 16px;
+    }
+
+    ul {
+      margin: 16px 0 20px 24px;
+      padding: 0;
+    }
+    li {
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 8px;
+      color: var(--on-surface);
+    }
+
+    .address {
+      background: var(--surface-low);
+      padding: 24px 28px;
+      border-radius: 1rem;
+      margin-bottom: 16px;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+    .address strong {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 16px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .highlight {
+      background: var(--primary-cont);
+      padding: 16px 24px;
+      border-radius: 1rem;
+      margin: 16px 0 24px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .highlight strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary-dim);
+      font-weight: 600;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover { text-decoration: underline; }
+
+    strong {
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .updated-note {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--on-surface-soft);
+    }
+
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 32px 20px;
+      text-align: center;
+    }
+    footer p {
+      font-size: 12px;
+      color: var(--on-surface-soft);
+      letter-spacing: 0.02em;
+      margin: 0;
+    }
+    footer a {
+      color: var(--primary);
+      font-weight: 500;
+      margin: 0 6px;
+    }
+
+    @media (max-width: 640px) {
+      .content { padding: 40px 28px; }
+      .top-nav { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="/" class="back-link">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+    Zurück zum Quiz
+  </a>
+</nav>
+
+<main>
+  <article class="content">
+    <h1>Datenschutzerklärung</h1>
+    <p class="subtitle">
+      Diese Erklärung beschreibt transparent, wie wir auf <strong>haarquiz.ch</strong> mit deinen Daten umgehen.
+      Wir halten uns an das Schweizer Datenschutzgesetz (DSG) und — soweit anwendbar — an die EU-Datenschutz-Grundverordnung (DSGVO).
+    </p>
+
+    <nav class="toc">
+      <div class="toc-title">Auf dieser Seite</div>
+      <ol>
+        <li><a href="#verantwortlich">Verantwortliche Stelle</a></li>
+        <li><a href="#grundsatz">Grundsatz</a></li>
+        <li><a href="#hosting">Hosting (Netlify)</a></li>
+        <li><a href="#fonts">Schriftarten (Google Fonts)</a></li>
+        <li><a href="#cdn">Externe Bibliotheken (Cloudflare)</a></li>
+        <li><a href="#quiz">Haar-Quiz und Kontaktformular</a></li>
+        <li><a href="#cookies">Cookies und Browser-Speicher</a></li>
+        <li><a href="#tracking">Analyse und Tracking</a></li>
+        <li><a href="#rechte">Deine Rechte</a></li>
+        <li><a href="#links">Externe Links</a></li>
+        <li><a href="#aenderungen">Anpassungen dieser Erklärung</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="verantwortlich">1. Verantwortliche Stelle</h2>
+    <div class="address">
+      <strong>mibo GmbH</strong>
+      Panoramastrasse 7A<br/>
+      4665 Oftringen<br/>
+      Schweiz<br/><br/>
+      UID-Nummer: CHE-358.511.012<br/>
+      Kontakt für Datenschutzanfragen: <a href="mailto:info@haarquiz.ch">info@haarquiz.ch</a>
+    </div>
+    <p>
+      Die Website wird im Auftrag von Michaela Antoniadis betrieben. Für datenschutzrelevante Anfragen
+      wendest du dich bitte an die oben angegebene Kontaktadresse.
+    </p>
+
+    <h2 id="grundsatz">2. Grundsatz</h2>
+    <p>
+      Wir verarbeiten deine Personendaten nur im notwendigen Umfang und nur für die unten genannten Zwecke.
+      Deine Daten werden nicht zu Werbe- oder Analysezwecken an Dritte weitergegeben oder verkauft.
+    </p>
+
+    <h2 id="hosting">3. Hosting (Netlify)</h2>
+    <p>
+      Diese Website wird bei <strong>Netlify, Inc.</strong> (San Francisco, USA) gehostet. Beim Aufruf der
+      Website werden technisch notwendige Informationen (IP-Adresse, Datum und Uhrzeit, aufgerufene Seite,
+      verwendeter Browser und Betriebssystem) an Netlify-Server übermittelt und dort zur Sicherstellung des
+      Betriebs temporär verarbeitet. Eine Auswertung zu Marketing- oder Tracking-Zwecken findet nicht statt.
+    </p>
+    <p>
+      Netlify ist nach dem <strong>EU-U.S. Data Privacy Framework</strong> zertifiziert und stellt
+      entsprechende Garantien zum internationalen Datenschutz bereit. Weitere Informationen:
+      <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">netlify.com/privacy</a>.
+    </p>
+
+    <h2 id="fonts">4. Schriftarten (Google Fonts)</h2>
+    <p>
+      Diese Website lädt die Schriftarten <em>Lexend</em> und <em>Plus Jakarta Sans</em> über
+      <strong>Google Fonts</strong>, einen Dienst der Google LLC (USA). Beim Laden der Schriften wird
+      deine IP-Adresse an Google übertragen. Die Nutzung dient der einheitlichen Darstellung der Seite
+      und beruht auf unserem berechtigten Interesse an einer optisch konsistenten Darstellung.
+    </p>
+    <p>
+      Weitere Informationen:
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.
+      Wenn du dies vermeiden möchtest, kannst du das Laden externer Ressourcen in deinem Browser blockieren.
+      Die Website bleibt funktional, zeigt dann aber möglicherweise andere Schriftarten an.
+    </p>
+
+    <h2 id="cdn">5. Externe Bibliotheken (Cloudflare CDN)</h2>
+    <p>
+      Zur Bereitstellung der Bildgenerierungs-Funktion — damit du dein Haar-Profil als Bild herunterladen
+      kannst — nutzen wir die Open-Source-Bibliothek <strong>html2canvas</strong>, die über das Content
+      Delivery Network von <strong>Cloudflare, Inc.</strong> (<code>cdnjs.cloudflare.com</code>) geladen wird.
+      Dabei wird deine IP-Adresse an Cloudflare übertragen.
+    </p>
+    <p>
+      Weitere Informationen:
+      <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>.
+    </p>
+
+    <h2 id="quiz">6. Haar-Quiz und Kontaktformular</h2>
+    <p>Wenn du das Haar-Quiz ausfüllst und deine E-Mail-Adresse angibst, werden folgende Daten erhoben:</p>
+    <ul>
+      <li>Vorname (freiwillig)</li>
+      <li>E-Mail-Adresse</li>
+      <li>Deine Angaben zu Haarstruktur, Haartyp, Kopfhaut, Behandlungsgewohnheiten und Pflege-Zielen</li>
+    </ul>
+
+    <div class="highlight">
+      <strong>Zweck der Verarbeitung</strong>
+      Die Daten werden ausschliesslich dazu verwendet, dir eine persönliche, unverbindliche Produkt-Empfehlung
+      zukommen zu lassen — in der Regel per Sprachnachricht via Instagram oder per E-Mail.
+    </div>
+
+    <h3>Rechtsgrundlage</h3>
+    <p>
+      Deine Einwilligung durch das aktive Ausfüllen und Absenden des Quiz. Diese Einwilligung kannst du
+      jederzeit mit Wirkung für die Zukunft widerrufen (siehe "Deine Rechte").
+    </p>
+
+    <h3>Speicherdauer</h3>
+    <p>
+      Deine Daten werden so lange gespeichert, wie dies für die Beantwortung und eine allfällige
+      Folgekommunikation erforderlich ist, höchstens jedoch 12 Monate. Danach werden sie gelöscht, sofern
+      du nicht in eine längere Aufbewahrung einwilligst (etwa im Rahmen einer Kundenbetreuung nach einem Kauf).
+    </p>
+
+    <h3>Keine Weitergabe an Dritte</h3>
+    <p>
+      Deine Daten werden nicht für Werbung verkauft, nicht an Datenhändler weitergegeben und nicht für
+      Profiling eingesetzt. Ausnahme: Wenn gesetzliche Verpflichtungen dies erfordern.
+    </p>
+
+    <h2 id="cookies">7. Cookies und Browser-Speicher</h2>
+    <p>
+      Diese Website setzt <strong>keine Cookies</strong> und speichert <strong>keine Daten</strong> in deinem
+      Browser (weder LocalStorage noch SessionStorage). Deine Quiz-Antworten existieren ausschliesslich während
+      deiner aktuellen Sitzung im Arbeitsspeicher deines Browsers und werden erst beim aktiven Absenden des
+      Formulars an uns übertragen.
+    </p>
+
+    <h2 id="tracking">8. Analyse und Tracking</h2>
+    <p>Diese Website nutzt:</p>
+    <ul>
+      <li><strong>Keine Analyse-Tools</strong> (z. B. Google Analytics, Matomo)</li>
+      <li><strong>Keine Werbe-Pixel</strong> (z. B. Meta/Facebook, TikTok, LinkedIn)</li>
+      <li><strong>Kein Remarketing</strong> und kein Cross-Site-Tracking</li>
+      <li><strong>Keine A/B-Testing-Tools</strong></li>
+    </ul>
+    <p>Dein Besuch bleibt nur dir und Michaela bekannt.</p>
+
+    <h2 id="rechte">9. Deine Rechte</h2>
+    <p>Du hast jederzeit das Recht auf:</p>
+    <ul>
+      <li><strong>Auskunft</strong> über die von uns über dich gespeicherten Daten</li>
+      <li><strong>Berichtigung</strong> unrichtiger Daten</li>
+      <li><strong>Löschung</strong> deiner Daten ("Recht auf Vergessen")</li>
+      <li><strong>Einschränkung</strong> der Verarbeitung</li>
+      <li><strong>Widerruf</strong> einer erteilten Einwilligung (mit Wirkung für die Zukunft)</li>
+      <li><strong>Datenübertragbarkeit</strong> in einem gängigen maschinenlesbaren Format</li>
+    </ul>
+    <p>
+      Deine Anfrage richtest du an: <a href="mailto:info@haarquiz.ch">info@haarquiz.ch</a>.
+      Wir bearbeiten Anfragen in der Regel innerhalb von 14 Tagen.
+    </p>
+    <p>
+      Zusätzlich hast du das Recht, dich bei der zuständigen Aufsichtsbehörde zu beschweren — in der Schweiz
+      beim <a href="https://www.edoeb.admin.ch" target="_blank" rel="noopener">Eidgenössischen Datenschutz-
+      und Öffentlichkeitsbeauftragten (EDÖB)</a>.
+    </p>
+
+    <h2 id="links">10. Externe Links</h2>
+    <p>
+      Diese Website verlinkt auf externe Dienste (insbesondere auf Instagram sowie auf Produktseiten von
+      MONAT Global Corp.). Für die Datenverarbeitung auf diesen externen Seiten sind deren Betreiber
+      verantwortlich. Beim Klick auf einen externen Link verlässt du diese Website; die Datenschutzerklärungen
+      dieser Anbieter gelten dann zusätzlich.
+    </p>
+
+    <h2 id="aenderungen">11. Anpassungen dieser Datenschutzerklärung</h2>
+    <p>
+      Wir behalten uns vor, diese Erklärung anzupassen, um sie aktuellen rechtlichen Anforderungen oder
+      technischen Änderungen (z. B. wenn ein neuer Dienst eingebunden wird) gerecht zu werden. Die aktuelle
+      Fassung ist jederzeit unter <a href="/datenschutz.html">haarquiz.ch/datenschutz</a> abrufbar.
+    </p>
+
+    <p class="updated-note">Stand: 21. April 2026</p>
+  </article>
+</main>
+
+<footer>
+  <p>© 2026 · Michaelas MONAT Academy · <a href="/">Quiz</a> · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a></p>
+</footer>
+
+</body>
+</html>
