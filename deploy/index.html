@@ -1351,9 +1351,9 @@
 
     <!-- Q2: Haartyp -->
     <div class="q-card" id="q2">
-      <span class="q-step">Frage 02 · Haartyp</span>
-      <h3 class="q-text">Wie beschreibst du deinen Haartyp?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle alles, was auf dich zutrifft.</p>
+      <span class="q-step">Frage 02 · Haar-Zustand</span>
+      <h3 class="q-text">Wie beschreibst du dein Haar?</h3>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle alles, was zutrifft (max. 4).</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q2','fein')">
           <span class="opt-icon">🪶</span>
@@ -1375,6 +1375,36 @@
           <span class="opt-label"><strong>Haarausfall</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
+        <button class="opt" onclick="pick(this,'q2','bruechig')">
+          <span class="opt-icon">💔</span>
+          <span class="opt-label"><strong>Brüchig</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q2','geschaedigt')">
+          <span class="opt-icon">🩹</span>
+          <span class="opt-label"><strong>Geschädigt</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q2','blondiert')">
+          <span class="opt-icon">☀️</span>
+          <span class="opt-label"><strong>Blondiert</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q2','spliss')">
+          <span class="opt-icon">✂️</span>
+          <span class="opt-label"><strong>Spliss</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q2','trocken')">
+          <span class="opt-icon">🌵</span>
+          <span class="opt-label"><strong>Trocken</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q2','platt')">
+          <span class="opt-icon">📏</span>
+          <span class="opt-label"><strong>Platt</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
       </div>
       <div class="q-nav">
         <button class="btn-back" onclick="prev(2)">
@@ -1392,7 +1422,7 @@
     <div class="q-card" id="q3">
       <span class="q-step">Frage 03 · Kopfhaut</span>
       <h3 class="q-text">Wie fühlt sich deine Kopfhaut an?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle alles, was auf dich zutrifft.</p>
+      <p class="q-hint">Mehrfachauswahl möglich — wähle alles, was zutrifft (max. 3).</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q3','nein')">
           <span class="opt-icon">🙌</span>
@@ -1400,8 +1430,13 @@
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q3','trocken')">
+          <span class="opt-icon">🌵</span>
+          <span class="opt-label"><strong>Trocken</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q3','schuppig')">
           <span class="opt-icon">❄️</span>
-          <span class="opt-label"><strong>Trocken / Schuppig</strong></span>
+          <span class="opt-label"><strong>Schuppig</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q3','fettend')">
@@ -1411,7 +1446,12 @@
         </button>
         <button class="opt" onclick="pick(this,'q3','empfindlich')">
           <span class="opt-icon">🌸</span>
-          <span class="opt-label"><strong>Empfindlich / Juckend</strong></span>
+          <span class="opt-label"><strong>Empfindlich</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q3','juckend')">
+          <span class="opt-icon">🔥</span>
+          <span class="opt-label"><strong>Juckend</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
       </div>
@@ -1489,7 +1529,7 @@
         </button>
         <button class="opt" onclick="pick(this,'q5','mehr-glanz')">
           <span class="opt-icon">✨</span>
-          <span class="opt-label"><strong>Mehr Glanz</strong></span>
+          <span class="opt-label"><strong>Mehr Glanz &amp; Feuchtigkeit</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','mehr-volumen')">
@@ -1497,9 +1537,24 @@
           <span class="opt-label"><strong>Mehr Volumen</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
+        <button class="opt" onclick="pick(this,'q5','dichteres-haar')">
+          <span class="opt-icon">🌾</span>
+          <span class="opt-label"><strong>Dichteres Haar</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q5','haarwachstum')">
+          <span class="opt-icon">🌱</span>
+          <span class="opt-label"><strong>Haarwachstum</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
         <button class="opt" onclick="pick(this,'q5','schoene-locken')">
           <span class="opt-icon">🌀</span>
           <span class="opt-label"><strong>Schöne Locken</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pick(this,'q5','glattere-haare')">
+          <span class="opt-icon">💧</span>
+          <span class="opt-label"><strong>Glattere Haare</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','ciao-schuppen')">
@@ -1507,9 +1562,9 @@
           <span class="opt-label"><strong>Ciao Schuppen</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
-        <button class="opt" onclick="pick(this,'q5','haarwachstum')">
-          <span class="opt-icon">🌱</span>
-          <span class="opt-label"><strong>Haarwachstum</strong></span>
+        <button class="opt" onclick="pick(this,'q5','weniger-oelige')">
+          <span class="opt-icon">🧼</span>
+          <span class="opt-label"><strong>Weniger ölige Haare</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
       </div>
@@ -1766,7 +1821,7 @@
 
   // Multi-Select Konfiguration: wie viele Antworten pro Frage maximal
   // Q2 und Q3 haben je 4 Optionen — max=4 entspricht "alles kann zutreffen"
-  const MULTI_LIMITS = { q1: 2, q2: 4, q3: 4, q4: 2, q5: 6 };
+  const MULTI_LIMITS = { q1: 2, q2: 4, q3: 3, q4: 2, q5: 6 };
 
   // Reihenfolge der Auswahl pro Frage — für "älteste rausschmeissen" bei Limit
   const selectedOrder = { q1: [], q2: [], q3: [], q4: [], q5: [] };
@@ -2009,6 +2064,48 @@
         'Geduld. Auch bei scheinbar toten Haarfollikeln kann mit Durchblutung wieder etwas wachsen.'
       ],
       product: 'Die IRT Clinical Serie ist MONATs Bestseller für Haarwachstum — klinisch getestet, mit Capixyl, Melatonin, Koffein und Erbsenextrakt. Kombiniert mit Rejuveniqe Oil als wöchentliches Scalp-Oiling. Michaela begleitet dich durch die ersten Monate — die meisten sehen nach 8–12 Wochen die ersten Veränderungen.'
+    },
+
+    'dichteres-haar': {
+      badge: 'Dichteres Haar & Fülle',
+      title: 'Dein Haar verdient\nmehr Dichte und Fülle.',
+      tagline: 'Von Natur aus feines Haar ist keine Diagnose — mit der richtigen Pflege wird es sichtbar voller.',
+      desc: 'Feines Haar ist genetisch, aber die sichtbare Dichte lässt sich beeinflussen. Der Schlüssel liegt in zwei Dingen: die Kopfhaut stärken (damit die Haare kräftiger nachwachsen) und das einzelne Haar stärken (damit jedes Haar optisch voller wirkt). Keine Schwere, keine Silikone, die beschweren — sondern Wirkstoffe, die das Haar von der Wurzel her aufbauen.',
+      tips: [
+        'Capixyl ist der entscheidende Wirkstoff — stärkt und verdichtet jede einzelne Haarsträhne.',
+        'Leichte, nicht-beschwerende Formulierungen nutzen — feines Haar plattet bei schweren Produkten.',
+        'Föhnen am Ansatz mit kühlem Luftstrom nach oben — macht Ansätze sichtbar voller.',
+        'Geduld: sichtbare Verdichtung braucht 6–8 Wochen. Den Griff-Unterschied spürst du schon früher.'
+      ],
+      product: 'Die IR Clinical Serie ist genau dafür entwickelt — Capixyl verdichtet, Rejuveniqe nährt, Erbsenextrakt bringt Fülle. Bei besonders feinem Haar zusätzlich die Revive Linie fürs Volumen am Ansatz. Michaela empfiehlt dir die Kombination, die zu deinem Haartyp passt.'
+    },
+
+    'glattere-haare': {
+      badge: 'Seidig-glattes Haar',
+      title: 'Seidig-glattes Haar,\ndas einfach fliesst.',
+      tagline: 'Glätte ist kein Tages-Kampf mit dem Glätteisen — sondern das Ergebnis von Haar, das Feuchtigkeit halten kann.',
+      desc: 'Damit Haar glatt liegt, braucht es zwei Dinge: genug Feuchtigkeit (sonst quillt es auf und wird kraus) und eine intakte Schuppenschicht (sonst reflektiert das Licht chaotisch). Anti-Frizz-Produkte schützen vor äusseren Einflüssen, aber wirklich glattes Haar entsteht durch Pflege, die die Haarfaser von innen stabilisiert.',
+      tips: [
+        'Feuchtigkeitsspendendes Shampoo und Conditioner sind die Basis — trockenes Haar wird nie glatt liegen.',
+        'Nach der Wäsche Leave-in mit Hitzeschutz, dann mit glatter Bürste in Wuchsrichtung föhnen.',
+        'Kaltes Wasser zum Abschluss schliesst die Kutikula — natürlicher Glanz inklusive.',
+        'Einmal pro Woche Intensivpflege-Maske, damit die Glätte nicht nach zwei Wäschen wieder weg ist.'
+      ],
+      product: 'Die Smoothing Anti-Frizz Serie ist dein Weg — System I für feines bis mittleres Haar (inkl. Föhnspray mit Hitzeschutz bis 232°C), System II für mittleres bis dickes Haar (mit Illipe-Butter und Kurkuma-Butter für tiefere Glättung). Michaela empfiehlt dir, welches zu dir passt.'
+    },
+
+    'weniger-oelige': {
+      badge: 'Balance für fettige Haare',
+      title: 'Weniger Öl,\nmehr Leichtigkeit.',
+      tagline: 'Schnell fettende Haare sind fast nie ein Haar-Thema — fast immer ein Kopfhaut-Thema.',
+      desc: 'Wenn das Haar am zweiten Tag schon wieder fettig wirkt, liegt die Ursache meist an der Talgdrüsen-Aktivität der Kopfhaut. Aggressive Shampoos führen zum Teufelskreis: je stärker du entfettest, desto mehr Talg produziert die Kopfhaut als Gegenreaktion. Der Weg raus ist sanfte Balance-Pflege, die das Mikrobiom der Kopfhaut reguliert statt es zu überfordern.',
+      tips: [
+        'Nicht täglich waschen — alle 2–3 Tage reicht. Häufigeres Waschen regt die Kopfhaut zu noch mehr Talg an.',
+        'Apfelessig-Spülung hilft, den pH-Wert der Kopfhaut ins Gleichgewicht zu bringen.',
+        'Trockenshampoo zwischendurch okay, aber nicht als Dauerlösung — lieber an die Wurzel gehen.',
+        'Haare kühl ausspülen — heisses Wasser regt Talgproduktion zusätzlich an.'
+      ],
+      product: 'Das MONAT Kopfhautpflege System ist genau dafür gemacht — 2-in-1 Peeling mit rosa Tonerde entfernt Ablagerungen, Apfelessig-Spülung balanciert den pH-Wert, Serum beruhigt die Talgdrüsen. Michaela begleitet dich durch die ersten Wochen — nach 2–3 Anwendungen spürst du meist den Unterschied.'
     }
   };
 
@@ -2023,13 +2120,22 @@
     document.getElementById('r-tagline').textContent = d.tagline;
 
     const lblStruktur = { glatt:'Glatt', wellig:'Wellig', locken:'Lockig', krause:'Krause' };
-    const lblTyp      = { fein:'Fein', normal:'Normal', dick:'Kräftig', haarausfall:'Haarausfall' };
-    const lblKopf     = { nein:'Unauffällig', trocken:'Trocken', fettend:'Schnell fettend', empfindlich:'Empfindlich' };
+    const lblTyp      = {
+      fein:'Fein', normal:'Normal', dick:'Kräftig', haarausfall:'Haarausfall',
+      bruechig:'Brüchig', geschaedigt:'Geschädigt', blondiert:'Blondiert',
+      spliss:'Spliss', trocken:'Trocken', platt:'Platt',
+    };
+    const lblKopf     = {
+      nein:'Unauffällig', trocken:'Trocken', schuppig:'Schuppig',
+      fettend:'Schnell fettend', empfindlich:'Empfindlich', juckend:'Juckend',
+    };
     const lblZiel     = {
       'reparatur':'Reparatur', 'gesunde-kopfhaut':'Kopfhaut',
-      'anti-frizz':'Anti Frizz', 'mehr-glanz':'Glanz',
-      'mehr-volumen':'Volumen', 'schoene-locken':'Locken',
-      'ciao-schuppen':'Schuppen weg', 'haarwachstum':'Wachstum'
+      'anti-frizz':'Anti Frizz', 'mehr-glanz':'Glanz & Feuchtigkeit',
+      'mehr-volumen':'Volumen', 'dichteres-haar':'Dichteres Haar',
+      'haarwachstum':'Wachstum', 'schoene-locken':'Locken',
+      'glattere-haare':'Glätte', 'ciao-schuppen':'Schuppen weg',
+      'weniger-oelige':'Weniger Öl',
     };
 
     // Helper: Array oder String sauber in Label-Text umwandeln
