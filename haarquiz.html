@@ -1589,10 +1589,11 @@
     <div class="email-wrap" style="text-align:center;">
       <div class="email-icon">🌿</div>
       <span class="email-eyebrow">Fast geschafft</span>
-      <h2 class="email-title">Wohin soll deine<br/>persönliche Empfehlung?</h2>
+      <h2 class="email-title">Wohin soll deine<br/>Haar-Auswertung?</h2>
       <p class="email-sub">
-        Michaela schaut sich deine Antworten an und schickt dir eine Sprachnachricht
-        mit ihrer persönlichen Empfehlung. Ehrlich, unverbindlich, auf dich zugeschnitten.
+        Du bekommst deine ausführliche Auswertung per E-Mail — zum Nachlesen und Aufheben.
+        Zusätzlich schaut sich Michaela deine Antworten persönlich an und meldet sich
+        mit einer Sprachnachricht. Ehrlich, unverbindlich, auf dich zugeschnitten.
       </p>
 
       <!--
@@ -1704,22 +1705,22 @@
           <div class="step-item">
             <div class="step-num">1</div>
             <div>
-              <div class="step-text-head">Speichere dein Haar-Profil</div>
-              <div class="step-text-body">Lade dein persönliches Haar-Profil-Bild mit dem Button unten herunter.</div>
+              <div class="step-text-head">Speichere dein Haar-Profil als Bild</div>
+              <div class="step-text-body">Mit dem Button unten herunterladen — oder einfach einen Screenshot. Du bekommst die Auswertung zusätzlich per E-Mail, aber das Bild brauchst du für den nächsten Schritt.</div>
             </div>
           </div>
           <div class="step-item">
             <div class="step-num">2</div>
             <div>
-              <div class="step-text-head">Schicke es an Michaela</div>
-              <div class="step-text-body">Per Instagram-DM an <a href="https://www.instagram.com/made_by_michaela" target="_blank">@made_by_michaela</a>.</div>
+              <div class="step-text-head">Sende Bild + Fotos an Michaela</div>
+              <div class="step-text-body">Per Instagram-DM an <a href="https://www.instagram.com/made_by_michaela" target="_blank">@made_by_michaela</a>: dein Haar-Profil plus 2–3 Fotos deiner Haare (gesamt, Kopfhaut, Spitzen). Das ist der entscheidende Schritt für deine persönliche Empfehlung.</div>
             </div>
           </div>
           <div class="step-item">
             <div class="step-num">3</div>
             <div>
-              <div class="step-text-head">Du erhältst deine persönliche Empfehlung</div>
-              <div class="step-text-body">Michaela schickt dir eine Sprachnachricht mit ehrlichem Feedback und Produkt-Empfehlungen — damit du nicht mehr raten musst.</div>
+              <div class="step-text-head">Persönliche Sprachnachricht</div>
+              <div class="step-text-body">Michaela meldet sich mit ehrlicher Einschätzung und passenden Produkt-Empfehlungen — damit du nicht mehr raten musst.</div>
             </div>
           </div>
         </div>
@@ -1789,15 +1790,15 @@
     <div class="sc-steps">
       <div class="sc-step">
         <div class="sc-step-num">1</div>
-        <div class="sc-step-text"><strong>Bild speichern</strong> — dieses Haar-Profil auf dein Gerät.</div>
+        <div class="sc-step-text"><strong>Auswertung per E-Mail</strong> — kommt gleich bei dir an.</div>
       </div>
       <div class="sc-step">
         <div class="sc-step-num">2</div>
-        <div class="sc-step-text"><strong>An Michaela senden</strong> — per Instagram-DM an @made_by_michaela.</div>
+        <div class="sc-step-text"><strong>An Michaela senden</strong> — dieses Profil + 2–3 Fotos deiner Haare per Instagram-DM.</div>
       </div>
       <div class="sc-step">
         <div class="sc-step-num">3</div>
-        <div class="sc-step-text"><strong>Persönliche Sprachnachricht</strong> mit ehrlicher Empfehlung erhalten.</div>
+        <div class="sc-step-text"><strong>Persönliche Sprachnachricht</strong> — mit ehrlicher Empfehlung.</div>
       </div>
     </div>
 
@@ -1919,6 +1920,19 @@
       plausible('quiz-submitted', { props: { goal: rType } });
     }
 
+    // Result-Daten und Labels für die E-Mail zusammenstellen (damit die Function
+    // die volle Auswertung rendern kann, ohne selbst das RESULTS-Dict zu kennen)
+    const resultData = RESULTS[rType] || RESULTS['mehr-glanz'];
+    const labelsSummary = {
+      struktur: fmt(A.q1, lblStruktur),
+      typ:      fmt(A.q2, lblTyp),
+      kopfhaut: fmt(A.q3, lblKopf),
+      ziel:     fmt(A.q5, lblZiel),
+    };
+    const multiGoalExtras = Array.isArray(A.q5) && A.q5.length > 1
+      ? A.q5.slice(1).map(v => lblZiel[v]).filter(Boolean)
+      : [];
+
     try {
       const res = await fetch('/api/submit-quiz', {
         method: 'POST',
@@ -1928,6 +1942,9 @@
           email,
           answers: A,
           resultType: rType,
+          result: resultData,
+          labels: labelsSummary,
+          multiGoals: multiGoalExtras,
           website: honeypot,
         }),
       });
@@ -2109,6 +2126,35 @@
     }
   };
 
+  // ── Labels (globaler Scope — auch in submitForm() verwendet, damit die ── //
+  // ── volle Auswertung in der E-Mail gerendert werden kann)              ── //
+  const lblStruktur = { glatt:'Glatt', wellig:'Wellig', locken:'Lockig', krause:'Krause' };
+  const lblTyp      = {
+    fein:'Fein', normal:'Normal', dick:'Kräftig', haarausfall:'Haarausfall',
+    bruechig:'Brüchig', geschaedigt:'Geschädigt', blondiert:'Blondiert',
+    spliss:'Spliss', trocken:'Trocken', platt:'Platt',
+  };
+  const lblKopf     = {
+    nein:'Unauffällig', trocken:'Trocken', schuppig:'Schuppig',
+    fettend:'Schnell fettend', empfindlich:'Empfindlich', juckend:'Juckend',
+  };
+  const lblZiel     = {
+    'reparatur':'Reparatur', 'gesunde-kopfhaut':'Kopfhaut',
+    'anti-frizz':'Anti Frizz', 'mehr-glanz':'Glanz & Feuchtigkeit',
+    'mehr-volumen':'Volumen', 'dichteres-haar':'Dichteres Haar',
+    'haarwachstum':'Wachstum', 'schoene-locken':'Locken',
+    'glattere-haare':'Glätte', 'ciao-schuppen':'Schuppen weg',
+    'weniger-oelige':'Weniger Öl',
+  };
+
+  // Helper: Array oder String sauber in Label-Text umwandeln
+  const fmt = (val, dict) => {
+    if (Array.isArray(val)) {
+      return val.map(v => dict[v]).filter(Boolean).join(', ') || '—';
+    }
+    return dict[val] || '—';
+  };
+
   function showResult(type){
     const d = RESULTS[type] || RESULTS['mehr-glanz'];
     const name = document.getElementById('inp-name').value.trim();
@@ -2118,33 +2164,6 @@
     document.getElementById('r-title').textContent   = d.title.replace('\n',' ');
     document.getElementById('r-badge').textContent   = d.badge;
     document.getElementById('r-tagline').textContent = d.tagline;
-
-    const lblStruktur = { glatt:'Glatt', wellig:'Wellig', locken:'Lockig', krause:'Krause' };
-    const lblTyp      = {
-      fein:'Fein', normal:'Normal', dick:'Kräftig', haarausfall:'Haarausfall',
-      bruechig:'Brüchig', geschaedigt:'Geschädigt', blondiert:'Blondiert',
-      spliss:'Spliss', trocken:'Trocken', platt:'Platt',
-    };
-    const lblKopf     = {
-      nein:'Unauffällig', trocken:'Trocken', schuppig:'Schuppig',
-      fettend:'Schnell fettend', empfindlich:'Empfindlich', juckend:'Juckend',
-    };
-    const lblZiel     = {
-      'reparatur':'Reparatur', 'gesunde-kopfhaut':'Kopfhaut',
-      'anti-frizz':'Anti Frizz', 'mehr-glanz':'Glanz & Feuchtigkeit',
-      'mehr-volumen':'Volumen', 'dichteres-haar':'Dichteres Haar',
-      'haarwachstum':'Wachstum', 'schoene-locken':'Locken',
-      'glattere-haare':'Glätte', 'ciao-schuppen':'Schuppen weg',
-      'weniger-oelige':'Weniger Öl',
-    };
-
-    // Helper: Array oder String sauber in Label-Text umwandeln
-    const fmt = (val, dict) => {
-      if (Array.isArray(val)) {
-        return val.map(v => dict[v]).filter(Boolean).join(', ') || '—';
-      }
-      return dict[val] || '—';
-    };
 
     document.getElementById('ri-struktur').textContent = fmt(A.q1, lblStruktur);
     document.getElementById('ri-typ').textContent      = fmt(A.q2, lblTyp);

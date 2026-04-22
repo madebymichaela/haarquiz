@@ -103,56 +103,187 @@ function json(obj, status = 200) {
 }
 
 // ── E-Mail Templates ─────────────────────────────────────────────────
-function customerHtml({ name }) {
+function customerHtml({ name, result, labels, multiGoals }) {
   const greeting = name ? `Hallo ${escapeHtml(name)}` : 'Hallo';
+  const r = result || {};
+  const lab = labels || {};
+  const goals = Array.isArray(multiGoals) ? multiGoals : [];
+
+  // Tips-Liste als HTML
+  const tipsList = Array.isArray(r.tips) && r.tips.length > 0
+    ? `<ul style="margin:16px 0 0;padding:0 0 0 20px;list-style:none;">` +
+      r.tips.map(t => `<li style="position:relative;padding:8px 0 8px 16px;font-size:14px;line-height:1.65;color:#2d342c;">
+        <span style="position:absolute;left:-4px;top:17px;width:6px;height:6px;background:#1d6a63;border-radius:50%;"></span>
+        ${escapeHtml(t)}
+      </li>`).join('') +
+      `</ul>`
+    : '';
+
+  // Multi-Goal-Note (nur wenn mehrere Ziele gewählt)
+  const multiGoalNote = goals.length > 0
+    ? `<div style="background:#ffffff;border-left:4px solid #1d6a63;border-radius:14px;padding:20px 24px;margin:20px 0;box-shadow:0 2px 12px rgba(45,52,44,0.03);">
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1d6a63;font-weight:600;margin-bottom:8px;">Deine weiteren Wünsche</div>
+        <p style="font-size:14px;line-height:1.7;color:#2d342c;margin:0;">
+          Du hast ausserdem <strong style="color:#0f4d47;">${escapeHtml(goals.length > 1
+            ? goals.slice(0, -1).join(', ') + ' und ' + goals[goals.length - 1]
+            : goals[0])}</strong> genannt.
+          Das ist häufig — dein Haar ist vielschichtig, und deine Empfehlung soll es auch sein.
+          Michaela berücksichtigt alle deine Wünsche in ihrer Sprachnachricht.
+        </p>
+      </div>`
+    : '';
+
+  // Insights-Cards (Quiz-Zusammenfassung)
+  const insightsHtml = `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;border-collapse:separate;border-spacing:0 8px;">
+      <tr>
+        <td style="padding:14px 16px;background:#f1f5ec;border-radius:12px;font-size:13px;line-height:1.5;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:4px;">Struktur</div>
+          <div style="font-size:15px;font-weight:600;color:#2d342c;">${escapeHtml(lab.struktur || '—')}</div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;background:#f1f5ec;border-radius:12px;font-size:13px;line-height:1.5;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:4px;">Haar-Zustand</div>
+          <div style="font-size:15px;font-weight:600;color:#2d342c;">${escapeHtml(lab.typ || '—')}</div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;background:#f1f5ec;border-radius:12px;font-size:13px;line-height:1.5;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:4px;">Kopfhaut</div>
+          <div style="font-size:15px;font-weight:600;color:#2d342c;">${escapeHtml(lab.kopfhaut || '—')}</div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:14px 16px;background:#a8f0e7;border-radius:12px;font-size:13px;line-height:1.5;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0f4d47;font-weight:600;margin-bottom:4px;">Deine Wünsche</div>
+          <div style="font-size:15px;font-weight:600;color:#2d342c;">${escapeHtml(lab.ziel || '—')}</div>
+        </td>
+      </tr>
+    </table>`;
+
+  const title = r.title ? String(r.title).replace(/\n/g, ' ') : '';
+  const badge = r.badge || '';
+
   return `<!DOCTYPE html>
 <html lang="de"><head><meta charset="UTF-8"/><title>Dein Haar-Profil</title></head>
 <body style="margin:0;padding:0;background:#f8faf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2d342c;">
-  <div style="max-width:560px;margin:0 auto;padding:40px 24px;">
-    <div style="background:#ffffff;border-radius:20px;padding:40px 36px;box-shadow:0 4px 24px rgba(45,52,44,0.04);">
-      <h1 style="font-size:28px;font-weight:600;margin:0 0 16px;letter-spacing:-0.02em;color:#2d342c;">${greeting}</h1>
-      <p style="font-size:15px;line-height:1.7;color:#2d342c;margin:0 0 16px;">
-        Danke, dass du dir zwei Minuten für dich genommen hast. Deine Antworten sind bei Michaela angekommen — sie schaut sich dein Haar-Profil persönlich an und meldet sich in den nächsten Tagen mit ihrer ehrlichen Empfehlung.
-      </p>
-      <div style="background:#a8f0e7;padding:20px 24px;border-radius:16px;margin:24px 0;font-size:14px;line-height:1.65;color:#2d342c;">
-        <strong style="display:block;margin-bottom:6px;color:#0f4d47;">Ein kleiner Tipp für eine noch bessere Empfehlung</strong>
-        Schick Michaela zusätzlich 2–3 Fotos deiner Haare per Instagram-DM — einmal gesamt, einmal Kopfhaut, einmal Spitzen. Viele schätzen den eigenen Haarzustand anders ein als er tatsächlich ist. Fotos helfen ihr, dich präzise zu beraten.
-      </div>
-      <p style="margin:16px 0;">
-        <a href="https://www.instagram.com/made_by_michaela" style="display:inline-block;background:linear-gradient(135deg,#1d6a63 0%,#0f4d47 100%);color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:999px;font-weight:600;font-size:14px;">Fotos an @made_by_michaela senden</a>
-      </p>
-      <p style="font-size:15px;line-height:1.7;color:#2d342c;margin:24px 0 16px;">
-        Die Empfehlung kommt als persönliche Sprachnachricht. Kein Verkaufsgespräch, sondern ehrliche Einschätzung von jemandem, der sich wirklich mit Haaren auskennt. Was du damit machst, ist ganz dir überlassen.
-      </p>
-      <p style="font-size:13px;color:#55605a;margin:32px 0 0;padding-top:24px;border-top:1px solid rgba(45,52,44,0.08);">
-        Du kannst diese E-Mail einfach beantworten, wenn du Fragen hast — sie landet direkt bei Michaela.
+  <div style="max-width:600px;margin:0 auto;padding:40px 20px;">
+
+    <!-- Greeting -->
+    <div style="background:#ffffff;border-radius:20px;padding:36px 32px 28px;box-shadow:0 4px 24px rgba(45,52,44,0.04);margin-bottom:20px;">
+      <h1 style="font-size:28px;font-weight:600;margin:0 0 14px;letter-spacing:-0.02em;color:#2d342c;">${greeting}</h1>
+      <p style="font-size:15px;line-height:1.7;color:#2d342c;margin:0;">
+        Danke, dass du dir zwei Minuten für dich genommen hast. Hier ist deine persönliche Haar-Auswertung — zum Aufheben und in Ruhe nachlesen.
       </p>
     </div>
-    <div style="text-align:center;padding:24px 20px;font-size:12px;color:#55605a;">
+
+    <!-- Insights (Quiz-Antworten) -->
+    <div style="background:#ffffff;border-radius:20px;padding:28px 32px;box-shadow:0 4px 24px rgba(45,52,44,0.04);margin-bottom:20px;">
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63;font-weight:600;margin-bottom:8px;">Dein Haar-Profil</div>
+      <h2 style="font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.015em;color:#2d342c;">Das hast du genannt</h2>
+      ${insightsHtml}
+    </div>
+
+    <!-- PROMINENTER CTA: Dein nächster Schritt -->
+    <div style="background:linear-gradient(135deg,#1d6a63 0%,#0f4d47 100%);border-radius:20px;padding:36px 32px;margin-bottom:20px;text-align:center;color:#ffffff;">
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#a8f0e7;font-weight:600;margin-bottom:12px;">Dein nächster Schritt</div>
+      <h3 style="font-size:24px;font-weight:600;margin:0 0 14px;letter-spacing:-0.02em;color:#ffffff;line-height:1.25;">Die persönliche Empfehlung kommt als Sprachnachricht.</h3>
+      <p style="font-size:15px;line-height:1.7;color:#ffffff;opacity:0.92;margin:0 0 24px;">
+        Dafür brauchst du nur zwei Minuten: Schick Michaela <strong>dein Haar-Profil als Bild oder Screenshot</strong> plus <strong>2–3 Fotos deiner Haare</strong> (gesamt, Kopfhaut, Spitzen) per Instagram-DM.
+        <br/><br/>
+        Viele schätzen den eigenen Haarzustand anders ein als er tatsächlich ist — Fotos helfen Michaela, dich wirklich präzise zu beraten.
+      </p>
+      <a href="https://www.instagram.com/made_by_michaela" style="display:inline-block;background:#ffffff;color:#1d6a63;text-decoration:none;padding:15px 32px;border-radius:999px;font-weight:600;font-size:15px;">An @made_by_michaela senden</a>
+      <p style="font-size:13px;color:#a8f0e7;margin:16px 0 0;opacity:0.85;">
+        Ohne diesen Schritt geht's nicht weiter — die Sprachnachricht ist die eigentliche Empfehlung.
+      </p>
+    </div>
+
+    <!-- Hauptauswertung -->
+    <div style="background:#ffffff;border-radius:20px;padding:36px 32px;box-shadow:0 4px 24px rgba(45,52,44,0.04);margin-bottom:20px;">
+      ${badge ? `<div style="display:inline-block;background:#1d6a63;color:#ffffff;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:8px 18px;border-radius:999px;margin-bottom:18px;">${escapeHtml(badge)}</div>` : ''}
+      ${title ? `<h2 style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:26px;font-weight:600;margin:0 0 14px;letter-spacing:-0.02em;color:#2d342c;line-height:1.2;">${escapeHtml(title)}</h2>` : ''}
+      ${r.tagline ? `<p style="font-size:16px;line-height:1.6;color:#55605a;font-style:italic;margin:0 0 24px;">${escapeHtml(r.tagline)}</p>` : ''}
+      ${r.desc ? `<h3 style="font-size:16px;font-weight:600;margin:0 0 12px;color:#2d342c;">Was das für dich bedeutet</h3><p style="font-size:15px;line-height:1.8;color:#2d342c;margin:0 0 4px;">${escapeHtml(r.desc)}</p>` : ''}
+      ${tipsList}
+    </div>
+
+    ${multiGoalNote}
+
+    <!-- Produkt-Richtung (kürzer, verweist auf Sprachnachricht) -->
+    ${r.product ? `<div style="background:#a8f0e7;border-radius:20px;padding:24px 32px;margin-bottom:20px;">
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0f4d47;font-weight:600;margin-bottom:8px;">Produkt-Richtung (allgemein)</div>
+      <p style="font-size:14px;line-height:1.65;color:#2d342c;margin:0 0 10px;">${escapeHtml(r.product)}</p>
+      <p style="font-size:13px;line-height:1.65;color:#0f4d47;margin:0;font-style:italic;">
+        Deine konkrete Empfehlung — welches Produkt in welcher Reihenfolge, angepasst an deine Fotos — hörst du in Michaelas Sprachnachricht.
+      </p>
+    </div>` : ''}
+
+    <!-- Reply-Hinweis (kurz) -->
+    <p style="font-size:13px;color:#55605a;text-align:center;margin:24px 0 0;padding:0 12px;">
+      Fragen vorab? Antworte einfach auf diese E-Mail — sie landet direkt bei Michaela.
+    </p>
+
+    <!-- Footer -->
+    <div style="text-align:center;padding:28px 20px 0;font-size:12px;color:#55605a;">
       Michaelas MONAT Academy · <a href="https://haarquiz.ch/impressum.html" style="color:#1d6a63;text-decoration:none;">Impressum</a> · <a href="https://haarquiz.ch/datenschutz.html" style="color:#1d6a63;text-decoration:none;">Datenschutz</a>
     </div>
   </div>
 </body></html>`;
 }
 
-function customerText({ name }) {
+function customerText({ name, result, labels, multiGoals }) {
   const greeting = name ? `Hallo ${name}` : 'Hallo';
+  const r = result || {};
+  const lab = labels || {};
+  const goals = Array.isArray(multiGoals) ? multiGoals : [];
+
+  const title = r.title ? String(r.title).replace(/\n/g, ' ') : '';
+  const tipsText = Array.isArray(r.tips) && r.tips.length > 0
+    ? '\n\n' + r.tips.map(t => `• ${t}`).join('\n')
+    : '';
+  const multiGoalText = goals.length > 0
+    ? `\n\nDEINE WEITEREN WÜNSCHE\nDu hast ausserdem ${goals.length > 1 ? goals.slice(0, -1).join(', ') + ' und ' + goals[goals.length - 1] : goals[0]} genannt. Michaela berücksichtigt alle deine Wünsche in ihrer Sprachnachricht.`
+    : '';
+
   return `${greeting},
 
-Danke, dass du dir zwei Minuten für dich genommen hast. Deine Antworten sind bei Michaela angekommen — sie schaut sich dein Haar-Profil persönlich an und meldet sich in den nächsten Tagen mit ihrer ehrlichen Empfehlung.
+Danke, dass du dir zwei Minuten für dich genommen hast. Hier ist deine Haar-Auswertung zum Nachlesen und Aufheben.
 
-Ein kleiner Tipp für eine noch bessere Empfehlung: Schick Michaela zusätzlich 2–3 Fotos deiner Haare per Instagram-DM — einmal gesamt, einmal Kopfhaut, einmal Spitzen. Viele schätzen den eigenen Haarzustand anders ein als er tatsächlich ist. Fotos helfen ihr, dich präzise zu beraten.
+DEIN HAAR-PROFIL
+Struktur:      ${lab.struktur || '—'}
+Haar-Zustand:  ${lab.typ || '—'}
+Kopfhaut:      ${lab.kopfhaut || '—'}
+Deine Wünsche: ${lab.ziel || '—'}
 
-Instagram: https://www.instagram.com/made_by_michaela
+========================================
+DEIN NÄCHSTER SCHRITT
+Die persönliche Empfehlung kommt als Sprachnachricht.
+========================================
 
-Die Empfehlung kommt als persönliche Sprachnachricht. Kein Verkaufsgespräch, sondern ehrliche Einschätzung von jemandem, der sich wirklich mit Haaren auskennt.
+Dafür brauchst du nur zwei Minuten: Schick Michaela dein Haar-Profil als Bild oder Screenshot PLUS 2-3 Fotos deiner Haare (gesamt, Kopfhaut, Spitzen) per Instagram-DM.
 
-Du kannst diese E-Mail einfach beantworten, wenn du Fragen hast — sie landet direkt bei Michaela.
+Viele schätzen den eigenen Haarzustand anders ein als er tatsächlich ist — Fotos helfen Michaela, dich wirklich präzise zu beraten.
+
+👉 Instagram: https://www.instagram.com/made_by_michaela
+
+Ohne diesen Schritt geht's nicht weiter — die Sprachnachricht ist die eigentliche Empfehlung.
+
+========================================
+
+${r.badge ? r.badge.toUpperCase() + '\n' : ''}${title}
+${r.tagline ? '\n' + r.tagline : ''}
+
+${r.desc ? 'WAS DAS FÜR DICH BEDEUTET\n' + r.desc : ''}${tipsText}${multiGoalText}
+
+${r.product ? 'PRODUKT-RICHTUNG (ALLGEMEIN)\n' + r.product + '\n\nDeine konkrete Empfehlung — welches Produkt in welcher Reihenfolge, angepasst an deine Fotos — hörst du in Michaelas Sprachnachricht.\n' : ''}
+Fragen vorab? Antworte einfach auf diese E-Mail — sie landet direkt bei Michaela.
 
 —
 Michaelas MONAT Academy
-Impressum: https://haarquiz.ch/impressum.html
-Datenschutz: https://haarquiz.ch/datenschutz.html`;
+Impressum:    https://haarquiz.ch/impressum.html
+Datenschutz:  https://haarquiz.ch/datenschutz.html`;
 }
 
 function michaelaHtml({ name, email, answers, resultType }) {
@@ -340,7 +471,7 @@ export default async (req) => {
     return json({ ok: false, error: 'Server-Konfigurationsfehler.' }, 500);
   }
 
-  const { name, email, answers, resultType } = data;
+  const { name, email, answers, resultType, result, labels, multiGoals } = data;
 
   // Tasks zusammenstellen — E-Mails sind Pflicht, Airtable ist optional
   const tasks = [
@@ -349,9 +480,9 @@ export default async (req) => {
       from: FROM,
       to: email,
       reply_to: MICHAELA,
-      subject: 'Dein Haar-Profil ist angekommen — Michaela meldet sich',
-      html: customerHtml({ name }),
-      text: customerText({ name }),
+      subject: 'Deine Haar-Auswertung — und was jetzt kommt',
+      html: customerHtml({ name, result, labels, multiGoals }),
+      text: customerText({ name, result, labels, multiGoals }),
     }),
     sendEmail({
       apiKey,
