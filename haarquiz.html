@@ -1555,6 +1555,10 @@
         <input type="hidden" name="ziel"          id="hf-ziel" />
         <input type="hidden" name="ergebnis-typ"  id="hf-ergebnis" />
 
+        <!-- Honeypot gegen Bots: echte User sehen dies nicht, Bots füllen es aus und werden blockiert -->
+        <input type="text" name="website" id="inp-website" tabindex="-1" autocomplete="off"
+               style="position:absolute;left:-9999px;top:0;width:1px;height:1px;opacity:0;" aria-hidden="true" />
+
         <div class="field-wrap">
           <label class="field-label">Dein Vorname</label>
           <input class="field-input" type="text" name="vorname" id="inp-name"
@@ -1841,41 +1845,50 @@
     scrollTop();
   }
 
-  function submitForm(e){
+  async function submitForm(e){
     e.preventDefault();
     const email = document.getElementById('inp-email').value.trim();
+    const name = document.getElementById('inp-name').value.trim();
     if (!email){ alert('Bitte gib deine E-Mail-Adresse ein.'); return; }
+
+    // Honeypot — Bot-Schutz, sollte leer sein
+    const honeypot = document.getElementById('inp-website')?.value || '';
 
     const rType = getResultType();
 
-    // Hidden Fields — Arrays joinen für E-Mail an Michaela
-    const asField = (v) => Array.isArray(v) ? (v.join(', ') || '—') : (v || '—');
-    document.getElementById('hf-struktur').value   = asField(A.q1);
-    document.getElementById('hf-typ').value        = asField(A.q2);
-    document.getElementById('hf-kopfhaut').value   = asField(A.q3);
-    document.getElementById('hf-behandlung').value = asField(A.q4);
-    document.getElementById('hf-ziel').value       = asField(A.q5);
-    document.getElementById('hf-ergebnis').value   = rType;
-
+    // Loader anzeigen
     document.getElementById('loader').classList.add('active');
 
-    setTimeout(() => {
-      document.getElementById('loader').classList.remove('active');
-      showResult(rType);
-    }, 2200);
+    // Plausible-Event (Conversion-Tracking), falls Script geladen
+    if (typeof plausible === 'function') {
+      plausible('quiz-submitted', { props: { goal: rType } });
+    }
 
-    /*
-    // ── REAL FORMSPREE INTEGRATION ──────────────────────
-    // const form = document.getElementById('lead-form');
-    // fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
-    //   method: 'POST',
-    //   body: new FormData(form),
-    //   headers: { 'Accept': 'application/json' }
-    // }).then(() => {
-    //   document.getElementById('loader').classList.remove('active');
-    //   showResult(rType);
-    // });
-    */
+    try {
+      const res = await fetch('/api/submit-quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          answers: A,
+          resultType: rType,
+          website: honeypot,
+        }),
+      });
+      const result = await res.json().catch(() => ({ ok: false, error: 'Antwort-Format unerwartet' }));
+      document.getElementById('loader').classList.remove('active');
+
+      if (result.ok) {
+        showResult(rType);
+      } else {
+        alert(result.error || 'Hoppla, da ist etwas schiefgelaufen. Bitte versuche es gleich nochmal.');
+      }
+    } catch (err) {
+      document.getElementById('loader').classList.remove('active');
+      alert('Netzwerkfehler. Bitte prüfe deine Internetverbindung und versuche es erneut.');
+      console.error('Submit error:', err);
+    }
   }
 
   function getResultType(){

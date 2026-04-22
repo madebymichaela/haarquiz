@@ -5,6 +5,11 @@
   # Kein Build-Schritt — wir deployen statisches HTML direkt aus dem deploy/-Ordner.
   publish = "deploy"
 
+# ── Netlify Functions (Backend) ──────────────────────────────────────
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # ── Security Headers für alle Seiten ──────────────────────────────────
 [[headers]]
   for = "/*"
@@ -49,3 +54,11 @@
   from = "/haarquiz"
   to = "/"
   status = 301
+
+# ── API-Rewrite zur Netlify Function ─────────────────────────────────
+# Fallback für den Fall, dass `config.path` in der Function nicht greift.
+# Status 200 = Rewrite (URL bleibt sichtbar), nicht Redirect.
+[[redirects]]
+  from = "/api/submit-quiz"
+  to = "/.netlify/functions/submit-quiz"
+  status = 200
