@@ -238,6 +238,54 @@ async function sendEmail({ apiKey, from, to, reply_to, subject, html, text }) {
   return data;
 }
 
+// ── Airtable Integration ─────────────────────────────────────────────
+/**
+ * Baut die Fields für einen Airtable-Record aus den Quiz-Daten.
+ * Die Feldnamen müssen EXAKT denen in Airtable entsprechen (case-sensitive).
+ * Multiple-Select-Felder erwarten Arrays von Option-Labels.
+ */
+function buildAirtableFields({ name, email, answers, resultType }) {
+  const mapMulti = (ids, dict) =>
+    (ids || []).map((id) => dict[id]).filter(Boolean);
+
+  return {
+    Name: name || '',
+    Email: email,
+    'Primäres Ziel': LABELS.q5[resultType] || null,
+    Struktur: mapMulti(answers.q1, LABELS.q1),
+    Haartyp: mapMulti(answers.q2, LABELS.q2),
+    Kopfhaut: mapMulti(answers.q3, LABELS.q3),
+    Alltag: mapMulti(answers.q4, LABELS.q4),
+    'Alle Wünsche': mapMulti(answers.q5, LABELS.q5),
+    Status: 'Neu',
+  };
+}
+
+/**
+ * Schreibt einen neuen Lead-Record in Airtable.
+ * `typecast: true` erlaubt Airtable, fehlende Select-Options automatisch anzulegen —
+ * macht die Integration robust gegenüber leichten Label-Abweichungen.
+ */
+async function writeAirtable({ token, baseId, tableId, fields }) {
+  const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableId)}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      records: [{ fields }],
+      typecast: true,
+    }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(`Airtable API ${res.status}: ${JSON.stringify(data)}`);
+  }
+  return data;
+}
+
 // ── Main Handler ─────────────────────────────────────────────────────
 export default async (req) => {
   // CORS-Preflight (falls von anderer Domain aufgerufen — hier nicht nötig, aber harmlos)
@@ -283,37 +331,69 @@ export default async (req) => {
 
   const { name, email, answers, resultType } = data;
 
-  try {
-    // Beide E-Mails parallel — spart ~500ms gegenüber seriell
-    await Promise.all([
-      sendEmail({
-        apiKey,
-        from: FROM,
-        to: email,
-        reply_to: MICHAELA,
-        subject: 'Dein Haar-Profil ist angekommen — Michaela meldet sich',
-        html: customerHtml({ name }),
-        text: customerText({ name }),
-      }),
-      sendEmail({
-        apiKey,
-        from: FROM,
-        to: MICHAELA,
-        reply_to: email,
-        subject: `Neuer Lead: ${name || email}`,
-        html: michaelaHtml({ name, email, answers, resultType }),
-        text: michaelaText({ name, email, answers, resultType }),
-      }),
-    ]);
+  // Tasks zusammenstellen — E-Mails sind Pflicht, Airtable ist optional
+  const tasks = [
+    sendEmail({
+      apiKey,
+      from: FROM,
+      to: email,
+      reply_to: MICHAELA,
+      subject: 'Dein Haar-Profil ist angekommen — Michaela meldet sich',
+      html: customerHtml({ name }),
+      text: customerText({ name }),
+    }),
+    sendEmail({
+      apiKey,
+      from: FROM,
+      to: MICHAELA,
+      reply_to: email,
+      subject: `Neuer Lead: ${name || email}`,
+      html: michaelaHtml({ name, email, answers, resultType }),
+      text: michaelaText({ name, email, answers, resultType }),
+    }),
+  ];
 
-    return json({ ok: true }, 200);
-  } catch (e) {
-    console.error('Email send failed:', e?.message || e);
+  // Airtable-Write nur hinzufügen, wenn alle drei Env Vars gesetzt sind
+  const airtableToken = process.env.AIRTABLE_TOKEN;
+  const airtableBaseId = process.env.AIRTABLE_BASE_ID;
+  const airtableTableId = process.env.AIRTABLE_TABLE_ID;
+  const airtableConfigured = airtableToken && airtableBaseId && airtableTableId;
+
+  if (airtableConfigured) {
+    tasks.push(
+      writeAirtable({
+        token: airtableToken,
+        baseId: airtableBaseId,
+        tableId: airtableTableId,
+        fields: buildAirtableFields({ name, email, answers, resultType }),
+      })
+    );
+  }
+
+  // Alle Tasks parallel, aber einzelne Fehler brechen nicht alles ab
+  const results = await Promise.allSettled(tasks);
+  const [mailCustomer, mailMichaela, airtableResult] = results;
+
+  // E-Mails sind kritisch — wenn eine davon scheitert, geben wir einen Fehler zurück
+  if (mailCustomer.status === 'rejected' || mailMichaela.status === 'rejected') {
+    console.error(
+      'Email send failed:',
+      mailCustomer.status === 'rejected' ? mailCustomer.reason?.message : '',
+      mailMichaela.status === 'rejected' ? mailMichaela.reason?.message : ''
+    );
     return json(
       { ok: false, error: 'E-Mail-Versand fehlgeschlagen. Bitte später erneut versuchen.' },
       500
     );
   }
+
+  // Airtable ist optional — nur loggen bei Fehler, User-Flow nicht stören.
+  // Michaela merkt es trotzdem, weil die Mail mit Lead-Daten ankommt.
+  if (airtableResult?.status === 'rejected') {
+    console.warn('Airtable write failed (non-critical):', airtableResult.reason?.message);
+  }
+
+  return json({ ok: true }, 200);
 };
 
 export const config = { path: '/api/submit-quiz' };
