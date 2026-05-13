@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="light" lang="de-CH">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Michaela Antoniadis — MONAT Markenpartnerin Schweiz. Haaranalyse, Shop & Partnerschaft."/>
+<title>Michaela Antoniadis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "tertiary-fixed": "#e5e2e1",
+          "surface-container": "#efeeeb",
+          "on-primary-container": "#5c451e",
+          "inverse-on-surface": "#f2f1ee",
+          "secondary-container": "#d4e4d6",
+          "surface-dim": "#dbdad7",
+          "on-tertiary-fixed": "#1b1b1b",
+          "on-primary-fixed": "#281900",
+          "surface-container-lowest": "#ffffff",
+          "on-primary": "#ffffff",
+          "primary": "#735a31",
+          "inverse-surface": "#2f312f",
+          "surface-container-low": "#f4f3f1",
+          "surface-tint": "#735a31",
+          "background": "#faf9f6",
+          "on-secondary-fixed-variant": "#3c4a40",
+          "on-primary-fixed-variant": "#59431c",
+          "surface": "#faf9f6",
+          "on-error": "#ffffff",
+          "on-tertiary-container": "#494949",
+          "on-surface-variant": "#4d463b",
+          "secondary": "#546257",
+          "tertiary-container": "#bab8b8",
+          "on-tertiary": "#ffffff",
+          "inverse-primary": "#e3c290",
+          "error-container": "#ffdad6",
+          "surface-container-high": "#e9e8e5",
+          "primary-container": "#d4b483",
+          "on-surface": "#1a1c1a",
+          "on-tertiary-fixed-variant": "#474746",
+          "on-secondary-container": "#58665b",
+          "outline-variant": "#d1c5b7",
+          "primary-fixed-dim": "#e3c290",
+          "tertiary-fixed-dim": "#c8c6c5",
+          "secondary-fixed": "#d7e6d9",
+          "on-secondary-fixed": "#121e16",
+          "outline": "#7f7669",
+          "on-background": "#1a1c1a",
+          "surface-variant": "#e3e2e0",
+          "on-secondary": "#ffffff",
+          "surface-bright": "#faf9f6",
+          "secondary-fixed-dim": "#bbcabd",
+          "tertiary": "#5f5e5e",
+          "error": "#ba1a1a",
+          "on-error-container": "#93000a",
+          "primary-fixed": "#ffdeac",
+          "surface-container-highest": "#e3e2e0"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "fontFamily": {
+          "headline-md": ["EB Garamond", "serif"],
+          "headline-lg-mobile": ["EB Garamond", "serif"],
+          "label-md": ["Montserrat", "sans-serif"],
+          "label-lg": ["Montserrat", "sans-serif"],
+          "headline-xl": ["EB Garamond", "serif"],
+          "body-sm": ["Montserrat", "sans-serif"],
+          "body-md": ["Montserrat", "sans-serif"],
+          "body-lg": ["Montserrat", "sans-serif"],
+          "headline-sm": ["EB Garamond", "serif"],
+          "headline-lg": ["EB Garamond", "serif"]
+        },
+        "fontSize": {
+          "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "500"}],
+          "headline-lg-mobile": ["36px", {"lineHeight": "44px", "fontWeight": "500"}],
+          "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "500"}],
+          "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+          "headline-xl": ["60px", {"lineHeight": "72px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+          "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+          "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+          "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+          "headline-lg": ["48px", {"lineHeight": "56px", "fontWeight": "500"}]
+        }
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  body {
+    background-color: #b0a89e;
+    color: #1a1c1a;
+    -webkit-font-smoothing: antialiased;
+  }
+  #app-shell {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #faf9f6;
+    min-height: 100dvh;
+  }
+  /* Foto-Zuschnitt in den Ergebnis-Karten */
+  .result-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+</style>
+</head>
+<body>
+<div id="app-shell">
+
+<main class="max-w-[500px] mx-auto px-8 pt-10 pb-32">
+
+  <!-- Hero Profil -->
+  <section class="flex flex-col items-center text-center mb-10">
+    <div class="relative w-56 h-56 mb-7">
+      <div class="absolute inset-0 rounded-full border border-primary-container/40 translate-x-2 translate-y-2"></div>
+      <img
+        alt="Michaela Antoniadis"
+        class="w-full h-full object-cover object-top rounded-full shadow-lg relative z-10"
+        src="michaela.jpg"
+        onerror="this.src='https://placehold.co/224x224/f4f3f1/735a31?text=MA'"
+      />
+    </div>
+    <h2 class="font-['EB_Garamond'] text-3xl font-medium text-on-surface mb-1">Michaela Antoniadis</h2>
+    <p class="font-['Montserrat'] text-xs font-semibold uppercase tracking-widest text-primary mb-3">MONAT Marken- und Teampartnerin Schweiz</p>
+    <img src="monat-logo.png" alt="MONAT" class="h-[84px] w-auto object-contain mx-auto mb-8" onerror="this.style.display='none'"/>
+    <p class="font-['Montserrat'] text-base text-on-surface-variant leading-relaxed mb-10 max-w-xs">
+      <span class="font-semibold text-on-surface">Für Mamas, die mehr wollen.</span><br/>
+      Ich zeige dir, wie du deine Haare wieder lieben wirst.<br/>
+      <span class="text-on-surface-variant/70">Und wenn du magst, wie du mit MONAT auch ein glückliches Einkommen aufbauen kannst.</span>
+    </p>
+    <div class="flex gap-8">
+      <a href="https://www.instagram.com/made_by_michaela_/" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="Instagram">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="https://haarquiz.ch" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="Haarquiz">
+        <span class="material-symbols-outlined text-[24px]">quiz</span>
+      </a>
+      <a href="mailto:michaela.krakat@yahoo.de" class="text-on-surface-variant hover:text-primary transition-colors" aria-label="E-Mail">
+        <span class="material-symbols-outlined text-[24px]">mail</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Link Buttons -->
+  <section class="space-y-3 mb-14">
+
+    <!-- Haaranalyse -->
+    <a class="group flex items-center p-4 bg-surface-container-low hover:bg-surface-container transition-all duration-300 rounded-xl shadow-sm border border-outline-variant/20 active:scale-[0.98]"
+       href="https://haarquiz.ch">
+      <div class="w-11 h-11 flex items-center justify-center bg-primary-container/20 rounded-lg mr-4 group-hover:bg-primary-container transition-colors flex-shrink-0">
+        <span class="material-symbols-outlined text-primary text-[20px]">quiz</span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h3 class="font-['Montserrat'] text-sm font-semibold tracking-wide text-on-surface">Finde heraus, was dein Haar braucht</h3>
+        <p class="font-['Montserrat'] text-xs text-on-surface-variant mt-0.5">2 Minuten für deine Haaranalyse.<br/>Danach berate ich dich persönlich.</p>
+      </div>
+      <span class="material-symbols-outlined text-outline-variant flex-shrink-0">chevron_right</span>
+    </a>
+
+    <!-- Shop (Ab Juni) -->
+    <a class="group flex items-center p-4 bg-surface-container-low hover:bg-surface-container transition-all duration-300 rounded-xl shadow-sm border border-outline-variant/20 active:scale-[0.98] opacity-80"
+       href="#" onclick="return false;" style="cursor: default;">
+      <div class="w-11 h-11 flex items-center justify-center bg-primary-container/20 rounded-lg mr-4 group-hover:bg-primary-container transition-colors flex-shrink-0">
+        <span class="material-symbols-outlined text-primary text-[20px]">shopping_bag</span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h3 class="font-['Montserrat'] text-sm font-semibold tracking-wide text-on-surface">Damit deine Haare wirklich glänzen</h3>
+        <p class="font-['Montserrat'] text-xs text-on-surface-variant mt-0.5">Ab Juni in der Schweiz verfügbar.<br/>Bewährt bei Millionen Mamas — auch bei mir.</p>
+      </div>
+      <span class="material-symbols-outlined text-outline-variant flex-shrink-0">chevron_right</span>
+    </a>
+
+    <!-- Partner werden -->
+    <a class="group flex items-center p-4 bg-surface-container-low hover:bg-surface-container transition-all duration-300 rounded-xl shadow-sm border border-outline-variant/20 active:scale-[0.98]"
+       href="mailto:michaela.krakat@yahoo.de">
+      <div class="w-11 h-11 flex items-center justify-center bg-primary-container/20 rounded-lg mr-4 group-hover:bg-primary-container transition-colors flex-shrink-0">
+        <span class="material-symbols-outlined text-primary text-[20px]">groups</span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h3 class="font-['Montserrat'] text-sm font-semibold tracking-wide text-on-surface">Verdiene mit Produkten, die du liebst</h3>
+        <p class="font-['Montserrat'] text-xs text-on-surface-variant mt-0.5">Flexibel, von zuhause aus.<br/>Persönlich begleitet — in einem starken Team.</p>
+      </div>
+      <span class="material-symbols-outlined text-outline-variant flex-shrink-0">chevron_right</span>
+    </a>
+
+    <!-- Beratung -->
+    <a class="group flex items-center p-4 bg-surface-container-low hover:bg-surface-container transition-all duration-300 rounded-xl shadow-sm border border-outline-variant/20 active:scale-[0.98]"
+       href="monat-info.html">
+      <div class="w-11 h-11 flex items-center justify-center bg-primary-container/20 rounded-lg mr-4 group-hover:bg-primary-container transition-colors flex-shrink-0">
+        <span class="material-symbols-outlined text-primary text-[20px]">help_outline</span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h3 class="font-['Montserrat'] text-sm font-semibold tracking-wide text-on-surface">Mehr über MONAT und die Produkte</h3>
+        <p class="font-['Montserrat'] text-xs text-on-surface-variant mt-0.5">Ehrlich erklärt, was MONAT ist.<br/>Und was das mit dir zu tun hat.</p>
+      </div>
+      <span class="material-symbols-outlined text-outline-variant flex-shrink-0">chevron_right</span>
+    </a>
+
+  </section>
+
+  <!-- Ergebnisse -->
+  <section class="mb-12">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="font-['EB_Garamond'] text-2xl font-semibold text-on-surface">Echte Ergebnisse</h2>
+      <div class="h-[1px] flex-1 bg-outline-variant/40 ml-4"></div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5">
+
+      <!-- Ergebnis 1: Locken -->
+      <div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm border border-outline-variant/10">
+        <div class="flex" style="height: 220px;">
+          <div class="relative w-1/2">
+            <img class="result-img"
+                 src="vorher-locken.jpg"
+                 alt="Locken vorher: frizzig, undefiniert"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="w-full h-full bg-surface-container flex items-center justify-center" style="display:none">
+              <span class="material-symbols-outlined text-outline text-4xl">image</span>
+            </div>
+            <span class="absolute bottom-2 left-2 px-2 py-0.5 bg-surface/80 backdrop-blur-sm text-[10px] font-['Montserrat'] font-medium uppercase tracking-wider rounded">Vorher</span>
+          </div>
+          <div class="relative w-1/2">
+            <img class="result-img"
+                 src="nachher-locken.jpg"
+                 alt="Locken nachher: definiert, glänzend"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="w-full h-full bg-surface-container flex items-center justify-center" style="display:none">
+              <span class="material-symbols-outlined text-outline text-4xl">image</span>
+            </div>
+            <span class="absolute bottom-2 left-2 px-2 py-0.5 bg-primary text-white text-[10px] font-['Montserrat'] font-medium uppercase tracking-wider rounded">Nachher</span>
+          </div>
+        </div>
+        <div class="p-3">
+          <p class="font-['Montserrat'] text-xs text-on-surface-variant text-center font-semibold text-on-surface">Von strohig zu definiert</p>
+          <p class="font-['Montserrat'] text-xs text-on-surface-variant text-center mt-0.5">ihre Locken sind zurück. Innerhalb weniger Tage.</p>
+        </div>
+      </div>
+
+      <!-- Ergebnis 2: Volumen -->
+      <div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm border border-outline-variant/10">
+        <div class="flex" style="height: 220px;">
+          <div class="relative w-1/2">
+            <img class="result-img"
+                 src="vorher-volumen.jpg"
+                 alt="Haar vorher: dünn, flach, Haarausfall"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="w-full h-full bg-surface-container flex items-center justify-center" style="display:none">
+              <span class="material-symbols-outlined text-outline text-4xl">image</span>
+            </div>
+            <span class="absolute bottom-2 left-2 px-2 py-0.5 bg-surface/80 backdrop-blur-sm text-[10px] font-['Montserrat'] font-medium uppercase tracking-wider rounded">Vorher</span>
+          </div>
+          <div class="relative w-1/2">
+            <img class="result-img"
+                 src="nachher-volumen.jpg"
+                 alt="Haar nachher: voll, voluminös"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+            <div class="w-full h-full bg-surface-container flex items-center justify-center" style="display:none">
+              <span class="material-symbols-outlined text-outline text-4xl">image</span>
+            </div>
+            <span class="absolute bottom-2 left-2 px-2 py-0.5 bg-primary text-white text-[10px] font-['Montserrat'] font-medium uppercase tracking-wider rounded">Nachher</span>
+          </div>
+        </div>
+        <div class="p-3">
+          <p class="font-['Montserrat'] text-xs text-on-surface-variant text-center font-semibold text-on-surface">Haarausfall gestoppt, Volumen zurück</p>
+          <p class="font-['Montserrat'] text-xs text-on-surface-variant text-center mt-0.5">Innerhalb weniger Wochen.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="space-y-4 mb-12">
+
+    <div class="py-8 px-6 bg-surface-container/30 rounded-3xl text-center italic relative overflow-hidden">
+      <span class="material-symbols-outlined text-primary-container/20 absolute -top-4 -left-4"
+            style="font-variation-settings: 'FILL' 1; font-size: 80px; line-height: 1;">format_quote</span>
+      <p class="font-['EB_Garamond'] text-lg text-primary mb-3 relative z-10 leading-relaxed">
+        «Michaela hat nicht nur mein Haar verändert — ich habe mein Selbstvertrauen zurückbekommen.»
+      </p>
+      <p class="font-['Montserrat'] text-xs text-on-surface-variant uppercase tracking-widest">— Sarah J., Kundin</p>
+    </div>
+
+    <div class="py-8 px-6 bg-surface-container/30 rounded-3xl text-center italic relative overflow-hidden">
+      <span class="material-symbols-outlined text-primary-container/20 absolute -top-4 -left-4"
+            style="font-variation-settings: 'FILL' 1; font-size: 80px; line-height: 1;">format_quote</span>
+      <p class="font-['EB_Garamond'] text-lg text-primary mb-3 relative z-10 leading-relaxed">
+        «Ich hatte schon so vieles probiert. Mit MONAT hat mein Haar endlich das bekommen, was es wirklich braucht.»
+      </p>
+      <p class="font-['Montserrat'] text-xs text-on-surface-variant uppercase tracking-widest">— Laura M., Kundin</p>
+    </div>
+
+    <div class="py-8 px-6 bg-surface-container/30 rounded-3xl text-center italic relative overflow-hidden">
+      <span class="material-symbols-outlined text-primary-container/20 absolute -top-4 -left-4"
+            style="font-variation-settings: 'FILL' 1; font-size: 80px; line-height: 1;">format_quote</span>
+      <p class="font-['EB_Garamond'] text-lg text-primary mb-3 relative z-10 leading-relaxed">
+        «Michaela hat sich wirklich Zeit genommen. Keine Verkaufsstrategie — einfach ehrliche Beratung, die wirkt.»
+      </p>
+      <p class="font-['Montserrat'] text-xs text-on-surface-variant uppercase tracking-widest">— Sandra K., Kundin</p>
+    </div>
+
+  </section>
+
+  <!-- Persönliche Botschaft Michaela -->
+  <section class="mb-10 px-2">
+    <div class="flex items-center gap-3 mb-5">
+      <img src="michaela.jpg" alt="Michaela Antoniadis"
+           class="w-12 h-12 rounded-full object-cover object-top flex-shrink-0 shadow-sm"/>
+      <div>
+        <p class="font-['Montserrat'] text-xs font-semibold text-on-surface uppercase tracking-wider">Michaela Antoniadis</p>
+        <p class="font-['Montserrat'] text-xs text-on-surface-variant">MONAT Markenpartnerin</p>
+      </div>
+    </div>
+    <p class="font-['EB_Garamond'] text-lg text-on-surface leading-relaxed mb-4">
+      «Ich war selbst lange auf der Suche nach Produkten, denen ich wirklich vertrauen kann. Als ich MONAT entdeckt habe, war ich skeptisch — heute bin ich überzeugt. Nicht weil ich muss, sondern weil ich es selbst jeden Tag erlebe.
+    </p>
+    <p class="font-['EB_Garamond'] text-lg text-on-surface leading-relaxed mb-5">
+      Wenn du Fragen hast, bin ich gerne für dich da. Ganz persönlich.»
+    </p>
+    <p class="font-['EB_Garamond'] text-xl text-primary italic">Michaela</p>
+    <div class="mt-1 w-16 h-px bg-primary/30"></div>
+  </section>
+
+  <!-- CTA Kontakt -->
+  <section class="text-center mb-8">
+    <p class="font-['Montserrat'] text-sm text-on-surface-variant mb-4">Fragen? Ich bin persönlich erreichbar.</p>
+    <a href="mailto:michaela.krakat@yahoo.de"
+       class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-['Montserrat'] text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors">
+      <span class="material-symbols-outlined text-[18px]">mail</span>
+      Schreib mir direkt
+    </a>
+  </section>
+
+</main>
+
+<!-- Bottom Navigation -->
+<nav class="bg-surface-container/90 backdrop-blur-lg fixed bottom-0 z-50 rounded-t-xl border-t border-outline-variant shadow-[0_-4px_20px_rgba(115,90,49,0.08)] flex justify-around items-center w-full pt-2 px-2 h-16 max-w-[500px] left-1/2 -translate-x-1/2">
+  <button class="flex flex-col items-center justify-center text-primary font-semibold">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+    <span class="font-['Montserrat'] text-[11px] font-medium">Home</span>
+  </button>
+  <a href="https://haarquiz.ch" class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary hover:opacity-100 transition-colors">
+    <span class="material-symbols-outlined">quiz</span>
+    <span class="font-['Montserrat'] text-[11px] font-medium">Analyse</span>
+  </a>
+  <a href="#" class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary hover:opacity-100 transition-colors">
+    <span class="material-symbols-outlined">shopping_bag</span>
+    <span class="font-['Montserrat'] text-[11px] font-medium">Shop</span>
+  </a>
+  <a href="mailto:michaela.krakat@yahoo.de" class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-primary hover:opacity-100 transition-colors">
+    <span class="material-symbols-outlined">mail</span>
+    <span class="font-['Montserrat'] text-[11px] font-medium">Kontakt</span>
+  </a>
+</nav>
+
+<!-- Footer -->
+<footer class="max-w-[500px] mx-auto flex flex-col items-center gap-3 py-10 px-6 mb-20 text-center">
+  <div class="font-['Montserrat'] text-xs font-semibold tracking-[0.15em] text-on-surface uppercase mb-1">Michaela Antoniadis</div>
+  <div class="flex gap-5 mb-2">
+    <a class="font-['Montserrat'] text-xs text-on-surface-variant hover:text-primary transition-colors" href="impressum-michaela.html">Impressum & Datenschutz</a>
+    <a class="font-['Montserrat'] text-xs text-on-surface-variant hover:text-primary transition-colors" href="mailto:michaela.krakat@yahoo.de">Kontakt</a>
+  </div>
+  <p class="font-['Montserrat'] text-[11px] text-on-surface-variant">© 2025 Michaela Antoniadis · MONAT Markenpartnerin</p>
+  <p class="font-['Montserrat'] text-[10px] text-on-surface-variant/60 max-w-xs leading-relaxed">
+    Diese Seite wird von einer unabhängigen MONAT Markenpartnerin betrieben und ist keine offizielle MONAT-Website.
+  </p>
+</footer>
+
+</div><!-- #app-shell -->
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html class="light" lang="de-CH">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Was ist MONAT? Produkte, Wirkung, VIP-Vorteile und die Business-Chance — ehrlich erklärt von Michaela Antoniadis."/>
+<title>Über MONAT — Michaela Antoniadis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#735a31",
+          "primary-container": "#d4b483",
+          "on-primary": "#ffffff",
+          "surface": "#faf9f6",
+          "surface-container-low": "#f4f3f1",
+          "surface-container": "#efeeeb",
+          "surface-container-high": "#e9e8e5",
+          "on-surface": "#1a1c1a",
+          "on-surface-variant": "#4d463b",
+          "outline-variant": "#d1c5b7",
+          "outline": "#7f7669",
+          "background": "#faf9f6",
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  body {
+    background-color: #faf9f6;
+    color: #1a1c1a;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Accordion */
+  .faq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.2s ease;
+  }
+  .faq-body.open {
+    max-height: 600px;
+  }
+  .faq-icon {
+    transition: transform 0.3s ease;
+  }
+  .faq-icon.open {
+    transform: rotate(45deg);
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="bg-background/80 backdrop-blur-md sticky top-0 z-50 flex items-center w-full px-5 py-4 border-b border-outline-variant/30">
+  <a href="./" class="text-on-surface-variant hover:text-primary transition-colors mr-3">
+    <span class="material-symbols-outlined text-[22px]">arrow_back</span>
+  </a>
+  <h1 class="font-['Montserrat'] text-xs font-semibold uppercase tracking-[0.2em] text-primary flex-1 text-center pr-7">
+    Über MONAT
+  </h1>
+</header>
+
+<main class="max-w-[500px] mx-auto px-5 pt-8 pb-28">
+
+  <!-- Intro -->
+  <section class="text-center mb-10">
+    <p class="font-['Montserrat'] text-xs font-semibold uppercase tracking-widest text-primary mb-3">Ehrlich erklärt</p>
+    <h2 class="font-['EB_Garamond'] text-3xl font-medium text-on-surface mb-3 leading-tight">
+      Was steckt hinter MONAT?
+    </h2>
+    <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed">
+      Hier findest du Antworten auf die Fragen, die wirklich zählen — ohne Werbejargon.
+    </p>
+  </section>
+
+  <!-- FAQ Einwände -->
+  <section class="mb-10">
+    <div class="space-y-2">
+
+      <!-- Frage 1 -->
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-4 py-4 text-left">
+          <span class="font-['Montserrat'] text-sm font-semibold text-on-surface pr-3">Ist das nicht einfach MLM?</span>
+          <span class="material-symbols-outlined text-primary flex-shrink-0 faq-icon text-[20px]">add</span>
+        </button>
+        <div class="faq-body">
+          <div class="px-4 pb-4">
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed mb-3">
+              Die kurze Antwort: Nein — nicht so, wie du es vermutlich kennst. MONAT ist ein Direktvertrieb, das bedeutet: Produkte werden über echte Menschen empfohlen, nicht über den Detailhandel.
+            </p>
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed mb-3">
+              Der Unterschied zu klassischem MLM: Du kannst bei MONAT <strong class="text-on-surface">ausschliesslich als Kundin</strong> profitieren — ohne je jemanden anzuwerben. Und als Markenpartnerin verdienst du in erster Linie durch Produktverkäufe, nicht durch das Rekrutieren.
+            </p>
+            <div class="bg-primary/5 rounded-lg p-3 mt-2">
+              <p class="font-['Montserrat'] text-xs text-on-surface-variant italic">
+                Ich sage dir direkt, wenn etwas nicht zu dir passt. Mein Ziel ist keine Zahl — sondern dass du mit dem Produkt zufrieden bist.
+              </p>
+              <p class="font-['Montserrat'] text-xs text-primary mt-1 font-semibold">— Michaela</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frage 2 -->
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-4 py-4 text-left">
+          <span class="font-['Montserrat'] text-sm font-semibold text-on-surface pr-3">Sind MONAT-Produkte wirklich besser als im Drogeriemarkt?</span>
+          <span class="material-symbols-outlined text-primary flex-shrink-0 faq-icon text-[20px]">add</span>
+        </button>
+        <div class="faq-body">
+          <div class="px-4 pb-4">
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed mb-3">
+              Der grösste Unterschied liegt in den Wirkstoffen. MONAT arbeitet ohne Sulfate, Parabene oder Silikone — Stoffe, die Haare kurzfristig glänzend machen, langfristig aber austrocknen.
+            </p>
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed mb-2">
+              Stattdessen: pflanzliche Technologien wie
+            </p>
+            <div class="space-y-2 mb-3">
+              <div class="flex gap-2 items-start">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0"></div>
+                <p class="font-['Montserrat'] text-sm text-on-surface-variant"><strong class="text-on-surface">Rejuveniqe™</strong> — MONAT-eigene Mischung aus Omega-Fettsäuren und Antioxidantien</p>
+              </div>
+              <div class="flex gap-2 items-start">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0"></div>
+                <p class="font-['Montserrat'] text-sm text-on-surface-variant"><strong class="text-on-surface">Capixyl™</strong> — stärkt die Haarwurzel, mindert Haarausfall</p>
+              </div>
+              <div class="flex gap-2 items-start">
+                <div class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0"></div>
+                <p class="font-['Montserrat'] text-sm text-on-surface-variant"><strong class="text-on-surface">Hyaluronsäure, Panthenol</strong> — intensive Feuchtigkeitsversorgung</p>
+              </div>
+            </div>
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed">
+              Das IR Clinical System etwa verspricht laut klinischen Studien: <strong class="text-on-surface">97% weniger Haarausfall</strong> und sichtlich dichteres Haar in 60 Tagen.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frage 3 -->
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-4 py-4 text-left">
+          <span class="font-['Montserrat'] text-sm font-semibold text-on-surface pr-3">Was kostet mich das als Kundin?</span>
+          <span class="material-symbols-outlined text-primary flex-shrink-0 faq-icon text-[20px]">add</span>
+        </button>
+        <div class="faq-body">
+          <div class="px-4 pb-4">
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed mb-3">
+              Du kannst einzelne Produkte zum Vollpreis kaufen — oder als VIP-Kundin einsteigen und dauerhaft 15% Rabatt auf alles bekommen.
+            </p>
+            <div class="bg-surface-container rounded-lg p-3 mb-3">
+              <p class="font-['Montserrat'] text-xs font-semibold uppercase tracking-wider text-primary mb-2">VIP-Kundin — kostenlos</p>
+              <div class="space-y-1">
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant">✓ 15% Rabatt auf alle Produkte</p>
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant">✓ VIP-Punkte auf jeden Einkauf</p>
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant">✓ Zugang zu Flexship (automatische Lieferung)</p>
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant">✓ Gratis Produkte ab Flexship 2, 3 und 4</p>
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant">✓ Geburtstags- und Jubiläumsbelohnungen</p>
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant">✓ Pauschalversand</p>
+              </div>
+            </div>
+            <p class="font-['Montserrat'] text-xs text-on-surface-variant italic">
+              Ab 1. Juni 2026 in der Schweiz verfügbar. Ich informiere dich persönlich, sobald es losgeht.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frage 4 -->
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-4 py-4 text-left">
+          <span class="font-['Montserrat'] text-sm font-semibold text-on-surface pr-3">Welche Produkte gibt es und wo fange ich an?</span>
+          <span class="material-symbols-outlined text-primary flex-shrink-0 faq-icon text-[20px]">add</span>
+        </button>
+        <div class="faq-body">
+          <div class="px-4 pb-4">
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed mb-3">
+              MONAT bietet Haar-Systeme, die auf dein spezifisches Ziel ausgerichtet sind — kein Einheitsbrei.
+            </p>
+            <div class="space-y-2 mb-3">
+              <div class="flex gap-3 items-start bg-surface-container rounded-lg p-2.5">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span class="material-symbols-outlined text-primary text-[16px]">science</span>
+                </div>
+                <div>
+                  <p class="font-['Montserrat'] text-xs font-semibold text-on-surface">IR Clinical — Haarausfall & Verdichtung</p>
+                  <p class="font-['Montserrat'] text-xs text-on-surface-variant">97% weniger Haarausfall in 60 Tagen</p>
+                </div>
+              </div>
+              <div class="flex gap-3 items-start bg-surface-container rounded-lg p-2.5">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span class="material-symbols-outlined text-primary text-[16px]">water_drop</span>
+                </div>
+                <div>
+                  <p class="font-['Montserrat'] text-xs font-semibold text-on-surface">Advanced Hydrating — Glanz & Feuchtigkeit</p>
+                  <p class="font-['Montserrat'] text-xs text-on-surface-variant">20% mehr Feuchtigkeit, strahlender Glanz</p>
+                </div>
+              </div>
+              <div class="flex gap-3 items-start bg-surface-container rounded-lg p-2.5">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span class="material-symbols-outlined text-primary text-[16px]">air</span>
+                </div>
+                <div>
+                  <p class="font-['Montserrat'] text-xs font-semibold text-on-surface">Smoothing Anti-Frizz — Frizz & Geschmeidigkeit</p>
+                  <p class="font-['Montserrat'] text-xs text-on-surface-variant">72 Stunden frizzfrei, 5× weicheres Haar</p>
+                </div>
+              </div>
+              <div class="flex gap-3 items-start bg-surface-container rounded-lg p-2.5">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span class="material-symbols-outlined text-primary text-[16px]">3p</span>
+                </div>
+                <div>
+                  <p class="font-['Montserrat'] text-xs font-semibold text-on-surface">Curl Perfection — Locken & Definition</p>
+                  <p class="font-['Montserrat'] text-xs text-on-surface-variant">Definierte, gepflegte Locken ohne Frizz</p>
+                </div>
+              </div>
+              <div class="flex gap-3 items-start bg-surface-container rounded-lg p-2.5">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span class="material-symbols-outlined text-primary text-[16px]">expand</span>
+                </div>
+                <div>
+                  <p class="font-['Montserrat'] text-xs font-semibold text-on-surface">Revive — Volumen & Fülle</p>
+                  <p class="font-['Montserrat'] text-xs text-on-surface-variant">Für feines, kraftloses Haar</p>
+                </div>
+              </div>
+            </div>
+            <a href="https://haarquiz.ch" target="_blank" rel="noopener noreferrer"
+               class="flex items-center justify-center gap-2 w-full py-2.5 bg-primary/10 text-primary rounded-lg font-['Montserrat'] text-xs font-semibold hover:bg-primary/20 transition-colors">
+              <span class="material-symbols-outlined text-[16px]">quiz</span>
+              Finde dein System — kostenlose Haaranalyse
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frage 5 -->
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-4 py-4 text-left">
+          <span class="font-['Montserrat'] text-sm font-semibold text-on-surface pr-3">Was ist der Einstieg als Markenpartnerin?</span>
+          <span class="material-symbols-outlined text-primary flex-shrink-0 faq-icon text-[20px]">add</span>
+        </button>
+        <div class="faq-body">
+          <div class="px-4 pb-4">
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed mb-3">
+              Zwei Starterpakete stehen in der Schweiz ab 1. Juni 2026 zur Verfügung:
+            </p>
+            <div class="space-y-3 mb-3">
+              <div class="bg-surface-container rounded-xl p-3">
+                <div class="flex justify-between items-start mb-1">
+                  <p class="font-['Montserrat'] text-sm font-semibold text-on-surface">Custom Hair Essentials</p>
+                  <span class="font-['Montserrat'] text-sm font-bold text-primary">CHF 200</span>
+                </div>
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant mb-1">53% Ersparnis · Wert: CHF 555</p>
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant">Starter Kit + Rejuvabeads + Rejuveniqe + 4 Produkte nach Wahl</p>
+              </div>
+              <div class="bg-surface-container rounded-xl p-3 border border-primary/20">
+                <div class="flex justify-between items-start mb-1">
+                  <p class="font-['Montserrat'] text-sm font-semibold text-on-surface">Dream Big Switzerland</p>
+                  <span class="font-['Montserrat'] text-sm font-bold text-primary">CHF 700</span>
+                </div>
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant mb-1">62% Ersparnis · Wert: CHF 1828</p>
+                <p class="font-['Montserrat'] text-xs text-on-surface-variant">Vollständige Produktpalette für den sofortigen Start</p>
+              </div>
+            </div>
+            <p class="font-['Montserrat'] text-xs text-on-surface-variant italic">
+              Als Markenpartnerin erhältst du 30% Rabatt auf alle Produkte, Boni auf Verkäufe und persönliche Begleitung durch mich.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frage 6 -->
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-4 py-4 text-left">
+          <span class="font-['Montserrat'] text-sm font-semibold text-on-surface pr-3">Was verdiene ich als Markenpartnerin realistisch?</span>
+          <span class="material-symbols-outlined text-primary flex-shrink-0 faq-icon text-[20px]">add</span>
+        </button>
+        <div class="faq-body">
+          <div class="px-4 pb-4">
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed mb-3">
+              Ehrlich: Der Verdienst hängt vollständig vom eigenen Einsatz ab. MONAT garantiert kein Einkommen.
+            </p>
+            <p class="font-['Montserrat'] text-sm text-on-surface-variant leading-relaxed mb-3">
+              Realistisch als Nebenverdienst: Viele Partnerinnen starten mit CHF 200–600 pro Monat — durch Empfehlungen im persönlichen Umfeld. Wer Vollzeit aufbaut, kann mehr erreichen.
+            </p>
+            <div class="space-y-1.5 mb-3">
+              <p class="font-['Montserrat'] text-xs font-semibold text-on-surface uppercase tracking-wide">Verdienst-Wege:</p>
+              <p class="font-['Montserrat'] text-xs text-on-surface-variant">/ Einzelhandels-Bonus: ~15–30% auf Verkäufe</p>
+              <p class="font-['Montserrat'] text-xs text-on-surface-variant">/ Produktpaket-Boni bei Neueinstiegen</p>
+              <p class="font-['Montserrat'] text-xs text-on-surface-variant">/ Super-Seller-Bonus ab bestimmtem Umsatz</p>
+              <p class="font-['Montserrat'] text-xs text-on-surface-variant">/ Teambonus bei eigenem Team (optional)</p>
+            </div>
+            <div class="bg-primary/5 rounded-lg p-3">
+              <p class="font-['Montserrat'] text-xs text-on-surface-variant italic">
+                *Die Einnahmen als Markenpartnerin sind nicht garantiert und hängen von individuellem Einsatz, Zeit, Führungserfahrung und der Struktur deiner Organisation ab.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frage 7 -->
+      <div class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-4 py-4 text-left">
+          <span class="font-['Montserrat'] text-sm font-semibold text-on-surface pr-3">Warum empfiehlst du MONAT, Michaela?</span>
+          <span class="material-symbols-outlined text-primary flex-shrink-0 faq-icon text-[20px]">add</span>
+        </button>
+        <div class="faq-body">
+          <div class="px-4 pb-4">
+            <div class="flex gap-3 items-start mb-3">
+              <img src="michaela.jpg" alt="Michaela" class="w-10 h-10 rounded-full object-cover object-top flex-shrink-0"/>
+              <p class="font-['EB_Garamond'] text-base text-on-surface leading-relaxed italic">
+                «Ich war lange skeptisch. Ich habe viele Produkte ausprobiert und war enttäuscht. MONAT hat mich überzeugt — nicht weil ich musste, sondern weil ich es selbst täglich erlebe. Ich empfehle nur weiter, wovon ich überzeugt bin.»
+              </p>
+            </div>
+            <p class="font-['Montserrat'] text-xs text-on-surface-variant leading-relaxed">
+              Mein Ansatz: keine Drucktaktiken, keine vorgetäuschten Versprechen. Ich schaue mir deine Situation an und sage dir ehrlich, ob und welches Produkt zu dir passt.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA zurück / Kontakt -->
+  <section class="text-center space-y-3">
+    <p class="font-['Montserrat'] text-sm text-on-surface-variant">Noch offene Fragen?</p>
+    <a href="mailto:michaela.krakat@yahoo.de"
+       class="flex items-center justify-center gap-2 w-full py-3 bg-primary text-white rounded-full font-['Montserrat'] text-sm font-semibold hover:bg-primary/90 transition-colors">
+      <span class="material-symbols-outlined text-[18px]">mail</span>
+      Michaela direkt fragen
+    </a>
+    <a href="https://haarquiz.ch" target="_blank" rel="noopener noreferrer"
+       class="flex items-center justify-center gap-2 w-full py-3 bg-surface-container text-primary rounded-full font-['Montserrat'] text-sm font-semibold hover:bg-surface-container-high transition-colors border border-outline-variant/30">
+      <span class="material-symbols-outlined text-[18px]">quiz</span>
+      Zur kostenlosen Haaranalyse
+    </a>
+    <a href="./"
+       class="flex items-center justify-center gap-2 w-full py-2 text-on-surface-variant font-['Montserrat'] text-xs hover:text-primary transition-colors">
+      <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+      Zurück zur Hauptseite
+    </a>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="max-w-[500px] mx-auto flex flex-col items-center gap-2 py-8 px-5 text-center">
+  <p class="font-['Montserrat'] text-[11px] text-on-surface-variant">© 2025 Michaela Antoniadis · MONAT Markenpartnerin</p>
+  <a href="impressum-michaela.html" class="font-['Montserrat'] text-[11px] text-on-surface-variant hover:text-primary transition-colors">Impressum & Datenschutz</a>
+  <p class="font-['Montserrat'] text-[10px] text-on-surface-variant/60 max-w-xs leading-relaxed mt-1">
+    Diese Seite wird von einer unabhängigen MONAT Markenpartnerin betrieben und ist keine offizielle MONAT-Website.
+  </p>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const body = btn.nextElementSibling;
+    const icon = btn.querySelector('.faq-icon');
+    const isOpen = body.classList.contains('open');
+
+    // Alle schliessen
+    document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('open'));
+
+    // Dieses öffnen (falls es nicht schon offen war)
+    if (!isOpen) {
+      body.classList.add('open');
+      icon.classList.add('open');
+    }
+  }
+</script>
+
+</body>
+</html>
