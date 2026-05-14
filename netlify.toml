@@ -43,6 +43,13 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# ── Domain-Redirect: haarquiz.ch → haar-analyse.ch ───────────────────
+[[redirects]]
+  from = "https://haarquiz.ch/*"
+  to = "https://haar-analyse.ch/:splat"
+  status = 301
+  force = true
+
 # ── Redirects für alternative URL-Pfade ──────────────────────────────
 # z.B. haarquiz.ch/quiz → haarquiz.ch
 [[redirects]]
