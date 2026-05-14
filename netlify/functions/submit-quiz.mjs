@@ -7,8 +7,8 @@
  *
  * Environment Variables (im Netlify-Dashboard zu setzen):
  *  - RESEND_API_KEY    — API-Key aus dem Resend-Dashboard
- *  - RESEND_FROM       — Absender-Adresse, z.B. "Michaela <hallo@haarquiz.ch>"
- *  - MICHAELA_EMAIL    — wohin Lead-Mails gehen, z.B. "info@haarquiz.ch"
+ *  - RESEND_FROM       — Absender-Adresse, z.B. "Michaela <hallo@haar-analyse.ch>"
+ *  - MICHAELA_EMAIL    — wohin Lead-Mails gehen, z.B. "info@haar-analyse.ch"
  *
  * Endpoint: POST /api/submit-quiz
  */
@@ -227,7 +227,7 @@ function customerHtml({ name, result, labels, multiGoals }) {
 
     <!-- Footer -->
     <div style="text-align:center;padding:28px 20px 0;font-size:12px;color:#55605a;">
-      Michaelas MONAT Academy · <a href="https://haarquiz.ch/impressum.html" style="color:#1d6a63;text-decoration:none;">Impressum</a> · <a href="https://haarquiz.ch/datenschutz.html" style="color:#1d6a63;text-decoration:none;">Datenschutz</a>
+      Michaelas MONAT Academy · <a href="https://haar-analyse.ch/impressum.html" style="color:#1d6a63;text-decoration:none;">Impressum</a> · <a href="https://haar-analyse.ch/datenschutz.html" style="color:#1d6a63;text-decoration:none;">Datenschutz</a>
     </div>
   </div>
 </body></html>`;
@@ -282,8 +282,8 @@ Fragen vorab? Antworte einfach auf diese E-Mail — sie landet direkt bei Michae
 
 —
 Michaelas MONAT Academy
-Impressum:    https://haarquiz.ch/impressum.html
-Datenschutz:  https://haarquiz.ch/datenschutz.html`;
+Impressum:    https://haar-analyse.ch/impressum.html
+Datenschutz:  https://haar-analyse.ch/datenschutz.html`;
 }
 
 function michaelaHtml({ name, email, answers, resultType }) {
@@ -310,7 +310,7 @@ function michaelaHtml({ name, email, answers, resultType }) {
   <div style="max-width:640px;margin:0 auto;padding:32px 24px;">
     <div style="background:#ffffff;border-radius:20px;padding:36px 32px;box-shadow:0 4px 24px rgba(45,52,44,0.04);">
       <h1 style="font-size:22px;font-weight:600;margin:0 0 6px;color:#2d342c;">Neuer Haar-Quiz-Lead</h1>
-      <p style="color:#55605a;font-size:13px;margin:0 0 24px;">Eingegangen ${escapeHtml(timestamp)} Uhr · via haarquiz.ch</p>
+      <p style="color:#55605a;font-size:13px;margin:0 0 24px;">Eingegangen ${escapeHtml(timestamp)} Uhr · via haar-analyse.ch</p>
 
       <div style="background:#f1f5ec;padding:20px 22px;border-radius:14px;font-size:15px;line-height:1.7;margin-bottom:20px;">
         <strong style="color:#0f4d47;">Name:</strong> ${escapeHtml(name || '—')}<br/>
@@ -346,7 +346,7 @@ function michaelaText({ name, email, answers, resultType }) {
     timeStyle: 'short',
   });
 
-  return `Neuer Haar-Quiz-Lead auf haarquiz.ch
+  return `Neuer Haar-Quiz-Lead auf haar-analyse.ch
 Eingegangen: ${timestamp} Uhr
 
 Name:   ${name || '—'}
@@ -463,8 +463,8 @@ export default async (req) => {
   if (err) return json({ ok: false, error: err }, 400);
 
   const apiKey = process.env.RESEND_API_KEY;
-  const FROM = process.env.RESEND_FROM || 'Michaela <hallo@haarquiz.ch>';
-  const MICHAELA = process.env.MICHAELA_EMAIL || 'info@haarquiz.ch';
+  const FROM = process.env.RESEND_FROM || 'Michaela <hallo@haar-analyse.ch>';
+  const MICHAELA = process.env.MICHAELA_EMAIL || 'info@haar-analyse.ch';
 
   if (!apiKey) {
     console.error('RESEND_API_KEY not configured');
