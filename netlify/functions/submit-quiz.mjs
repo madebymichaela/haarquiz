@@ -286,7 +286,7 @@ Impressum:    https://haar-analyse.ch/impressum.html
 Datenschutz:  https://haar-analyse.ch/datenschutz.html`;
 }
 
-function michaelaHtml({ name, email, answers, resultType }) {
+function michaelaHtml({ name, email, answers, resultType, result }) {
   const rows = Object.keys(QUESTIONS)
     .map((q) => {
       const labels = formatLabels(answers[q] || [], LABELS[q]);
@@ -331,11 +331,21 @@ function michaelaHtml({ name, email, answers, resultType }) {
         <a href="https://www.instagram.com/direct/inbox/" style="display:inline-block;background:linear-gradient(135deg,#1d6a63,#0f4d47);color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:999px;font-weight:600;font-size:13px;">Instagram-DMs öffnen</a>
       </p>
     </div>
+
+    <!-- Was der Lead erhalten hat -->
+    ${result ? `<div style="background:#ffffff;border-radius:20px;padding:36px 32px;box-shadow:0 4px 24px rgba(45,52,44,0.04);margin-top:16px;">
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63;font-weight:600;margin-bottom:8px;">Was der Lead erhalten hat</div>
+      <h2 style="font-size:18px;font-weight:600;margin:0 0 8px;color:#2d342c;">${escapeHtml(String(result.title || '').replace(/\n/g, ' '))}</h2>
+      ${result.tagline ? `<p style="font-size:14px;color:#55605a;font-style:italic;margin:0 0 14px;">${escapeHtml(result.tagline)}</p>` : ''}
+      ${result.desc ? `<p style="font-size:14px;line-height:1.7;color:#2d342c;margin:0 0 14px;">${escapeHtml(result.desc)}</p>` : ''}
+      ${Array.isArray(result.tips) && result.tips.length > 0 ? `<ul style="margin:0 0 14px;padding-left:18px;">${result.tips.map(t => `<li style="font-size:13px;line-height:1.65;color:#2d342c;margin-bottom:4px;">${escapeHtml(t)}</li>`).join('')}</ul>` : ''}
+      ${result.product ? `<div style="background:#f1f5ec;padding:14px 16px;border-radius:10px;font-size:13px;color:#2d342c;line-height:1.6;"><strong style="color:#0f4d47;">Produkt-Richtung:</strong> ${escapeHtml(result.product)}</div>` : ''}
+    </div>` : ''}
   </div>
 </body></html>`;
 }
 
-function michaelaText({ name, email, answers, resultType }) {
+function michaelaText({ name, email, answers, resultType, result }) {
   const lines = Object.keys(QUESTIONS)
     .map((q) => `${QUESTIONS[q]}: ${formatLabels(answers[q] || [], LABELS[q])}`)
     .join('\n');
@@ -345,6 +355,17 @@ function michaelaText({ name, email, answers, resultType }) {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
+
+  const r = result || {};
+  const title = r.title ? String(r.title).replace(/\n/g, ' ') : '';
+  const resultBlock = result ? `
+========================================
+WAS DER LEAD ERHALTEN HAT
+========================================
+${title ? title + '\n' : ''}${r.tagline ? r.tagline + '\n' : ''}
+${r.desc || ''}
+${Array.isArray(r.tips) && r.tips.length > 0 ? '\n' + r.tips.map(t => `• ${t}`).join('\n') : ''}
+${r.product ? '\nProdukt-Richtung: ' + r.product : ''}` : '';
 
   return `Neuer Haar-Quiz-Lead auf haar-analyse.ch
 Eingegangen: ${timestamp} Uhr
@@ -357,7 +378,7 @@ PRIMÄRES ZIEL: ${primaryGoal}
 ${lines}
 
 Die Kundin wurde gebeten, dir per Instagram 2-3 Fotos ihrer Haare zu schicken.
-Instagram-DMs: https://www.instagram.com/direct/inbox/`;
+Instagram-DMs: https://www.instagram.com/direct/inbox/${resultBlock}`;
 }
 
 // ── Resend API Call ──────────────────────────────────────────────────
@@ -494,8 +515,8 @@ export default async (req) => {
       to: leadRecipients,
       reply_to: email,
       subject: `Neuer Lead: ${name || email}`,
-      html: michaelaHtml({ name, email, answers, resultType }),
-      text: michaelaText({ name, email, answers, resultType }),
+      html: michaelaHtml({ name, email, answers, resultType, result }),
+      text: michaelaText({ name, email, answers, resultType, result }),
     }),
   ];
 
