@@ -465,6 +465,10 @@ export default async (req) => {
   const apiKey = process.env.RESEND_API_KEY;
   const FROM = process.env.RESEND_FROM || 'Michaela <hallo@haar-analyse.ch>';
   const MICHAELA = process.env.MICHAELA_EMAIL || 'info@haar-analyse.ch';
+  const OWNER = process.env.OWNER_EMAIL || null;
+
+  // Lead-Empfänger: Michaela immer, Owner (Georgios) wenn konfiguriert
+  const leadRecipients = OWNER ? [MICHAELA, OWNER] : MICHAELA;
 
   if (!apiKey) {
     console.error('RESEND_API_KEY not configured');
@@ -487,7 +491,7 @@ export default async (req) => {
     sendEmail({
       apiKey,
       from: FROM,
-      to: MICHAELA,
+      to: leadRecipients,
       reply_to: email,
       subject: `Neuer Lead: ${name || email}`,
       html: michaelaHtml({ name, email, answers, resultType }),
