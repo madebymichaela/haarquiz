@@ -188,15 +188,13 @@ function customerHtml({ name, result, labels, multiGoals }) {
     <!-- PROMINENTER CTA: Dein nächster Schritt -->
     <div style="background:linear-gradient(135deg,#1d6a63 0%,#0f4d47 100%);border-radius:20px;padding:36px 32px;margin-bottom:20px;text-align:center;color:#ffffff;">
       <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#a8f0e7;font-weight:600;margin-bottom:12px;">Dein nächster Schritt</div>
-      <h3 style="font-size:24px;font-weight:600;margin:0 0 14px;letter-spacing:-0.02em;color:#ffffff;line-height:1.25;">Die persönliche Empfehlung kommt als Sprachnachricht.</h3>
+      <h3 style="font-size:24px;font-weight:600;margin:0 0 14px;letter-spacing:-0.02em;color:#ffffff;line-height:1.25;">Schicke mir jetzt eine WhatsApp.</h3>
       <p style="font-size:15px;line-height:1.7;color:#ffffff;opacity:0.92;margin:0 0 24px;">
-        Dafür brauchst du nur zwei Minuten: Schick Michaela <strong>dein Haar-Profil als Bild oder Screenshot</strong> plus <strong>2–3 Fotos deiner Haare</strong> (gesamt, Kopfhaut, Spitzen) per Instagram-DM.
-        <br/><br/>
-        Viele schätzen den eigenen Haarzustand anders ein als er tatsächlich ist — Fotos helfen Michaela, dich wirklich präzise zu beraten.
+        Deine ausgefüllten Punkte werden automatisch übertragen — du musst nichts nochmals eingeben. Füge noch <strong>2–3 Fotos deiner Haare und Kopfhaut</strong> hinzu, damit ich dir eine tiefe und individuelle Antwort persönlich geben kann.
       </p>
-      <a href="https://www.instagram.com/made_by_michaela" style="display:inline-block;background:#ffffff;color:#1d6a63;text-decoration:none;padding:15px 32px;border-radius:999px;font-weight:600;font-size:15px;">An @made_by_michaela senden</a>
+      <a href="https://wa.me/41767587551" style="display:inline-block;background:#25D366;color:#ffffff;text-decoration:none;padding:15px 32px;border-radius:999px;font-weight:600;font-size:15px;">Jetzt per WhatsApp schreiben</a>
       <p style="font-size:13px;color:#a8f0e7;margin:16px 0 0;opacity:0.85;">
-        Ohne diesen Schritt geht's nicht weiter — die Sprachnachricht ist die eigentliche Empfehlung.
+        Ohne Fotos kann ich keine individuelle Empfehlung geben — dieser Schritt macht den Unterschied.
       </p>
     </div>
 
@@ -262,13 +260,11 @@ DEIN NÄCHSTER SCHRITT
 Die persönliche Empfehlung kommt als Sprachnachricht.
 ========================================
 
-Dafür brauchst du nur zwei Minuten: Schick Michaela dein Haar-Profil als Bild oder Screenshot PLUS 2-3 Fotos deiner Haare (gesamt, Kopfhaut, Spitzen) per Instagram-DM.
+Deine ausgefüllten Punkte werden automatisch übertragen — du musst nichts nochmals eingeben. Füge noch 2-3 Fotos deiner Haare und Kopfhaut hinzu, damit Michaela dir eine tiefe und individuelle Antwort persönlich geben kann.
 
-Viele schätzen den eigenen Haarzustand anders ein als er tatsächlich ist — Fotos helfen Michaela, dich wirklich präzise zu beraten.
+👉 WhatsApp: https://wa.me/41767587551
 
-👉 Instagram: https://www.instagram.com/made_by_michaela
-
-Ohne diesen Schritt geht's nicht weiter — die Sprachnachricht ist die eigentliche Empfehlung.
+Ohne Fotos kann ich keine individuelle Empfehlung geben — dieser Schritt macht den Unterschied.
 
 ========================================
 
@@ -325,10 +321,10 @@ function michaelaHtml({ name, email, answers, resultType, result }) {
       <table style="width:100%;border-collapse:separate;border-spacing:0 4px;margin-bottom:28px;">${rows}</table>
 
       <p style="font-size:13px;color:#55605a;margin:0 0 16px;">
-        Die Kundin wurde in der Bestätigungs-Mail gebeten, dir per Instagram 2–3 Fotos zu schicken.
+        Die Kundin wurde in der Bestätigungs-Mail gebeten, dir per WhatsApp zu schreiben und 2–3 Fotos ihrer Haare hinzuzufügen.
       </p>
       <p style="margin:0;">
-        <a href="https://www.instagram.com/direct/inbox/" style="display:inline-block;background:linear-gradient(135deg,#1d6a63,#0f4d47);color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:999px;font-weight:600;font-size:13px;">Instagram-DMs öffnen</a>
+        <a href="https://wa.me/41767587551" style="display:inline-block;background:#25D366;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:999px;font-weight:600;font-size:13px;">WhatsApp öffnen</a>
       </p>
     </div>
 
@@ -377,8 +373,8 @@ PRIMÄRES ZIEL: ${primaryGoal}
 
 ${lines}
 
-Die Kundin wurde gebeten, dir per Instagram 2-3 Fotos ihrer Haare zu schicken.
-Instagram-DMs: https://www.instagram.com/direct/inbox/${resultBlock}`;
+Die Kundin wurde gebeten, dir per WhatsApp zu schreiben und 2-3 Fotos ihrer Haare hinzuzufügen.
+WhatsApp: https://wa.me/41767587551${resultBlock}`;
 }
 
 // ── Resend API Call ──────────────────────────────────────────────────
