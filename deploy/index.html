@@ -1771,51 +1771,46 @@
         </div>
       </div>
 
-      <div class="result-desc">
-        <h3 class="desc-title">Was das für dich bedeutet</h3>
-        <p class="desc-text" id="r-desc"></p>
-        <ul class="tip-list" id="r-tips"></ul>
-      </div>
-
-      <div class="multi-goal-note" id="r-multi-goal" style="display:none;">
-        <div class="multi-goal-label">Deine weiteren Wünsche</div>
-        <p class="multi-goal-text">
-          Du hast ausserdem <strong id="r-multi-goal-list"></strong> genannt.
-          Das ist häufig — dein Haar ist vielschichtig, und deine Empfehlung soll es auch sein.
-          Michaela berücksichtigt alle deine Wünsche in ihrer persönlichen Sprachnachricht.
-        </p>
-      </div>
-
-      <div class="product-hint">
-        <div class="product-hint-label">Produkt-Richtung</div>
-        <div class="product-hint-title" id="r-product-title">Deine MONAT-Empfehlung</div>
-        <div class="product-hint-text" id="r-product-text">—</div>
+      <!-- Versteckte Elemente — werden per JS befüllt (Share Card, etc.) -->
+      <div style="display:none;">
+        <p id="r-desc"></p>
+        <ul id="r-tips"></ul>
+        <div id="r-multi-goal"><strong id="r-multi-goal-list"></strong></div>
+        <div id="r-product-title"></div>
+        <div id="r-product-text"></div>
       </div>
 
       <div class="cta-block">
-        <span class="cta-eyebrow">So geht's weiter</span>
-        <h3 class="cta-title">Drei kleine Schritte<br/>zu deiner perfekten Pflege</h3>
+        <span class="cta-eyebrow">So geht es weiter</span>
+        <h3 class="cta-title">Deine nächsten Schritte</h3>
 
         <div class="steps-container">
           <div class="step-item">
             <div class="step-num">1</div>
             <div>
-              <div class="step-text-head">Speichere dein Haar-Profil als Bild</div>
-              <div class="step-text-body">Mit dem Button unten herunterladen — oder einfach einen Screenshot. Du bekommst die Auswertung zusätzlich per E-Mail, aber das Bild brauchst du für den nächsten Schritt.</div>
+              <div class="step-text-head">Erste Haar-Analyse per E-Mail</div>
+              <div class="step-text-body">Du bekommst per E-Mail eine erste Haar-Analyse, damit du ein Gefühl für deine Haare bekommst.</div>
             </div>
           </div>
           <div class="step-item">
             <div class="step-num">2</div>
             <div>
-              <div class="step-text-head">Sende Bild + Fotos an Michaela</div>
-              <div class="step-text-body">Per Instagram-DM an <a href="https://www.instagram.com/made_by_michaela" target="_blank">@made_by_michaela</a>: dein Haar-Profil plus 2–3 Fotos deiner Haare (gesamt, Kopfhaut, Spitzen). Das ist der entscheidende Schritt für deine persönliche Empfehlung.</div>
+              <div class="step-text-head">Schicke mir eine WhatsApp</div>
+              <div class="step-text-body">Als Nächstes schickst du mir eine WhatsApp — mit dem Button unten geht das in einem Klick.</div>
             </div>
           </div>
           <div class="step-item">
             <div class="step-num">3</div>
             <div>
-              <div class="step-text-head">Persönliche Sprachnachricht</div>
-              <div class="step-text-body">Michaela meldet sich mit ehrlicher Einschätzung und passenden Produkt-Empfehlungen — damit du nicht mehr raten musst.</div>
+              <div class="step-text-head">Deine Angaben werden automatisch übertragen</div>
+              <div class="step-text-body">In der WhatsApp werden automatisch deine ausgefüllten Punkte übertragen — du musst nichts nochmals eingeben.</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <div>
+              <div class="step-text-head">Fotos hinzufügen</div>
+              <div class="step-text-body">Füge noch 2–3 Fotos deiner Haare und Kopfhaut hinzu — so kann ich dir eine tiefe und individuelle Antwort persönlich geben.</div>
             </div>
           </div>
         </div>
@@ -1836,14 +1831,14 @@
         </div>
 
         <div class="download-wrap">
+          <a id="btn-wa" class="btn-whatsapp" href="#" target="_blank" rel="noopener" onclick="return openWhatsApp()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.524 5.845L.057 23.486c-.066.254.004.524.186.706a.748.748 0 00.527.218.742.742 0 00.194-.026l5.789-1.489A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.822 9.822 0 01-5.006-1.371l-.36-.214-3.722.957.99-3.613-.235-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
+            Jetzt per WhatsApp schreiben
+          </a>
           <button class="btn-download" id="btn-dl" onclick="downloadCard()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Haar-Profil als Bild speichern
           </button>
-          <a id="btn-wa" class="btn-whatsapp" href="#" target="_blank" rel="noopener" onclick="return openWhatsApp()">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.524 5.845L.057 23.486c-.066.254.004.524.186.706a.748.748 0 00.527.218.742.742 0 00.194-.026l5.789-1.489A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.822 9.822 0 01-5.006-1.371l-.36-.214-3.722.957.99-3.613-.235-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
-            Ergebnis per WhatsApp teilen
-          </a>
           <p class="download-hint">Michaela meldet sich persönlich bei dir</p>
         </div>
 
