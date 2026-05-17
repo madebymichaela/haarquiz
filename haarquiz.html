@@ -980,6 +980,30 @@
     .btn-download svg { width: 17px; height: 17px; }
     .btn-download.loading { opacity: 0.6; cursor: wait; }
 
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 15px 32px;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 12px;
+      text-decoration: none;
+    }
+    .btn-whatsapp:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(37, 211, 102, 0.35);
+    }
+    .btn-whatsapp svg { width: 19px; height: 19px; flex-shrink: 0; }
+
     .download-hint {
       font-size: 13px;
       color: rgba(255, 255, 255, 0.6);
@@ -1816,7 +1840,11 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Haar-Profil als Bild speichern
           </button>
-          <p class="download-hint">Bild herunterladen &amp; per Instagram an Michaela senden</p>
+          <a id="btn-wa" class="btn-whatsapp" href="#" target="_blank" rel="noopener" onclick="return openWhatsApp()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.524 5.845L.057 23.486c-.066.254.004.524.186.706a.748.748 0 00.527.218.742.742 0 00.194-.026l5.789-1.489A11.947 11.947 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.822 9.822 0 01-5.006-1.371l-.36-.214-3.722.957.99-3.613-.235-.373A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
+            Ergebnis per WhatsApp teilen
+          </a>
+          <p class="download-hint">Michaela meldet sich persönlich bei dir</p>
         </div>
 
         <button class="btn-restart" onclick="restart()">Analyse wiederholen</button>
@@ -2316,6 +2344,36 @@
       btn.classList.remove('loading');
       btn.innerHTML = 'Fehler — bitte nochmals versuchen';
     });
+  }
+
+  function openWhatsApp() {
+    const name      = document.getElementById('inp-name').value.trim() || '—';
+    const titel     = document.getElementById('r-title').textContent.trim();
+    const struktur  = document.getElementById('ri-struktur').textContent.trim();
+    const typ       = document.getElementById('ri-typ').textContent.trim();
+    const kopfhaut  = document.getElementById('ri-kopfhaut').textContent.trim();
+    const ziel      = document.getElementById('ri-ziel').textContent.trim();
+    const allergien = A.q6 ? A.q6 : '—';
+    const waschen   = A.q7 ? A.q7 : '—';
+    const interesse = A.q8.length ? A.q8.join(', ') + (A.q8_sonstiges ? ' (' + A.q8_sonstiges + ')' : '') : '—';
+
+    const msg =
+      'Hallo Michaela! 👋\n\n' +
+      'Ich habe gerade die Haar-Analyse gemacht und möchte mein Ergebnis mit dir besprechen.\n\n' +
+      '👤 Name: ' + name + '\n' +
+      '💇 Haar-Profil: ' + titel + '\n' +
+      '🔹 Struktur: ' + struktur + '\n' +
+      '🔹 Haartyp: ' + typ + '\n' +
+      '🔹 Kopfhaut: ' + kopfhaut + '\n' +
+      '🔹 Hauptziel: ' + ziel + '\n' +
+      '⚠️ Allergien / Unverträglichkeiten: ' + allergien + '\n' +
+      '🚿 Waschen: ' + waschen + '\n' +
+      '✨ MONAT-Interesse: ' + interesse + '\n\n' +
+      'Ich freue mich auf deine persönliche Empfehlung!';
+
+    const url = 'https://wa.me/41767587551?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank', 'noopener');
+    return false;
   }
 
 
