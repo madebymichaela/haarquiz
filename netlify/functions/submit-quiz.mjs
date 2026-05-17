@@ -103,20 +103,21 @@ function json(obj, status = 200) {
 }
 
 // ── E-Mail Templates ─────────────────────────────────────────────────
-function buildWaLink(name, labels) {
+function buildWaLink(name, email, labels) {
   const msg =
-    'Hallo Michaela! 👋\n\n' +
+    'Hallo Michaela!\n\n' +
     'Ich habe gerade die Haar-Analyse gemacht und möchte mein Ergebnis mit dir besprechen.\n\n' +
-    '👤 Name: ' + (name || '—') + '\n' +
-    '🔹 Struktur: ' + (labels.struktur || '—') + '\n' +
-    '🔹 Haartyp: ' + (labels.typ || '—') + '\n' +
-    '🔹 Kopfhaut: ' + (labels.kopfhaut || '—') + '\n' +
-    '🔹 Hauptziel: ' + (labels.ziel || '—') + '\n\n' +
+    'Name: ' + (name || '—') + '\n' +
+    'E-Mail: ' + (email || '—') + '\n' +
+    'Struktur: ' + (labels.struktur || '—') + '\n' +
+    'Haartyp: ' + (labels.typ || '—') + '\n' +
+    'Kopfhaut: ' + (labels.kopfhaut || '—') + '\n' +
+    'Hauptziel: ' + (labels.ziel || '—') + '\n\n' +
     'Ich freue mich auf deine persönliche Empfehlung!';
   return 'https://wa.me/41767587551?text=' + encodeURIComponent(msg);
 }
 
-function customerHtml({ name, result, labels, multiGoals }) {
+function customerHtml({ name, email, result, labels, multiGoals }) {
   const greeting = name ? `Hallo ${escapeHtml(name)}` : 'Hallo';
   const r = result || {};
   const lab = labels || {};
@@ -205,11 +206,11 @@ function customerHtml({ name, result, labels, multiGoals }) {
     <!-- PROMINENTER CTA: Dein nächster Schritt -->
     <div style="background-color:#ffffff !important;border-radius:20px;padding:36px 32px;margin-bottom:20px;text-align:center;border:2px solid #dee5d8;">
       <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63 !important;font-weight:700;margin-bottom:12px;">Dein nächster Schritt</div>
-      <h3 style="font-size:22px;font-weight:700;margin:0 0 14px;color:#1a1a1a !important;line-height:1.3;">Schicke mir jetzt eine WhatsApp.</h3>
+      <h3 style="font-size:22px;font-weight:700;margin:0 0 14px;color:#1a1a1a !important;line-height:1.3;">Falls du mir noch keine WhatsApp geschickt hast, dann klick jetzt hier:</h3>
       <p style="font-size:15px;line-height:1.7;color:#444444 !important;margin:0 0 28px;">
         Deine ausgefüllten Punkte werden automatisch übertragen — du musst nichts nochmals eingeben. Füge noch <strong style="color:#1a1a1a !important;">2–3 Fotos deiner Haare und Kopfhaut</strong> hinzu, damit ich dir eine tiefe und individuelle Antwort persönlich geben kann.
       </p>
-      <a href="${buildWaLink(name, lab)}" style="display:inline-block;background-color:#25D366 !important;color:#ffffff !important;text-decoration:none;padding:16px 36px;border-radius:999px;font-weight:700;font-size:16px;">Jetzt per WhatsApp schreiben</a>
+      <a href="${buildWaLink(name, email, lab)}" style="display:inline-block;background-color:#25D366 !important;color:#ffffff !important;text-decoration:none;padding:16px 36px;border-radius:999px;font-weight:700;font-size:16px;-webkit-text-fill-color:#ffffff;">Jetzt per WhatsApp schreiben</a>
       <p style="font-size:13px;color:#888888 !important;margin:16px 0 0;">
         Ohne Fotos kann ich keine individuelle Empfehlung geben.
       </p>
@@ -248,12 +249,12 @@ function customerHtml({ name, result, labels, multiGoals }) {
 </body></html>`;
 }
 
-function customerText({ name, result, labels, multiGoals }) {
+function customerText({ name, email, result, labels, multiGoals }) {
   const greeting = name ? `Hallo ${name}` : 'Hallo';
   const r = result || {};
   const lab = labels || {};
   const goals = Array.isArray(multiGoals) ? multiGoals : [];
-  const waLink = buildWaLink(name, lab);
+  const waLink = buildWaLink(name, email, lab);
 
   const title = r.title ? String(r.title).replace(/\n/g, ' ') : '';
   const tipsText = Array.isArray(r.tips) && r.tips.length > 0
@@ -520,8 +521,8 @@ export default async (req) => {
       to: email,
       reply_to: MICHAELA,
       subject: 'Deine Haar-Auswertung — und was jetzt kommt',
-      html: customerHtml({ name, result, labels, multiGoals }),
-      text: customerText({ name, result, labels, multiGoals }),
+      html: customerHtml({ name, email, result, labels, multiGoals }),
+      text: customerText({ name, email, result, labels, multiGoals }),
     }),
     sendEmail({
       apiKey,
