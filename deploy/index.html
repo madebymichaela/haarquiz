@@ -2343,6 +2343,7 @@
 
   function openWhatsApp() {
     const name      = document.getElementById('inp-name').value.trim() || '—';
+    const email     = document.getElementById('inp-email').value.trim() || '—';
     const titel     = document.getElementById('r-title').textContent.trim();
     const struktur  = document.getElementById('ri-struktur').textContent.trim();
     const typ       = document.getElementById('ri-typ').textContent.trim();
@@ -2356,6 +2357,7 @@
       'Hallo Michaela!\n\n' +
       'Ich habe gerade die Haar-Analyse gemacht und möchte mein Ergebnis mit dir besprechen.\n\n' +
       'Name: ' + name + '\n' +
+      'E-Mail: ' + email + '\n' +
       'Haar-Profil: ' + titel + '\n' +
       'Struktur: ' + struktur + '\n' +
       'Haartyp: ' + typ + '\n' +
