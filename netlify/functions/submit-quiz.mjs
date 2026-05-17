@@ -113,7 +113,8 @@ function buildWaLink(name, email, labels) {
     'Haartyp: ' + (labels.typ || '—') + '\n' +
     'Kopfhaut: ' + (labels.kopfhaut || '—') + '\n' +
     'Hauptziel: ' + (labels.ziel || '—') + '\n\n' +
-    'Ich freue mich auf deine persönliche Empfehlung!';
+    'Hier noch einige Bilder von meinen Haaren und meiner Kopfhaut.\n\n' +
+    'Ich freue mich auf deine persönliche Empfehlung.';
   return 'https://wa.me/41767587551?text=' + encodeURIComponent(msg);
 }
 
