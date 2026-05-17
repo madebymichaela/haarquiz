@@ -103,6 +103,19 @@ function json(obj, status = 200) {
 }
 
 // ── E-Mail Templates ─────────────────────────────────────────────────
+function buildWaLink(name, labels) {
+  const msg =
+    'Hallo Michaela! 👋\n\n' +
+    'Ich habe gerade die Haar-Analyse gemacht und möchte mein Ergebnis mit dir besprechen.\n\n' +
+    '👤 Name: ' + (name || '—') + '\n' +
+    '🔹 Struktur: ' + (labels.struktur || '—') + '\n' +
+    '🔹 Haartyp: ' + (labels.typ || '—') + '\n' +
+    '🔹 Kopfhaut: ' + (labels.kopfhaut || '—') + '\n' +
+    '🔹 Hauptziel: ' + (labels.ziel || '—') + '\n\n' +
+    'Ich freue mich auf deine persönliche Empfehlung!';
+  return 'https://wa.me/41767587551?text=' + encodeURIComponent(msg);
+}
+
 function customerHtml({ name, result, labels, multiGoals }) {
   const greeting = name ? `Hallo ${escapeHtml(name)}` : 'Hallo';
   const r = result || {};
@@ -166,8 +179,12 @@ function customerHtml({ name, result, labels, multiGoals }) {
   const badge = r.badge || '';
 
   return `<!DOCTYPE html>
-<html lang="de"><head><meta charset="UTF-8"/><title>Dein Haar-Profil</title></head>
-<body style="margin:0;padding:0;background:#f8faf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2d342c;">
+<html lang="de"><head><meta charset="UTF-8"/><title>Dein Haar-Profil</title>
+<meta name="color-scheme" content="light"/>
+<meta name="supported-color-schemes" content="light"/>
+<style>:root{color-scheme:light;} body{background-color:#f8faf3 !important;color:#2d342c !important;}</style>
+</head>
+<body style="margin:0;padding:0;background:#f8faf3 !important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2d342c !important;">
   <div style="max-width:600px;margin:0 auto;padding:40px 20px;">
 
     <!-- Greeting -->
@@ -186,15 +203,15 @@ function customerHtml({ name, result, labels, multiGoals }) {
     </div>
 
     <!-- PROMINENTER CTA: Dein nächster Schritt -->
-    <div style="background:linear-gradient(135deg,#1d6a63 0%,#0f4d47 100%);border-radius:20px;padding:36px 32px;margin-bottom:20px;text-align:center;color:#ffffff;">
-      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#a8f0e7;font-weight:600;margin-bottom:12px;">Dein nächster Schritt</div>
-      <h3 style="font-size:24px;font-weight:600;margin:0 0 14px;letter-spacing:-0.02em;color:#ffffff;line-height:1.25;">Schicke mir jetzt eine WhatsApp.</h3>
-      <p style="font-size:15px;line-height:1.7;color:#ffffff;opacity:0.92;margin:0 0 24px;">
-        Deine ausgefüllten Punkte werden automatisch übertragen — du musst nichts nochmals eingeben. Füge noch <strong>2–3 Fotos deiner Haare und Kopfhaut</strong> hinzu, damit ich dir eine tiefe und individuelle Antwort persönlich geben kann.
+    <div style="background-color:#ffffff !important;border-radius:20px;padding:36px 32px;margin-bottom:20px;text-align:center;border:2px solid #dee5d8;">
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63 !important;font-weight:700;margin-bottom:12px;">Dein nächster Schritt</div>
+      <h3 style="font-size:22px;font-weight:700;margin:0 0 14px;color:#1a1a1a !important;line-height:1.3;">Schicke mir jetzt eine WhatsApp.</h3>
+      <p style="font-size:15px;line-height:1.7;color:#444444 !important;margin:0 0 28px;">
+        Deine ausgefüllten Punkte werden automatisch übertragen — du musst nichts nochmals eingeben. Füge noch <strong style="color:#1a1a1a !important;">2–3 Fotos deiner Haare und Kopfhaut</strong> hinzu, damit ich dir eine tiefe und individuelle Antwort persönlich geben kann.
       </p>
-      <a href="https://wa.me/41767587551" style="display:inline-block;background:#25D366;color:#ffffff;text-decoration:none;padding:15px 32px;border-radius:999px;font-weight:600;font-size:15px;">Jetzt per WhatsApp schreiben</a>
-      <p style="font-size:13px;color:#a8f0e7;margin:16px 0 0;opacity:0.85;">
-        Ohne Fotos kann ich keine individuelle Empfehlung geben — dieser Schritt macht den Unterschied.
+      <a href="${buildWaLink(name, lab)}" style="display:inline-block;background-color:#25D366 !important;color:#ffffff !important;text-decoration:none;padding:16px 36px;border-radius:999px;font-weight:700;font-size:16px;">Jetzt per WhatsApp schreiben</a>
+      <p style="font-size:13px;color:#888888 !important;margin:16px 0 0;">
+        Ohne Fotos kann ich keine individuelle Empfehlung geben.
       </p>
     </div>
 
@@ -236,6 +253,7 @@ function customerText({ name, result, labels, multiGoals }) {
   const r = result || {};
   const lab = labels || {};
   const goals = Array.isArray(multiGoals) ? multiGoals : [];
+  const waLink = buildWaLink(name, lab);
 
   const title = r.title ? String(r.title).replace(/\n/g, ' ') : '';
   const tipsText = Array.isArray(r.tips) && r.tips.length > 0
@@ -262,7 +280,7 @@ Die persönliche Empfehlung kommt als Sprachnachricht.
 
 Deine ausgefüllten Punkte werden automatisch übertragen — du musst nichts nochmals eingeben. Füge noch 2-3 Fotos deiner Haare und Kopfhaut hinzu, damit Michaela dir eine tiefe und individuelle Antwort persönlich geben kann.
 
-👉 WhatsApp: https://wa.me/41767587551
+👉 WhatsApp: ${waLink}
 
 Ohne Fotos kann ich keine individuelle Empfehlung geben — dieser Schritt macht den Unterschied.
 
