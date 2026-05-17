@@ -333,12 +333,6 @@
       transform: scale(1);
     }
 
-    .opt-icon {
-      font-size: 22px;
-      width: 32px;
-      text-align: center;
-      flex-shrink: 0;
-    }
 
     .opt-label {
       flex: 1;
@@ -1273,14 +1267,14 @@
 
     <p class="hero-sub">
       Hör auf, zwischen Produkten zu wechseln, die eigentlich für alle und niemanden gemacht sind.
-      <strong>Beantworte 5 Fragen</strong> — und erhalte eine persönliche Empfehlung,
+      <strong>Beantworte ein paar Fragen</strong> — und erhalte eine persönliche Empfehlung,
       die wirklich zu dir passt.
     </p>
 
     <div class="hero-badges">
       <span class="badge">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        5 Fragen · 2 Minuten
+        Einige Fragen · 3 Minuten
       </span>
       <span class="badge">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -1317,25 +1311,21 @@
     <div class="q-card active" id="q1">
       <span class="q-step">Frage 01 · Struktur</span>
       <h3 class="q-text">Wie beschreibst du deine Haarstruktur?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 2.</p>
+      <p class="q-hint">Mehrfachauswahl möglich.</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q1','glatt')">
-          <span class="opt-icon">〰️</span>
           <span class="opt-label"><strong>Glatt</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q1','wellig')">
-          <span class="opt-icon">🌊</span>
           <span class="opt-label"><strong>Wellig</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q1','locken')">
-          <span class="opt-icon">🌀</span>
           <span class="opt-label"><strong>Locken</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q1','krause')">
-          <span class="opt-icon">🔱</span>
           <span class="opt-label"><strong>Krause</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
@@ -1353,55 +1343,45 @@
     <div class="q-card" id="q2">
       <span class="q-step">Frage 02 · Haar-Zustand</span>
       <h3 class="q-text">Wie beschreibst du dein Haar?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle alles, was zutrifft (max. 4).</p>
+      <p class="q-hint">Mehrfachauswahl möglich.</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q2','fein')">
-          <span class="opt-icon">🪶</span>
           <span class="opt-label"><strong>Fein / Dünn</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q2','normal')">
-          <span class="opt-icon">✨</span>
           <span class="opt-label"><strong>Normal / Mittel</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q2','dick')">
-          <span class="opt-icon">💪</span>
           <span class="opt-label"><strong>Dick / Kräftig</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q2','haarausfall')">
-          <span class="opt-icon">🍂</span>
           <span class="opt-label"><strong>Haarausfall</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q2','bruechig')">
-          <span class="opt-icon">💔</span>
           <span class="opt-label"><strong>Brüchig</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q2','geschaedigt')">
-          <span class="opt-icon">🩹</span>
           <span class="opt-label"><strong>Geschädigt</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q2','blondiert')">
-          <span class="opt-icon">☀️</span>
           <span class="opt-label"><strong>Blondiert</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q2','spliss')">
-          <span class="opt-icon">✂️</span>
           <span class="opt-label"><strong>Spliss</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q2','trocken')">
-          <span class="opt-icon">🌵</span>
           <span class="opt-label"><strong>Trocken</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q2','platt')">
-          <span class="opt-icon">📏</span>
           <span class="opt-label"><strong>Platt</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
@@ -1422,35 +1402,29 @@
     <div class="q-card" id="q3">
       <span class="q-step">Frage 03 · Kopfhaut</span>
       <h3 class="q-text">Wie fühlt sich deine Kopfhaut an?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle alles, was zutrifft (max. 3).</p>
+      <p class="q-hint">Mehrfachauswahl möglich.</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q3','nein')">
-          <span class="opt-icon">🙌</span>
           <span class="opt-label"><strong>Unauffällig</strong><span>Keine spürbaren Probleme</span></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q3','trocken')">
-          <span class="opt-icon">🌵</span>
           <span class="opt-label"><strong>Trocken</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q3','schuppig')">
-          <span class="opt-icon">❄️</span>
           <span class="opt-label"><strong>Schuppig</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q3','fettend')">
-          <span class="opt-icon">💧</span>
           <span class="opt-label"><strong>Schnell fettend</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q3','empfindlich')">
-          <span class="opt-icon">🌸</span>
           <span class="opt-label"><strong>Empfindlich</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q3','juckend')">
-          <span class="opt-icon">🔥</span>
           <span class="opt-label"><strong>Juckend</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
@@ -1471,25 +1445,21 @@
     <div class="q-card" id="q4">
       <span class="q-step">Frage 04 · Dein Alltag</span>
       <h3 class="q-text">Wie gehst du mit deinem Haar um?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 2.</p>
+      <p class="q-hint">Mehrfachauswahl möglich.</p>
       <div class="opts">
         <button class="opt" onclick="pick(this,'q4','farbe')">
-          <span class="opt-icon">🎨</span>
           <span class="opt-label"><strong>Ich färbe oder blondiere regelmässig</strong><span>Colorationen, Highlights, Balayage</span></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q4','hitze')">
-          <span class="opt-icon">🔥</span>
           <span class="opt-label"><strong>Ich nutze Hitze-Styling</strong><span>Föhn, Glätteisen oder Lockenstab regelmässig</span></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q4','beides')">
-          <span class="opt-icon">💫</span>
           <span class="opt-label"><strong>Beides — Farbe und Hitze</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q4','nein')">
-          <span class="opt-icon">🌿</span>
           <span class="opt-label"><strong>Natürlich — weder noch</strong><span>Keine Farbe, kaum Hitze-Styling</span></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
@@ -1510,60 +1480,49 @@
     <div class="q-card" id="q5">
       <span class="q-step">Frage 05 · Deine Wünsche</span>
       <h3 class="q-text">Was wünschst du dir am meisten für dein Haar?</h3>
-      <p class="q-hint">Mehrfachauswahl möglich — wähle bis zu 6.</p>
+      <p class="q-hint">Mehrfachauswahl möglich.</p>
       <div class="opts cols2">
         <button class="opt" onclick="pick(this,'q5','reparatur')">
-          <span class="opt-icon">💚</span>
           <span class="opt-label"><strong>Reparatur</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','gesunde-kopfhaut')">
-          <span class="opt-icon">🌿</span>
           <span class="opt-label"><strong>Gesunde Kopfhaut</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','anti-frizz')">
-          <span class="opt-icon">⚡</span>
           <span class="opt-label"><strong>Anti Frizz</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','mehr-glanz')">
-          <span class="opt-icon">✨</span>
           <span class="opt-label"><strong>Mehr Glanz &amp; Feuchtigkeit</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','mehr-volumen')">
-          <span class="opt-icon">🎈</span>
           <span class="opt-label"><strong>Mehr Volumen</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','dichteres-haar')">
-          <span class="opt-icon">🌾</span>
           <span class="opt-label"><strong>Dichteres Haar</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','haarwachstum')">
-          <span class="opt-icon">🌱</span>
           <span class="opt-label"><strong>Haarwachstum</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','schoene-locken')">
-          <span class="opt-icon">🌀</span>
           <span class="opt-label"><strong>Schöne Locken</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','glattere-haare')">
-          <span class="opt-icon">💧</span>
           <span class="opt-label"><strong>Glattere Haare</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','ciao-schuppen')">
-          <span class="opt-icon">❄️</span>
           <span class="opt-label"><strong>Ciao Schuppen</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
         <button class="opt" onclick="pick(this,'q5','weniger-oelige')">
-          <span class="opt-icon">🧼</span>
           <span class="opt-label"><strong>Weniger ölige Haare</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
@@ -1573,7 +1532,89 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
           Zurück
         </button>
-        <button class="btn-next" id="nx5" disabled onclick="goToEmail()">
+        <button class="btn-next" id="nx5" disabled onclick="next(5)">
+          Weiter
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Q6: Allergien -->
+    <div class="q-card" id="q6">
+      <span class="q-step">Frage 06 · Verträglichkeit</span>
+      <h3 class="q-text">Hast du Allergien oder Unverträglichkeiten?</h3>
+      <p class="q-hint">Z. B. Duftstoffe, Sulfate, bestimmte Inhaltsstoffe — oder einfach «keine».</p>
+      <div class="opts">
+        <textarea class="field-input" id="inp-allergien"
+          placeholder="z. B. keine bekannten Allergien · parfumfrei bevorzugt · empfindlich auf Sulfate …"
+          rows="3" style="resize:vertical; font-family:var(--font-body);"
+          oninput="A.q6 = this.value.trim();"></textarea>
+      </div>
+      <div class="q-nav">
+        <button class="btn-back" onclick="prev(6)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Zurück
+        </button>
+        <button class="btn-next" id="nx6" onclick="next(6)">
+          Weiter
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Q7: Waschen -->
+    <div class="q-card" id="q7">
+      <span class="q-step">Frage 07 · Wasch-Rhythmus</span>
+      <h3 class="q-text">Wie oft wäschst du deine Haare?</h3>
+      <p class="q-hint">Einfach in eigenen Worten — z. B. täglich, alle 2–3 Tage, einmal pro Woche.</p>
+      <div class="opts">
+        <textarea class="field-input" id="inp-waschen"
+          placeholder="z. B. täglich · alle 2–3 Tage · einmal pro Woche …"
+          rows="2" style="resize:vertical; font-family:var(--font-body);"
+          oninput="A.q7 = this.value.trim();"></textarea>
+      </div>
+      <div class="q-nav">
+        <button class="btn-back" onclick="prev(7)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Zurück
+        </button>
+        <button class="btn-next" id="nx7" onclick="next(7)">
+          Weiter
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Q8: MONAT Interesse -->
+    <div class="q-card" id="q8">
+      <span class="q-step">Frage 08 · Dein Interesse</span>
+      <h3 class="q-text">Was interessiert dich bei MONAT?</h3>
+      <p class="q-hint">Mehrfachauswahl möglich — optional.</p>
+      <div class="opts">
+        <button class="opt" onclick="pickQ8(this,'q8','vip')">
+          <span class="opt-label"><strong>VIP KundIn werden &amp; Rabatte erhalten</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pickQ8(this,'q8','markenpartnerschaft')">
+          <span class="opt-label"><strong>Bitte auch Infos zur Markenpartnerschaft</strong><span>30% Rabatt und Business Chance</span></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" id="btn-sonstiges" onclick="toggleSonstiges(this)">
+          <span class="opt-label"><strong>Sonstiges</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <input class="field-input" type="text" id="inp-sonstiges"
+          placeholder="Was interessiert dich sonst?"
+          style="display:none; margin-top:4px;"
+          oninput="A.q8_sonstiges = this.value.trim();" />
+      </div>
+      <div class="q-nav">
+        <button class="btn-back" onclick="prev(8)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Zurück
+        </button>
+        <button class="btn-next" id="nx8" onclick="goToEmail()">
           Zum Ergebnis
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </button>
@@ -1587,14 +1628,36 @@
 <section id="email-section">
   <div class="quiz-wrap">
     <div class="email-wrap" style="text-align:center;">
-      <div class="email-icon">🌿</div>
       <span class="email-eyebrow">Fast geschafft</span>
-      <h2 class="email-title">Wohin soll deine<br/>Haar-Auswertung?</h2>
-      <p class="email-sub">
-        Du bekommst deine ausführliche Auswertung per E-Mail — zum Nachlesen und Aufheben.
-        Zusätzlich schaut sich Michaela deine Antworten persönlich an und meldet sich
-        mit einer Sprachnachricht. Ehrlich, unverbindlich, auf dich zugeschnitten.
-      </p>
+      <h2 class="email-title">So geht es weiter.</h2>
+
+      <div style="display:flex; flex-direction:column; gap:20px; text-align:left; margin-bottom:36px;">
+
+        <div style="display:flex; align-items:flex-start; gap:16px;">
+          <div class="step-num" style="width:36px;height:36px;background:var(--primary-cont);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--primary-dim);">1</div>
+          <div style="padding-top:6px;">
+            <div style="font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--on-surface);margin-bottom:4px;">Fülle deine Angaben aus.</div>
+            <div style="font-size:13px;color:var(--on-surface-soft);line-height:1.6;">E-Mail und Mobilnummer genügen — dauert 30 Sekunden.</div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:flex-start; gap:16px;">
+          <div class="step-num" style="width:36px;height:36px;background:var(--primary-cont);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--primary-dim);">2</div>
+          <div style="padding-top:6px;">
+            <div style="font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--on-surface);margin-bottom:4px;">Du bekommst deine Auswertung sofort per E-Mail.</div>
+            <div style="font-size:13px;color:var(--on-surface-soft);line-height:1.6;">Zum Nachlesen und Aufheben — direkt in deinem Postfach.</div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:flex-start; gap:16px;">
+          <div class="step-num" style="width:36px;height:36px;background:var(--primary-cont);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--primary-dim);">3</div>
+          <div style="padding-top:6px;">
+            <div style="font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--on-surface);margin-bottom:4px;">Klicke auf der Folgeseite auf den WhatsApp-Button.</div>
+            <div style="font-size:13px;color:var(--on-surface-soft);line-height:1.6;">Dein Profil geht direkt an Michaela. Füge einfach noch 2–3 Fotos deiner Haare und Kopfhaut dazu — so kann Michaela dir eine individuelle und vertiefte Empfehlung geben.</div>
+          </div>
+        </div>
+
+      </div>
 
       <!--
         ╔══════════════════════════════════════════════════════════╗
@@ -1609,21 +1672,29 @@
         <input type="hidden" name="kopfhaut"      id="hf-kopfhaut" />
         <input type="hidden" name="behandlungen"  id="hf-behandlung" />
         <input type="hidden" name="ziel"          id="hf-ziel" />
-        <input type="hidden" name="ergebnis-typ"  id="hf-ergebnis" />
+        <input type="hidden" name="ergebnis-typ"    id="hf-ergebnis" />
+        <input type="hidden" name="allergien"        id="hf-allergien" />
+        <input type="hidden" name="waschen"          id="hf-waschen" />
+        <input type="hidden" name="monat-interesse"  id="hf-monat" />
 
         <!-- Honeypot gegen Bots: echte User sehen dies nicht, Bots füllen es aus und werden blockiert -->
         <input type="text" name="website" id="inp-website" tabindex="-1" autocomplete="off"
                style="position:absolute;left:-9999px;top:0;width:1px;height:1px;opacity:0;" aria-hidden="true" />
 
         <div class="field-wrap">
-          <label class="field-label">Dein Vorname</label>
+          <label class="field-label">Dein Vorname *</label>
           <input class="field-input" type="text" name="vorname" id="inp-name"
-                 placeholder="z. B. Sandra" autocomplete="given-name" />
+                 placeholder="z. B. Sandra" autocomplete="given-name" required />
         </div>
         <div class="field-wrap">
           <label class="field-label">Deine E-Mail-Adresse *</label>
           <input class="field-input" type="email" name="email" id="inp-email"
                  placeholder="sandra@beispiel.ch" autocomplete="email" required />
+        </div>
+        <div class="field-wrap">
+          <label class="field-label">Deine Mobilenummer (WhatsApp) *</label>
+          <input class="field-input" type="tel" name="telefon" id="inp-tel"
+                 placeholder="+41 79 123 45 67" autocomplete="tel" required />
         </div>
 
         <button type="submit" class="btn-submit">
@@ -1817,15 +1888,15 @@
 <script>
   // State
   // Alle 5 Fragen sind Multi-Select (array). Limits variieren pro Frage.
-  const A = { q1: [], q2: [], q3: [], q4: [], q5: [] };
-  const TOTAL = 5;
+  const A = { q1: [], q2: [], q3: [], q4: [], q5: [], q6: '', q7: '', q8: [], q8_sonstiges: '' };
+  const TOTAL = 8;
 
   // Multi-Select Konfiguration: wie viele Antworten pro Frage maximal
   // Q2 und Q3 haben je 4 Optionen — max=4 entspricht "alles kann zutreffen"
-  const MULTI_LIMITS = { q1: 2, q2: 4, q3: 3, q4: 2, q5: 6 };
+  const MULTI_LIMITS = { q1: 99, q2: 99, q3: 99, q4: 99, q5: 99, q8: 99 };
 
   // Reihenfolge der Auswahl pro Frage — für "älteste rausschmeissen" bei Limit
-  const selectedOrder = { q1: [], q2: [], q3: [], q4: [], q5: [] };
+  const selectedOrder = { q1: [], q2: [], q3: [], q4: [], q5: [], q8: [] };
 
   // Helpers
   function scrollTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
@@ -1905,7 +1976,10 @@
     e.preventDefault();
     const email = document.getElementById('inp-email').value.trim();
     const name = document.getElementById('inp-name').value.trim();
+    if (!name){ alert('Bitte gib deinen Vornamen ein.'); return; }
     if (!email){ alert('Bitte gib deine E-Mail-Adresse ein.'); return; }
+    const tel = document.getElementById('inp-tel').value.trim();
+    if (!tel){ alert('Bitte gib deine Mobilenummer ein.'); return; }
 
     // Honeypot — Bot-Schutz, sollte leer sein
     const honeypot = document.getElementById('inp-website')?.value || '';
@@ -1940,7 +2014,12 @@
         body: JSON.stringify({
           name,
           email,
+          telefon: document.getElementById('inp-tel').value.trim(),
           answers: A,
+          allergien: A.q6,
+          waschen: A.q7,
+          monatInteresse: A.q8.join(', '),
+          monatSonstiges: A.q8_sonstiges,
           resultType: rType,
           result: resultData,
           labels: labelsSummary,
@@ -2239,10 +2318,39 @@
     });
   }
 
+
+  // pickQ8: wie pick(), aber nx8 bleibt immer aktiv (Q8 ist optional)
+  function pickQ8(btn, q, val){
+    pick(btn, q, val);
+    const nx8 = document.getElementById('nx8');
+    if(nx8) nx8.disabled = false;
+  }
+
+  // toggleSonstiges: klappt Freitext-Feld auf/zu
+  function toggleSonstiges(btn){
+    const idx = A.q8.indexOf('sonstiges');
+    if(idx >= 0){
+      A.q8.splice(idx, 1);
+      const bi = selectedOrder.q8.indexOf(btn);
+      if(bi >= 0) selectedOrder.q8.splice(bi, 1);
+      btn.classList.remove('sel');
+      const inp = document.getElementById('inp-sonstiges');
+      if(inp){ inp.style.display='none'; inp.value=''; A.q8_sonstiges=''; }
+    } else {
+      A.q8.push('sonstiges');
+      selectedOrder.q8.push(btn);
+      btn.classList.add('sel');
+      const inp = document.getElementById('inp-sonstiges');
+      if(inp){ inp.style.display='block'; inp.focus(); }
+    }
+    const nx8 = document.getElementById('nx8');
+    if(nx8) nx8.disabled = false;
+  }
+
   function restart(){
     // State zurücksetzen — alle Fragen sind Multi-Select (Arrays)
-    A.q1 = []; A.q2 = []; A.q3 = []; A.q4 = []; A.q5 = [];
-    selectedOrder.q1 = []; selectedOrder.q2 = []; selectedOrder.q3 = []; selectedOrder.q4 = []; selectedOrder.q5 = [];
+    A.q1 = []; A.q2 = []; A.q3 = []; A.q4 = []; A.q5 = []; A.q6 = ''; A.q7 = ''; A.q8 = []; A.q8_sonstiges = '';
+    selectedOrder.q1 = []; selectedOrder.q2 = []; selectedOrder.q3 = []; selectedOrder.q4 = []; selectedOrder.q5 = []; selectedOrder.q8 = [];
 
     document.querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
     document.querySelectorAll('.btn-next').forEach(b => b.disabled = true);
@@ -2250,6 +2358,11 @@
     document.getElementById('q1').classList.add('active');
     document.getElementById('inp-name').value = '';
     document.getElementById('inp-email').value = '';
+    const _tel = document.getElementById('inp-tel'); if(_tel) _tel.value = '';
+    const _al = document.getElementById('inp-allergien'); if(_al) _al.value = '';
+    const _wa = document.getElementById('inp-waschen'); if(_wa) _wa.value = '';
+    const _so = document.getElementById('inp-sonstiges'); if(_so){ _so.value=''; _so.style.display='none'; }
+    const _bs = document.getElementById('btn-sonstiges'); if(_bs) _bs.classList.remove('sel');
     document.getElementById('r-multi-goal').style.display = 'none';
     updateProgress(1);
     document.getElementById('result-section').classList.remove('active');
