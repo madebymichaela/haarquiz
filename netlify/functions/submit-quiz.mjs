@@ -204,42 +204,61 @@ function customerHtml({ name, email, result, labels, multiGoals }) {
       ${insightsHtml}
     </div>
 
-    <!-- PROMINENTER CTA: Dein nächster Schritt -->
+    <!-- MONAT System Erklärung -->
+    <div style="background-color:#ffffff !important;border-radius:20px;padding:36px 32px;margin-bottom:20px;box-shadow:0 4px 24px rgba(45,52,44,0.04);">
+      <p style="font-size:15px;line-height:1.8;color:#2d342c !important;margin:0 0 20px;">
+        Vielen Dank, dass du dir die Zeit genommen hast. Ich freue mich, dich begleiten zu dürfen — und dich dabei zu unterstützen, wieder zu gesunden, schönen Haaren zu kommen.
+      </p>
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63 !important;font-weight:700;margin-bottom:8px;">Das MONAT-Pflegesystem</div>
+      <p style="font-size:15px;line-height:1.8;color:#2d342c !important;margin:0 0 14px;">
+        MONAT ist kein einzelnes Shampoo, das alles regelt. Es ist ein ganzheitliches System, das wie Bausteine funktioniert — aufeinander aufgebaut, je nach deinem Haarbedürfnis individuell einsetzbar.
+      </p>
+      <p style="font-size:15px;line-height:1.8;color:#2d342c !important;margin:0;">
+        Der Ausgangspunkt ist immer die Kopfhaut. Denn nur eine gesunde Kopfhaut kann gesunde, starke Haare wachsen lassen — wie ein gesunder Boden, aus dem gute Pflanzen wachsen.
+      </p>
+    </div>
+
+    <!-- WhatsApp CTA -->
     <div style="background-color:#ffffff !important;border-radius:20px;padding:36px 32px;margin-bottom:20px;text-align:center;border:2px solid #dee5d8;">
       <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63 !important;font-weight:700;margin-bottom:12px;">Dein nächster Schritt</div>
-      <h3 style="font-size:22px;font-weight:700;margin:0 0 14px;color:#1a1a1a !important;line-height:1.3;">Falls du mir noch keine WhatsApp geschickt hast, dann klick jetzt hier:</h3>
+      <h3 style="font-size:20px;font-weight:700;margin:0 0 14px;color:#1a1a1a !important;line-height:1.35;">Schicke mir ein Foto — sofern du das noch nicht gemacht hast.</h3>
       <p style="font-size:15px;line-height:1.7;color:#444444 !important;margin:0 0 28px;">
-        Deine ausgefüllten Punkte werden automatisch übertragen — du musst nichts nochmals eingeben. Füge noch <strong style="color:#1a1a1a !important;">2–3 Fotos deiner Haare und Kopfhaut</strong> hinzu, damit ich dir eine tiefe und individuelle Antwort persönlich geben kann.
+        Damit ich dir eine wirklich individuelle Beratung geben kann, brauche ich noch ein Foto deiner Haare — auch ohne Gesicht oder verdeckt, einfach von der Haarstruktur. Deine ausgefüllten Angaben werden automatisch mitgesendet.
       </p>
       <a href="${buildWaLink(name, email, lab)}" style="display:inline-block;background-color:#25D366 !important;color:#ffffff !important;text-decoration:none;padding:16px 36px;border-radius:999px;font-weight:700;font-size:16px;-webkit-text-fill-color:#ffffff;">Jetzt per WhatsApp schreiben</a>
-      <p style="font-size:13px;color:#888888 !important;margin:16px 0 0;">
-        Ohne Fotos kann ich keine individuelle Empfehlung geben.
-      </p>
     </div>
 
-    <!-- Hauptauswertung -->
-    <div style="background:#ffffff;border-radius:20px;padding:36px 32px;box-shadow:0 4px 24px rgba(45,52,44,0.04);margin-bottom:20px;">
-      ${badge ? `<div style="display:inline-block;background:#1d6a63;color:#ffffff;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:8px 18px;border-radius:999px;margin-bottom:18px;">${escapeHtml(badge)}</div>` : ''}
-      ${title ? `<h2 style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:26px;font-weight:600;margin:0 0 14px;letter-spacing:-0.02em;color:#2d342c;line-height:1.2;">${escapeHtml(title)}</h2>` : ''}
-      ${r.tagline ? `<p style="font-size:16px;line-height:1.6;color:#55605a;font-style:italic;margin:0 0 24px;">${escapeHtml(r.tagline)}</p>` : ''}
-      ${r.desc ? `<h3 style="font-size:16px;font-weight:600;margin:0 0 12px;color:#2d342c;">Was das für dich bedeutet</h3><p style="font-size:15px;line-height:1.8;color:#2d342c;margin:0 0 4px;">${escapeHtml(r.desc)}</p>` : ''}
-      ${tipsList}
+    <!-- Was als Nächstes passiert -->
+    <div style="background-color:#ffffff !important;border-radius:20px;padding:36px 32px;margin-bottom:20px;box-shadow:0 4px 24px rgba(45,52,44,0.04);">
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63 !important;font-weight:700;margin-bottom:16px;">Was als Nächstes passiert</div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="vertical-align:top;padding-bottom:16px;">
+            <div style="display:inline-block;background:#1d6a63;color:#ffffff;font-size:13px;font-weight:700;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;margin-right:12px;vertical-align:middle;">1</div>
+            <span style="font-size:15px;color:#2d342c !important;line-height:1.6;vertical-align:middle;">Sobald ich dein Foto erhalten habe, schicke ich dir eine <strong>persönliche Sprachnachricht</strong> mit meiner Einschätzung und Empfehlung.</span>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align:top;padding-bottom:16px;">
+            <div style="display:inline-block;background:#1d6a63;color:#ffffff;font-size:13px;font-weight:700;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;margin-right:12px;vertical-align:middle;">2</div>
+            <span style="font-size:15px;color:#2d342c !important;line-height:1.6;vertical-align:middle;">Bei weiteren Fragen klären wir das gerne <strong>telefonisch</strong> — du wirst Schritt für Schritt begleitet.</span>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align:top;">
+            <div style="display:inline-block;background:#1d6a63;color:#ffffff;font-size:13px;font-weight:700;width:28px;height:28px;border-radius:50%;text-align:center;line-height:28px;margin-right:12px;vertical-align:middle;">3</div>
+            <span style="font-size:15px;color:#2d342c !important;line-height:1.6;vertical-align:middle;">Nach unserer Beratung stelle ich dir die <strong>für dich passenden Produkte im Warenkorb</strong> zusammen — nach Absprache, damit du sie einfach bestellen kannst.</span>
+          </td>
+        </tr>
+      </table>
     </div>
 
-    ${multiGoalNote}
-
-    <!-- Produkt-Richtung (kürzer, verweist auf Sprachnachricht) -->
-    ${r.product ? `<div style="background:#a8f0e7;border-radius:20px;padding:24px 32px;margin-bottom:20px;">
-      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0f4d47;font-weight:600;margin-bottom:8px;">Produkt-Richtung (allgemein)</div>
-      <p style="font-size:14px;line-height:1.65;color:#2d342c;margin:0 0 10px;">${escapeHtml(r.product)}</p>
-      <p style="font-size:13px;line-height:1.65;color:#0f4d47;margin:0;font-style:italic;">
-        Deine konkrete Empfehlung — welches Produkt in welcher Reihenfolge, angepasst an deine Fotos — hörst du in Michaelas Sprachnachricht.
-      </p>
-    </div>` : ''}
-
-    <!-- Reply-Hinweis (kurz) -->
-    <p style="font-size:13px;color:#55605a;text-align:center;margin:24px 0 0;padding:0 12px;">
-      Fragen vorab? Antworte einfach auf diese E-Mail — sie landet direkt bei Michaela.
+    <!-- Abschluss -->
+    <p style="font-size:15px;color:#2d342c !important;text-align:center;margin:0 0 8px;padding:0 12px;">
+      Ich freue mich auf deine Nachricht.
+    </p>
+    <p style="font-size:15px;color:#2d342c !important;text-align:center;font-weight:600;margin:0 0 24px;">
+      Herzlich, Michaela
     </p>
 
     <!-- Footer -->
@@ -262,12 +281,12 @@ function customerText({ name, email, result, labels, multiGoals }) {
     ? '\n\n' + r.tips.map(t => `• ${t}`).join('\n')
     : '';
   const multiGoalText = goals.length > 0
-    ? `\n\nDEINE WEITEREN WÜNSCHE\nDu hast ausserdem ${goals.length > 1 ? goals.slice(0, -1).join(', ') + ' und ' + goals[goals.length - 1] : goals[0]} genannt. Michaela berücksichtigt alle deine Wünsche in ihrer Sprachnachricht.`
+    ? `\n\nDEINE WEITEREN WÜNSCHE\nDu hast ausserdem ${goals.length > 1 ? goals.slice(0, -1).join(', ') + ' und ' + goals[goals.length - 1] : goals[0]} genannt. Ich berücksichtige alle deine Wünsche in meiner Sprachnachricht.`
     : '';
 
   return `${greeting},
 
-Danke, dass du dir zwei Minuten für dich genommen hast. Hier ist deine Haar-Auswertung zum Nachlesen und Aufheben.
+Vielen Dank, dass du dir die Zeit genommen hast. Ich freue mich, dich begleiten zu dürfen — und dich dabei zu unterstützen, wieder zu gesunden, schönen Haaren zu kommen.
 
 DEIN HAAR-PROFIL
 Struktur:      ${lab.struktur || '—'}
@@ -276,25 +295,35 @@ Kopfhaut:      ${lab.kopfhaut || '—'}
 Deine Wünsche: ${lab.ziel || '—'}
 
 ========================================
+DAS MONAT-PFLEGESYSTEM
+========================================
+
+MONAT ist kein einzelnes Shampoo, das alles regelt. Es ist ein ganzheitliches System, das wie Bausteine funktioniert — aufeinander aufgebaut, je nach deinem Haarbedürfnis individuell einsetzbar.
+
+Der Ausgangspunkt ist immer die Kopfhaut. Denn nur eine gesunde Kopfhaut kann gesunde, starke Haare wachsen lassen — wie ein gesunder Boden, aus dem gute Pflanzen wachsen.
+
+========================================
 DEIN NÄCHSTER SCHRITT
-Die persönliche Empfehlung kommt als Sprachnachricht.
 ========================================
 
-Deine ausgefüllten Punkte werden automatisch übertragen — du musst nichts nochmals eingeben. Füge noch 2-3 Fotos deiner Haare und Kopfhaut hinzu, damit Michaela dir eine tiefe und individuelle Antwort persönlich geben kann.
+Schicke mir ein Foto — sofern du das noch nicht gemacht hast.
 
-👉 WhatsApp: ${waLink}
+Damit ich dir eine wirklich individuelle Beratung geben kann, brauche ich noch ein Foto deiner Haare — auch ohne Gesicht oder verdeckt, einfach von der Haarstruktur. Deine ausgefüllten Angaben werden automatisch mitgesendet.
 
-Ohne Fotos kann ich keine individuelle Empfehlung geben — dieser Schritt macht den Unterschied.
+WhatsApp: ${waLink}
 
 ========================================
+WAS ALS NÄCHSTES PASSIERT
+========================================
 
-${r.badge ? r.badge.toUpperCase() + '\n' : ''}${title}
-${r.tagline ? '\n' + r.tagline : ''}
+1. Sobald ich dein Foto erhalten habe, schicke ich dir eine persönliche Sprachnachricht mit meiner Einschätzung und Empfehlung.
 
-${r.desc ? 'WAS DAS FÜR DICH BEDEUTET\n' + r.desc : ''}${tipsText}${multiGoalText}
+2. Bei weiteren Fragen klären wir das gerne telefonisch — du wirst Schritt für Schritt begleitet.
 
-${r.product ? 'PRODUKT-RICHTUNG (ALLGEMEIN)\n' + r.product + '\n\nDeine konkrete Empfehlung — welches Produkt in welcher Reihenfolge, angepasst an deine Fotos — hörst du in Michaelas Sprachnachricht.\n' : ''}
-Fragen vorab? Antworte einfach auf diese E-Mail — sie landet direkt bei Michaela.
+3. Nach unserer Beratung stelle ich dir die für dich passenden Produkte im Warenkorb zusammen — nach Absprache, damit du sie einfach bestellen kannst.
+
+Ich freue mich auf deine Nachricht.
+Herzlich, Michaela
 
 —
 Michaelas MONAT Academy
