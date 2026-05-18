@@ -352,13 +352,23 @@ Impressum:    https://haar-analyse.ch/impressum.html
 Datenschutz:  https://haar-analyse.ch/datenschutz.html`;
 }
 
-function michaelaHtml({ name, email, answers, resultType, result, allergien, waschen, monatInteresse }) {
+// Telefonnummer auf internationales Format bringen (Schweiz: 0XX → 41XX, +41XX → 41XX)
+function formatPhone(raw) {
+  if (!raw) return null;
+  let n = String(raw).replace(/[\s\-\(\)\.]/g, '');
+  if (n.startsWith('+')) n = n.slice(1);
+  if (n.startsWith('00')) n = n.slice(2);
+  if (n.startsWith('0')) n = '41' + n.slice(1);
+  return n;
+}
+
+function michaelaHtml({ name, email, telefon, answers, resultType, result, labels, multiGoals, allergien, waschen, monatInteresse }) {
   const rows = Object.keys(QUESTIONS)
     .map((q) => {
-      const labels = formatLabels(answers[q] || [], LABELS[q]);
+      const lbs = formatLabels(answers[q] || [], LABELS[q]);
       return `<tr>
         <td style="padding:12px 16px;background:#f1f5ec;font-weight:600;font-size:11px;color:#55605a;letter-spacing:2px;text-transform:uppercase;width:140px;vertical-align:top;">${QUESTIONS[q]}</td>
-        <td style="padding:12px 16px;background:#ffffff;font-size:15px;color:#2d342c;vertical-align:top;">${escapeHtml(labels)}</td>
+        <td style="padding:12px 16px;background:#ffffff;font-size:15px;color:#2d342c;vertical-align:top;">${escapeHtml(lbs)}</td>
       </tr>`;
     })
     .join('');
@@ -370,6 +380,65 @@ function michaelaHtml({ name, email, answers, resultType, result, allergien, was
     timeStyle: 'short',
   });
 
+  // WhatsApp-Link zur Teilnehmerin (falls Nummer vorhanden)
+  const customerPhone = formatPhone(telefon);
+  const waMsg = encodeURIComponent(`Hallo ${name || ''}! Ich melde mich bezüglich deiner Haar-Analyse. Ich habe deine Angaben angeschaut und melde mich gleich mit meiner Empfehlung.`);
+  const waCustomerLink = customerPhone
+    ? `https://wa.me/${customerPhone}?text=${waMsg}`
+    : null;
+
+  // Kundinnen-Mail-Vorschau (gleicher Inhalt wie customerHtml)
+  const lab = labels || {};
+  const goals = Array.isArray(multiGoals) ? multiGoals : [];
+  const customerPreview = `
+    <div style="background:#f8faf3;border-radius:16px;padding:24px;margin-top:16px;border:2px dashed #c8d5c0;">
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63;font-weight:700;margin-bottom:12px;">Vorschau — Das hat die Teilnehmerin erhalten</div>
+
+      <!-- Greeting -->
+      <div style="background:#ffffff;border-radius:16px;padding:24px 24px 20px;margin-bottom:12px;">
+        <h2 style="font-size:20px;font-weight:600;margin:0 0 10px;color:#2d342c;">${name ? `Hallo ${escapeHtml(name)}` : 'Hallo'}</h2>
+        <p style="font-size:14px;line-height:1.7;color:#2d342c;margin:0;">Danke, dass du dir zwei Minuten für dich genommen hast. Hier ist deine persönliche Haar-Auswertung — zum Aufheben und in Ruhe nachlesen.</p>
+      </div>
+
+      <!-- Insights -->
+      <div style="background:#ffffff;border-radius:16px;padding:20px 24px;margin-bottom:12px;">
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63;font-weight:600;margin-bottom:6px;">Dein Haar-Profil</div>
+        <h3 style="font-size:16px;font-weight:600;margin:0 0 12px;color:#2d342c;">Das hast du genannt</h3>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate;border-spacing:0 6px;">
+          <tr><td style="padding:10px 14px;background:#f1f5ec;border-radius:10px;"><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:3px;">Struktur</div><div style="font-size:14px;font-weight:600;color:#2d342c;">${escapeHtml(lab.struktur || '—')}</div></td></tr>
+          <tr><td style="padding:10px 14px;background:#f1f5ec;border-radius:10px;"><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:3px;">Haar-Zustand</div><div style="font-size:14px;font-weight:600;color:#2d342c;">${escapeHtml(lab.typ || '—')}</div></td></tr>
+          <tr><td style="padding:10px 14px;background:#f1f5ec;border-radius:10px;"><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:3px;">Kopfhaut</div><div style="font-size:14px;font-weight:600;color:#2d342c;">${escapeHtml(lab.kopfhaut || '—')}</div></td></tr>
+          <tr><td style="padding:10px 14px;background:#a8f0e7;border-radius:10px;"><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#0f4d47;font-weight:600;margin-bottom:3px;">Deine Wünsche</div><div style="font-size:14px;font-weight:600;color:#2d342c;">${escapeHtml(lab.ziel || '—')}</div></td></tr>
+          ${allergien ? `<tr><td style="padding:10px 14px;background:#f1f5ec;border-radius:10px;"><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:3px;">Allergien</div><div style="font-size:14px;font-weight:600;color:#2d342c;">${escapeHtml(allergien)}</div></td></tr>` : ''}
+          ${waschen ? `<tr><td style="padding:10px 14px;background:#f1f5ec;border-radius:10px;"><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:3px;">Waschen</div><div style="font-size:14px;font-weight:600;color:#2d342c;">${escapeHtml(waschen)}</div></td></tr>` : ''}
+          ${monatInteresse ? `<tr><td style="padding:10px 14px;background:#f1f5ec;border-radius:10px;"><div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:3px;">MONAT-Interesse</div><div style="font-size:14px;font-weight:600;color:#2d342c;">${escapeHtml(monatInteresse)}</div></td></tr>` : ''}
+        </table>
+      </div>
+
+      <!-- MONAT Erklärung -->
+      <div style="background:#ffffff;border-radius:16px;padding:20px 24px;margin-bottom:12px;">
+        <p style="font-size:14px;line-height:1.8;color:#2d342c;margin:0 0 14px;">Vielen Dank, dass du dir die Zeit genommen hast. Ich freue mich, dich begleiten zu dürfen — und dich dabei zu unterstützen, wieder zu gesunden, schönen Haaren zu kommen.</p>
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63;font-weight:700;margin-bottom:6px;">Das MONAT-Pflegesystem</div>
+        <p style="font-size:14px;line-height:1.8;color:#2d342c;margin:0 0 10px;">MONAT ist kein einzelnes Shampoo, das alles regelt. Es ist ein ganzheitliches System, das wie Bausteine funktioniert — aufeinander aufgebaut, je nach deinem Haarbedürfnis individuell einsetzbar.</p>
+        <p style="font-size:14px;line-height:1.8;color:#2d342c;margin:0;">Der Ausgangspunkt ist immer die Kopfhaut. Denn nur eine gesunde Kopfhaut kann gesunde, starke Haare wachsen lassen — wie ein gesunder Boden, aus dem gute Pflanzen wachsen.</p>
+      </div>
+
+      <!-- WA CTA -->
+      <div style="background:#ffffff;border-radius:16px;padding:20px 24px;margin-bottom:12px;text-align:center;border:1px solid #dee5d8;">
+        <h4 style="font-size:16px;font-weight:700;margin:0 0 10px;color:#1a1a1a;">Schicke mir ein Foto — sofern du das noch nicht gemacht hast.</h4>
+        <p style="font-size:13px;line-height:1.7;color:#444;margin:0 0 16px;">Damit ich dir eine wirklich individuelle Beratung geben kann, brauche ich noch ein Foto deiner Haare.</p>
+        <span style="display:inline-block;background:#25D366;color:#ffffff;padding:12px 28px;border-radius:999px;font-weight:700;font-size:14px;">Jetzt per WhatsApp schreiben</span>
+      </div>
+
+      <!-- Nächste Schritte -->
+      <div style="background:#ffffff;border-radius:16px;padding:20px 24px;">
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63;font-weight:700;margin-bottom:12px;">Was als Nächstes passiert</div>
+        <p style="font-size:13px;line-height:1.7;color:#2d342c;margin:0 0 8px;"><strong>1.</strong> Sobald ich dein Foto erhalten habe, schicke ich dir eine <strong>persönliche Sprachnachricht</strong>.</p>
+        <p style="font-size:13px;line-height:1.7;color:#2d342c;margin:0 0 8px;"><strong>2.</strong> Bei weiteren Fragen klären wir das gerne <strong>telefonisch</strong>.</p>
+        <p style="font-size:13px;line-height:1.7;color:#2d342c;margin:0;"><strong>3.</strong> Nach unserer Beratung stelle ich dir die <strong>passenden Produkte im Warenkorb</strong> zusammen.</p>
+      </div>
+    </div>`;
+
   return `<!DOCTYPE html>
 <html lang="de"><head><meta charset="UTF-8"/><title>Neuer Lead</title></head>
 <body style="margin:0;padding:0;background:#f8faf3;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#2d342c;">
@@ -380,7 +449,8 @@ function michaelaHtml({ name, email, answers, resultType, result, allergien, was
 
       <div style="background:#f1f5ec;padding:20px 22px;border-radius:14px;font-size:15px;line-height:1.7;margin-bottom:20px;">
         <strong style="color:#0f4d47;">Name:</strong> ${escapeHtml(name || '—')}<br/>
-        <strong style="color:#0f4d47;">E-Mail:</strong> <a href="mailto:${escapeHtml(email)}" style="color:#1d6a63;text-decoration:none;">${escapeHtml(email)}</a>
+        <strong style="color:#0f4d47;">E-Mail:</strong> <a href="mailto:${escapeHtml(email)}" style="color:#1d6a63;text-decoration:none;">${escapeHtml(email)}</a><br/>
+        ${telefon ? `<strong style="color:#0f4d47;">Telefon:</strong> ${escapeHtml(telefon)}` : ''}
       </div>
 
       <div style="background:#a8f0e7;padding:18px 22px;border-radius:14px;margin-bottom:24px;">
@@ -406,27 +476,22 @@ function michaelaHtml({ name, email, answers, resultType, result, allergien, was
       </table>` : ''}
 
       <p style="font-size:13px;color:#55605a;margin:0 0 16px;">
-        Die Kundin wurde in der Bestätigungs-Mail gebeten, dir per WhatsApp zu schreiben und 2–3 Fotos ihrer Haare hinzuzufügen.
+        Die Teilnehmerin wurde gebeten, dir per WhatsApp zu schreiben und ein Foto ihrer Haare hinzuzufügen.
       </p>
       <p style="margin:0;">
-        <a href="https://wa.me/41767587551" style="display:inline-block;background:#25D366;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:999px;font-weight:600;font-size:13px;">WhatsApp öffnen</a>
+        ${waCustomerLink
+          ? `<a href="${waCustomerLink}" style="display:inline-block;background:#25D366;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:999px;font-weight:600;font-size:13px;-webkit-text-fill-color:#ffffff;">WhatsApp öffnen (${escapeHtml(telefon)})</a>`
+          : `<span style="font-size:13px;color:#55605a;">Keine Telefonnummer angegeben</span>`
+        }
       </p>
     </div>
 
-    <!-- Was der Lead erhalten hat -->
-    ${result ? `<div style="background:#ffffff;border-radius:20px;padding:36px 32px;box-shadow:0 4px 24px rgba(45,52,44,0.04);margin-top:16px;">
-      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1d6a63;font-weight:600;margin-bottom:8px;">Was der Lead erhalten hat</div>
-      <h2 style="font-size:18px;font-weight:600;margin:0 0 8px;color:#2d342c;">${escapeHtml(String(result.title || '').replace(/\n/g, ' '))}</h2>
-      ${result.tagline ? `<p style="font-size:14px;color:#55605a;font-style:italic;margin:0 0 14px;">${escapeHtml(result.tagline)}</p>` : ''}
-      ${result.desc ? `<p style="font-size:14px;line-height:1.7;color:#2d342c;margin:0 0 14px;">${escapeHtml(result.desc)}</p>` : ''}
-      ${Array.isArray(result.tips) && result.tips.length > 0 ? `<ul style="margin:0 0 14px;padding-left:18px;">${result.tips.map(t => `<li style="font-size:13px;line-height:1.65;color:#2d342c;margin-bottom:4px;">${escapeHtml(t)}</li>`).join('')}</ul>` : ''}
-      ${result.product ? `<div style="background:#f1f5ec;padding:14px 16px;border-radius:10px;font-size:13px;color:#2d342c;line-height:1.6;"><strong style="color:#0f4d47;">Produkt-Richtung:</strong> ${escapeHtml(result.product)}</div>` : ''}
-    </div>` : ''}
+    ${customerPreview}
   </div>
 </body></html>`;
 }
 
-function michaelaText({ name, email, answers, resultType, result, allergien, waschen, monatInteresse }) {
+function michaelaText({ name, email, telefon, answers, resultType, result, allergien, waschen, monatInteresse }) {
   const lines = Object.keys(QUESTIONS)
     .map((q) => `${QUESTIONS[q]}: ${formatLabels(answers[q] || [], LABELS[q])}`)
     .join('\n');
@@ -451,8 +516,9 @@ ${r.product ? '\nProdukt-Richtung: ' + r.product : ''}` : '';
   return `Neuer Haar-Quiz-Lead auf haar-analyse.ch
 Eingegangen: ${timestamp} Uhr
 
-Name:   ${name || '—'}
-E-Mail: ${email}
+Name:    ${name || '—'}
+E-Mail:  ${email}
+Telefon: ${telefon || '—'}
 
 PRIMÄRES ZIEL: ${primaryGoal}
 
@@ -577,7 +643,7 @@ export default async (req) => {
     return json({ ok: false, error: 'Server-Konfigurationsfehler.' }, 500);
   }
 
-  const { name, email, answers, resultType, result, labels, multiGoals, allergien, waschen, monatInteresse: rawMonatInteresse, monatSonstiges } = data;
+  const { name, email, telefon, answers, resultType, result, labels, multiGoals, allergien, waschen, monatInteresse: rawMonatInteresse, monatSonstiges } = data;
   // MONAT-Interesse: Komma-getrennte Auswahl + optional Freitext
   const monatInteresse = rawMonatInteresse
     ? rawMonatInteresse + (monatSonstiges ? ` (${monatSonstiges})` : '')
@@ -600,8 +666,8 @@ export default async (req) => {
       to: leadRecipients,
       reply_to: email,
       subject: `Neuer Lead: ${name || email}`,
-      html: michaelaHtml({ name, email, answers, resultType, result, allergien, waschen, monatInteresse }),
-      text: michaelaText({ name, email, answers, resultType, result, allergien, waschen, monatInteresse }),
+      html: michaelaHtml({ name, email, telefon, answers, resultType, result, labels, multiGoals, allergien, waschen, monatInteresse }),
+      text: michaelaText({ name, email, telefon, answers, resultType, result, allergien, waschen, monatInteresse }),
     }),
   ];
 
