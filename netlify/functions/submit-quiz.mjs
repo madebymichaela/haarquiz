@@ -103,7 +103,7 @@ function json(obj, status = 200) {
 }
 
 // ── E-Mail Templates ─────────────────────────────────────────────────
-function buildWaLink(name, email, labels) {
+function buildWaLink(name, email, labels, allergien, waschen, monatInteresse) {
   const msg =
     'Hallo Michaela!\n\n' +
     'Ich habe gerade die Haar-Analyse gemacht und möchte mein Ergebnis mit dir besprechen.\n\n' +
@@ -112,13 +112,16 @@ function buildWaLink(name, email, labels) {
     'Struktur: ' + (labels.struktur || '—') + '\n' +
     'Haartyp: ' + (labels.typ || '—') + '\n' +
     'Kopfhaut: ' + (labels.kopfhaut || '—') + '\n' +
-    'Hauptziel: ' + (labels.ziel || '—') + '\n\n' +
+    'Hauptziel: ' + (labels.ziel || '—') + '\n' +
+    'Allergien / Unverträglichkeiten: ' + (allergien || '—') + '\n' +
+    'Waschen: ' + (waschen || '—') + '\n' +
+    'MONAT-Interesse: ' + (monatInteresse || '—') + '\n\n' +
     'Ich freue mich auf deine persönliche Empfehlung.\n\n' +
     'Hier noch einige Bilder von meinen Haaren und meiner Kopfhaut.';
   return 'https://wa.me/41767587551?text=' + encodeURIComponent(msg);
 }
 
-function customerHtml({ name, email, result, labels, multiGoals }) {
+function customerHtml({ name, email, result, labels, multiGoals, allergien, waschen, monatInteresse }) {
   const greeting = name ? `Hallo ${escapeHtml(name)}` : 'Hallo';
   const r = result || {};
   const lab = labels || {};
@@ -175,6 +178,24 @@ function customerHtml({ name, email, result, labels, multiGoals }) {
           <div style="font-size:15px;font-weight:600;color:#2d342c;">${escapeHtml(lab.ziel || '—')}</div>
         </td>
       </tr>
+      ${allergien ? `<tr>
+        <td style="padding:14px 16px;background:#f1f5ec;border-radius:12px;font-size:13px;line-height:1.5;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:4px;">Allergien / Unverträglichkeiten</div>
+          <div style="font-size:15px;font-weight:600;color:#2d342c;">${escapeHtml(allergien)}</div>
+        </td>
+      </tr>` : ''}
+      ${waschen ? `<tr>
+        <td style="padding:14px 16px;background:#f1f5ec;border-radius:12px;font-size:13px;line-height:1.5;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:4px;">Waschen</div>
+          <div style="font-size:15px;font-weight:600;color:#2d342c;">${escapeHtml(waschen)}</div>
+        </td>
+      </tr>` : ''}
+      ${monatInteresse ? `<tr>
+        <td style="padding:14px 16px;background:#f1f5ec;border-radius:12px;font-size:13px;line-height:1.5;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#55605a;font-weight:600;margin-bottom:4px;">MONAT-Interesse</div>
+          <div style="font-size:15px;font-weight:600;color:#2d342c;">${escapeHtml(monatInteresse)}</div>
+        </td>
+      </tr>` : ''}
     </table>`;
 
   const title = r.title ? String(r.title).replace(/\n/g, ' ') : '';
@@ -225,7 +246,7 @@ function customerHtml({ name, email, result, labels, multiGoals }) {
       <p style="font-size:15px;line-height:1.7;color:#444444 !important;margin:0 0 28px;">
         Damit ich dir eine wirklich individuelle Beratung geben kann, brauche ich noch ein Foto deiner Haare — auch ohne Gesicht oder verdeckt, einfach von der Haarstruktur. Deine ausgefüllten Angaben werden automatisch mitgesendet.
       </p>
-      <a href="${buildWaLink(name, email, lab)}" style="display:inline-block;background-color:#25D366 !important;color:#ffffff !important;text-decoration:none;padding:16px 36px;border-radius:999px;font-weight:700;font-size:16px;-webkit-text-fill-color:#ffffff;">Jetzt per WhatsApp schreiben</a>
+      <a href="${buildWaLink(name, email, lab, allergien, waschen, monatInteresse)}" style="display:inline-block;background-color:#25D366 !important;color:#ffffff !important;text-decoration:none;padding:16px 36px;border-radius:999px;font-weight:700;font-size:16px;-webkit-text-fill-color:#ffffff;">Jetzt per WhatsApp schreiben</a>
     </div>
 
     <!-- Was als Nächstes passiert -->
@@ -269,12 +290,12 @@ function customerHtml({ name, email, result, labels, multiGoals }) {
 </body></html>`;
 }
 
-function customerText({ name, email, result, labels, multiGoals }) {
+function customerText({ name, email, result, labels, multiGoals, allergien, waschen, monatInteresse }) {
   const greeting = name ? `Hallo ${name}` : 'Hallo';
   const r = result || {};
   const lab = labels || {};
   const goals = Array.isArray(multiGoals) ? multiGoals : [];
-  const waLink = buildWaLink(name, email, lab);
+  const waLink = buildWaLink(name, email, lab, allergien, waschen, monatInteresse);
 
   const title = r.title ? String(r.title).replace(/\n/g, ' ') : '';
   const tipsText = Array.isArray(r.tips) && r.tips.length > 0
@@ -292,7 +313,7 @@ DEIN HAAR-PROFIL
 Struktur:      ${lab.struktur || '—'}
 Haar-Zustand:  ${lab.typ || '—'}
 Kopfhaut:      ${lab.kopfhaut || '—'}
-Deine Wünsche: ${lab.ziel || '—'}
+Deine Wünsche: ${lab.ziel || '—'}${allergien ? '\nAllergien:     ' + allergien : ''}${waschen ? '\nWaschen:       ' + waschen : ''}${monatInteresse ? '\nMONAT-Interesse: ' + monatInteresse : ''}
 
 ========================================
 DAS MONAT-PFLEGESYSTEM
@@ -331,7 +352,7 @@ Impressum:    https://haar-analyse.ch/impressum.html
 Datenschutz:  https://haar-analyse.ch/datenschutz.html`;
 }
 
-function michaelaHtml({ name, email, answers, resultType, result }) {
+function michaelaHtml({ name, email, answers, resultType, result, allergien, waschen, monatInteresse }) {
   const rows = Object.keys(QUESTIONS)
     .map((q) => {
       const labels = formatLabels(answers[q] || [], LABELS[q]);
@@ -369,6 +390,21 @@ function michaelaHtml({ name, email, answers, resultType, result }) {
 
       <table style="width:100%;border-collapse:separate;border-spacing:0 4px;margin-bottom:28px;">${rows}</table>
 
+      ${allergien || waschen || monatInteresse ? `<table style="width:100%;border-collapse:separate;border-spacing:0 4px;margin-bottom:28px;">
+        ${allergien ? `<tr>
+          <td style="padding:12px 16px;background:#f1f5ec;font-weight:600;font-size:11px;color:#55605a;letter-spacing:2px;text-transform:uppercase;width:140px;vertical-align:top;">Allergien</td>
+          <td style="padding:12px 16px;background:#ffffff;font-size:15px;color:#2d342c;vertical-align:top;">${escapeHtml(allergien)}</td>
+        </tr>` : ''}
+        ${waschen ? `<tr>
+          <td style="padding:12px 16px;background:#f1f5ec;font-weight:600;font-size:11px;color:#55605a;letter-spacing:2px;text-transform:uppercase;width:140px;vertical-align:top;">Waschen</td>
+          <td style="padding:12px 16px;background:#ffffff;font-size:15px;color:#2d342c;vertical-align:top;">${escapeHtml(waschen)}</td>
+        </tr>` : ''}
+        ${monatInteresse ? `<tr>
+          <td style="padding:12px 16px;background:#f1f5ec;font-weight:600;font-size:11px;color:#55605a;letter-spacing:2px;text-transform:uppercase;width:140px;vertical-align:top;">MONAT-Interesse</td>
+          <td style="padding:12px 16px;background:#ffffff;font-size:15px;color:#2d342c;vertical-align:top;">${escapeHtml(monatInteresse)}</td>
+        </tr>` : ''}
+      </table>` : ''}
+
       <p style="font-size:13px;color:#55605a;margin:0 0 16px;">
         Die Kundin wurde in der Bestätigungs-Mail gebeten, dir per WhatsApp zu schreiben und 2–3 Fotos ihrer Haare hinzuzufügen.
       </p>
@@ -390,7 +426,7 @@ function michaelaHtml({ name, email, answers, resultType, result }) {
 </body></html>`;
 }
 
-function michaelaText({ name, email, answers, resultType, result }) {
+function michaelaText({ name, email, answers, resultType, result, allergien, waschen, monatInteresse }) {
   const lines = Object.keys(QUESTIONS)
     .map((q) => `${QUESTIONS[q]}: ${formatLabels(answers[q] || [], LABELS[q])}`)
     .join('\n');
@@ -420,7 +456,7 @@ E-Mail: ${email}
 
 PRIMÄRES ZIEL: ${primaryGoal}
 
-${lines}
+${lines}${allergien ? '\nAllergien:        ' + allergien : ''}${waschen ? '\nWaschen:          ' + waschen : ''}${monatInteresse ? '\nMONAT-Interesse:  ' + monatInteresse : ''}
 
 Die Kundin wurde gebeten, dir per WhatsApp zu schreiben und 2-3 Fotos ihrer Haare hinzuzufügen.
 WhatsApp: https://wa.me/41767587551${resultBlock}`;
@@ -541,7 +577,11 @@ export default async (req) => {
     return json({ ok: false, error: 'Server-Konfigurationsfehler.' }, 500);
   }
 
-  const { name, email, answers, resultType, result, labels, multiGoals } = data;
+  const { name, email, answers, resultType, result, labels, multiGoals, allergien, waschen, monatInteresse: rawMonatInteresse, monatSonstiges } = data;
+  // MONAT-Interesse: Komma-getrennte Auswahl + optional Freitext
+  const monatInteresse = rawMonatInteresse
+    ? rawMonatInteresse + (monatSonstiges ? ` (${monatSonstiges})` : '')
+    : '';
 
   // Tasks zusammenstellen — E-Mails sind Pflicht, Airtable ist optional
   const tasks = [
@@ -551,8 +591,8 @@ export default async (req) => {
       to: email,
       reply_to: MICHAELA,
       subject: 'Deine Haar-Auswertung — und was jetzt kommt',
-      html: customerHtml({ name, email, result, labels, multiGoals }),
-      text: customerText({ name, email, result, labels, multiGoals }),
+      html: customerHtml({ name, email, result, labels, multiGoals, allergien, waschen, monatInteresse }),
+      text: customerText({ name, email, result, labels, multiGoals, allergien, waschen, monatInteresse }),
     }),
     sendEmail({
       apiKey,
@@ -560,8 +600,8 @@ export default async (req) => {
       to: leadRecipients,
       reply_to: email,
       subject: `Neuer Lead: ${name || email}`,
-      html: michaelaHtml({ name, email, answers, resultType, result }),
-      text: michaelaText({ name, email, answers, resultType, result }),
+      html: michaelaHtml({ name, email, answers, resultType, result, allergien, waschen, monatInteresse }),
+      text: michaelaText({ name, email, answers, resultType, result, allergien, waschen, monatInteresse }),
     }),
   ];
 
