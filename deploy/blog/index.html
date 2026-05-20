@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script defer data-domain="haar-analyse.ch" src="https://plausible.io/js/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haar-Blog — Ehrliche Tipps rund ums Haar</title>
+    <meta name="description" content="Haarausfall, trockene Haare, Hormone — Michaela schreibt über das, was sie selbst erlebt hat. Ehrlich, verständlich, ohne Werbedruck.">
+
+    <link rel="canonical" href="https://haar-analyse.ch/blog/">
+
+    <meta property="og:title" content="Haar-Blog — Ehrliche Tipps rund ums Haar">
+    <meta property="og:description" content="Haarausfall, trockene Haare, Hormone — Michaela schreibt über das, was sie selbst erlebt hat.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://haar-analyse.ch/blog/">
+    <meta property="og:image" content="https://haar-analyse.ch/michaela/michaela-hero.jpeg">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #2d2d2d;
+            background: #fff;
+            line-height: 1.8;
+        }
+
+        /* ── NAV ── */
+        .site-nav {
+            background: #fff;
+            border-bottom: 1px solid #e8ddd0;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .nav-logo {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #a07850;
+            text-decoration: none;
+        }
+        .nav-back {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 13px;
+            color: #888;
+            text-decoration: none;
+        }
+        .nav-back:hover { color: #a07850; }
+
+        /* ── HEADER ── */
+        .blog-header {
+            background: #f9f5f0;
+            padding: 64px 24px 56px;
+            text-align: center;
+        }
+        .blog-tag {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #a07850;
+            margin-bottom: 20px;
+        }
+        .blog-header h1 {
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 400;
+            line-height: 1.3;
+            color: #1a1a1a;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        .blog-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 540px;
+            margin: 0 auto;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ── ARTICLE GRID ── */
+        .blog-list {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 56px 24px 80px;
+        }
+
+        .article-card {
+            display: grid;
+            grid-template-columns: 1fr;
+            border-bottom: 1px solid #e8ddd0;
+            padding: 40px 0;
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.2s;
+        }
+        .article-card:first-child { padding-top: 0; }
+        .article-card:last-child { border-bottom: none; }
+        .article-card:hover { opacity: 0.75; }
+
+        .card-tag {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #a07850;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-size: clamp(20px, 2.5vw, 26px);
+            font-weight: 400;
+            color: #1a1a1a;
+            line-height: 1.35;
+            margin-bottom: 14px;
+        }
+        .card-desc {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+            max-width: 640px;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+        .card-meta {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 13px;
+            color: #aaa;
+        }
+        .card-meta span {
+            color: #a07850;
+            font-weight: 500;
+        }
+
+        /* ── CTA BOX ── */
+        .cta-box {
+            background: #1a1a1a;
+            color: #f9f5f0;
+            padding: 56px 32px;
+            text-align: center;
+            max-width: 860px;
+            margin: 0 auto 64px;
+            border-radius: 4px;
+        }
+        .cta-box p {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #a07850;
+            margin-bottom: 16px;
+        }
+        .cta-box h2 {
+            font-size: clamp(22px, 3vw, 30px);
+            font-weight: 400;
+            margin-bottom: 16px;
+            line-height: 1.35;
+        }
+        .cta-box .cta-sub {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 15px;
+            color: #bbb;
+            margin-bottom: 32px;
+            font-weight: 300;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #a07850;
+            color: #fff;
+            padding: 14px 32px;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: background 0.2s;
+        }
+        .cta-button:hover { background: #8a6540; }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 32px 24px;
+            border-top: 1px solid #e8ddd0;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 13px;
+            color: #aaa;
+        }
+        footer a {
+            color: #888;
+            text-decoration: none;
+        }
+        footer a:hover { color: #a07850; }
+
+        @media (max-width: 600px) {
+            .blog-header { padding: 48px 20px 40px; }
+            .blog-list { padding: 40px 20px 60px; }
+            .article-card { padding: 32px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav style="border-bottom: 1px solid #e8ddd0;">
+        <div class="site-nav">
+            <a href="https://haar-analyse.ch" class="nav-logo">haar-analyse.ch</a>
+            <a href="https://haar-analyse.ch/michaela/" class="nav-back">← Zur Beratung</a>
+        </div>
+    </nav>
+
+    <header class="blog-header">
+        <p class="blog-tag">Haar-Blog</p>
+        <h1>Ehrliche Tipps rund ums Haar</h1>
+        <p>Haarausfall, trockene Haare, Hormone — ich schreibe über das, was ich selbst erlebt habe. Verständlich, ohne Werbedruck, mit dem, was mir wirklich geholfen hat.</p>
+    </header>
+
+    <main class="blog-list">
+
+        <a class="article-card" href="https://haar-analyse.ch/blog/haarausfall-stillzeit-nach-schwangerschaft">
+            <div class="card-tag">Haarausfall · Schwangerschaft</div>
+            <h2 class="card-title">Haarausfall in der Stillzeit und nach der Schwangerschaft: Was wirklich hilft</h2>
+            <p class="card-desc">Büschelweise Haare in der Bürste, obwohl das Baby längst da ist. Warum das passiert, wie lange es dauert — und was ich getan habe, als es mir selbst so ging.</p>
+            <div class="card-meta">Von Michaela · <span>Artikel lesen →</span></div>
+        </a>
+
+        <a class="article-card" href="https://haar-analyse.ch/blog/haarausfall-frauen-ursachen">
+            <div class="card-tag">Haarausfall · Ursachen</div>
+            <h2 class="card-title">Haarausfall bei Frauen: Ursachen und was wirklich hilft</h2>
+            <p class="card-desc">Stress, Hormone, Eisenmangel — die Ursachen für Haarausfall bei Frauen sind vielfältig. Ich erkläre, wie man sie auseinanderhält und was konkret dagegen hilft.</p>
+            <div class="card-meta">Von Michaela · <span>Artikel lesen →</span></div>
+        </a>
+
+        <a class="article-card" href="https://haar-analyse.ch/blog/trockene-haare-ursachen-tipps">
+            <div class="card-tag">Haarpflege · Trockene Haare</div>
+            <h2 class="card-title">Trockene Haare: Ursachen, Hausmittel und die besten Pflegetipps</h2>
+            <p class="card-desc">Strohige, spröde Haare trotz teurer Masken? Das Problem liegt meist tiefer. Was wirklich hilft — und was du weglassen kannst.</p>
+            <div class="card-meta">Von Michaela · <span>Artikel lesen →</span></div>
+        </a>
+
+        <a class="article-card" href="https://haar-analyse.ch/blog/haarausfall-hormone-frauen-40">
+            <div class="card-tag">Hormone · Wechseljahre</div>
+            <h2 class="card-title">Haarausfall durch Hormone: Was Frauen ab 40 wissen sollten</h2>
+            <p class="card-desc">Ab 40 verändert sich der Hormonspiegel — und die Haare merken es als erste. Was in deinem Körper passiert, welche Werte du checken lassen solltest und was hilft.</p>
+            <div class="card-meta">Von Michaela · <span>Artikel lesen →</span></div>
+        </a>
+
+        <a class="article-card" href="https://haar-analyse.ch/blog/natuerliche-haarpflege">
+            <div class="card-tag">Haarpflege · Natürlich</div>
+            <h2 class="card-title">Natürliche Haarpflege: Was wirklich funktioniert</h2>
+            <p class="card-desc">Ohne Sulfate, ohne Silikone — aber was stattdessen? Ich erkläre, welche natürlichen Zutaten wirklich etwas bringen und worauf es beim Lesen der Inhaltsstoffe ankommt.</p>
+            <div class="card-meta">Von Michaela · <span>Artikel lesen →</span></div>
+        </a>
+
+    </main>
+
+    <div style="max-width: 860px; margin: 0 auto; padding: 0 24px 64px;">
+        <div class="cta-box">
+            <p>Kostenlose Haaranalyse</p>
+            <h2>Du weisst nicht, wo dein Haarausfall wirklich herkommt?</h2>
+            <p class="cta-sub">In 2 Minuten bekommst du eine persönliche Einschätzung — direkt von mir, ohne Verkaufsdruck.</p>
+            <a href="https://haar-analyse.ch" class="cta-button" target="_blank" rel="noopener">Zur kostenlosen Haaranalyse →</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Michaela Antoniadis · <a href="https://haar-analyse.ch/michaela/">Zur Beratung</a> · <a href="https://haar-analyse.ch/michaela/impressum-michaela">Impressum</a></p>
+    </footer>
+
+</body>
+</html>
