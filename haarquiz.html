@@ -1564,23 +1564,95 @@
     </div>
 
 
-    <!-- Q6: Allergien -->
+    <!-- Q6: Alter -->
     <div class="q-card" id="q6">
-      <span class="q-step">Frage 06 · Verträglichkeit</span>
-      <h3 class="q-text">Hast du Allergien oder Unverträglichkeiten?</h3>
-      <p class="q-hint">Z. B. Duftstoffe, Sulfate, bestimmte Inhaltsstoffe — oder einfach «keine».</p>
-      <div class="opts">
-        <textarea class="field-input" id="inp-allergien"
-          placeholder="z. B. keine bekannten Allergien · parfumfrei bevorzugt · empfindlich auf Sulfate …"
-          rows="3" style="resize:vertical; font-family:var(--font-body);"
-          oninput="A.q6 = this.value.trim();"></textarea>
+      <span class="q-step">Frage 06 · Dein Alter</span>
+      <h3 class="q-text">In welcher Altersgruppe bist du?</h3>
+      <p class="q-hint">Das hilft uns, hormonelle Einflüsse auf dein Haar besser einzuschätzen.</p>
+      <div class="opts cols2">
+        <button class="opt" onclick="pickAlter(this,'unter-25')">
+          <span class="opt-label"><strong>Unter 25</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pickAlter(this,'25-35')">
+          <span class="opt-label"><strong>25 – 35</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pickAlter(this,'36-45')">
+          <span class="opt-label"><strong>36 – 45</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pickAlter(this,'46-55')">
+          <span class="opt-label"><strong>46 – 55</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" onclick="pickAlter(this,'ueber-55')">
+          <span class="opt-label"><strong>Über 55</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
       </div>
       <div class="q-nav">
         <button class="btn-back" onclick="prev(6)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
           Zurück
         </button>
-        <button class="btn-next" id="nx6" onclick="next(6)">
+        <button class="btn-next" id="nx6" disabled onclick="next(6)">
+          Weiter
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Q7: Kinder -->
+    <div class="q-card" id="q7">
+      <span class="q-step">Frage 07 · Lebensphase</span>
+      <h3 class="q-text">Hast du Kinder?</h3>
+      <p class="q-hint">Schwangerschaft, Stillzeit und die Zeit danach können das Haar stark beeinflussen.</p>
+      <div class="opts">
+        <button class="opt" id="btn-kinder-nein" onclick="pickKinder(this,'nein')">
+          <span class="opt-label"><strong>Nein</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <button class="opt" id="btn-kinder-ja" onclick="pickKinder(this,'ja')">
+          <span class="opt-label"><strong>Ja</strong></span>
+          <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+        </button>
+        <div id="kinder-detail-wrap" style="display:none; margin-top:4px;">
+          <input class="field-input" type="text" id="inp-kinder-detail"
+            placeholder="z. B. 2 Kinder, 3 und 7 Jahre"
+            oninput="A.q7_detail = this.value.trim();" />
+        </div>
+      </div>
+      <div class="q-nav">
+        <button class="btn-back" onclick="prev(7)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Zurück
+        </button>
+        <button class="btn-next" id="nx7" disabled onclick="next(7)">
+          Weiter
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Q8: Allergien -->
+    <div class="q-card" id="q8">
+      <span class="q-step">Frage 08 · Verträglichkeit</span>
+      <h3 class="q-text">Hast du Allergien oder Unverträglichkeiten?</h3>
+      <p class="q-hint">Z. B. Duftstoffe, Sulfate, bestimmte Inhaltsstoffe — oder einfach «keine».</p>
+      <div class="opts">
+        <textarea class="field-input" id="inp-allergien"
+          placeholder="z. B. keine bekannten Allergien · parfumfrei bevorzugt · empfindlich auf Sulfate …"
+          rows="3" style="resize:vertical; font-family:var(--font-body);"
+          oninput="A.q8 = this.value.trim();"></textarea>
+      </div>
+      <div class="q-nav">
+        <button class="btn-back" onclick="prev(8)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Zurück
+        </button>
+        <button class="btn-next" id="nx8" onclick="next(8)">
           Weiter
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </button>
@@ -1588,22 +1660,22 @@
     </div>
 
     <!-- Q7: Waschen -->
-    <div class="q-card" id="q7">
-      <span class="q-step">Frage 07 · Wasch-Rhythmus</span>
+    <div class="q-card" id="q9">
+      <span class="q-step">Frage 09 · Wasch-Rhythmus</span>
       <h3 class="q-text">Wie oft wäschst du deine Haare?</h3>
       <p class="q-hint">Einfach in eigenen Worten — z. B. täglich, alle 2–3 Tage, einmal pro Woche.</p>
       <div class="opts">
         <textarea class="field-input" id="inp-waschen"
           placeholder="z. B. täglich · alle 2–3 Tage · einmal pro Woche …"
           rows="2" style="resize:vertical; font-family:var(--font-body);"
-          oninput="A.q7 = this.value.trim();"></textarea>
+          oninput="A.q9 = this.value.trim();"></textarea>
       </div>
       <div class="q-nav">
-        <button class="btn-back" onclick="prev(7)">
+        <button class="btn-back" onclick="prev(9)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
           Zurück
         </button>
-        <button class="btn-next" id="nx7" onclick="next(7)">
+        <button class="btn-next" id="nx9" onclick="next(9)">
           Weiter
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </button>
@@ -1611,16 +1683,16 @@
     </div>
 
     <!-- Q8: MONAT Interesse -->
-    <div class="q-card" id="q8">
-      <span class="q-step">Frage 08 · Dein Interesse</span>
+    <div class="q-card" id="q10">
+      <span class="q-step">Frage 10 · Dein Interesse</span>
       <h3 class="q-text">Was interessiert dich bei MONAT?</h3>
       <p class="q-hint">Mehrfachauswahl möglich — optional.</p>
       <div class="opts">
-        <button class="opt" onclick="pickQ8(this,'q8','vip')">
+        <button class="opt" onclick="pickQ10(this,'q10','vip')">
           <span class="opt-label"><strong>VIP KundIn werden &amp; Rabatte erhalten</strong></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
-        <button class="opt" onclick="pickQ8(this,'q8','markenpartnerschaft')">
+        <button class="opt" onclick="pickQ10(this,'q10','markenpartnerschaft')">
           <span class="opt-label"><strong>Bitte auch Infos zur Markenpartnerschaft</strong><span>30% Rabatt und Business Chance</span></span>
           <span class="chk"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
         </button>
@@ -1634,11 +1706,11 @@
           oninput="A.q8_sonstiges = this.value.trim();" />
       </div>
       <div class="q-nav">
-        <button class="btn-back" onclick="prev(8)">
+        <button class="btn-back" onclick="prev(10)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
           Zurück
         </button>
-        <button class="btn-next" id="nx8" onclick="goToEmail()">
+        <button class="btn-next" id="nx10" onclick="goToEmail()">
           Zum Ergebnis
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </button>
@@ -1907,15 +1979,15 @@
 <script>
   // State
   // Alle 5 Fragen sind Multi-Select (array). Limits variieren pro Frage.
-  const A = { q1: [], q2: [], q3: [], q4: [], q5: [], q6: '', q7: '', q8: [], q8_sonstiges: '' };
-  const TOTAL = 8;
+  const A = { q1: [], q2: [], q3: [], q4: [], q5: [], q6: '', q7: '', q7_detail: '', q8: '', q9: '', q10: [], q10_sonstiges: '' };
+  const TOTAL = 10;
 
   // Multi-Select Konfiguration: wie viele Antworten pro Frage maximal
   // Q2 und Q3 haben je 4 Optionen — max=4 entspricht "alles kann zutreffen"
-  const MULTI_LIMITS = { q1: 99, q2: 99, q3: 99, q4: 99, q5: 99, q8: 99 };
+  const MULTI_LIMITS = { q1: 99, q2: 99, q3: 99, q4: 99, q5: 99, q10: 99 };
 
   // Reihenfolge der Auswahl pro Frage — für "älteste rausschmeissen" bei Limit
-  const selectedOrder = { q1: [], q2: [], q3: [], q4: [], q5: [], q8: [] };
+  const selectedOrder = { q1: [], q2: [], q3: [], q4: [], q5: [], q10: [] };
 
   // Helpers
   function scrollTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
@@ -1991,6 +2063,30 @@
     scrollTop();
   }
 
+  function pickAlter(btn, val){
+    btn.closest('.opts').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+    btn.classList.add('sel');
+    A.q6 = val;
+    document.getElementById('nx6').disabled = false;
+  }
+
+  function pickKinder(btn, val){
+    document.querySelectorAll('#q7 .opt').forEach(b => b.classList.remove('sel'));
+    btn.classList.add('sel');
+    A.q7 = val;
+    const wrap = document.getElementById('kinder-detail-wrap');
+    const inp  = document.getElementById('inp-kinder-detail');
+    if(val === 'ja'){
+      wrap.style.display = 'block';
+      inp.focus();
+    } else {
+      wrap.style.display = 'none';
+      if(inp){ inp.value = ''; }
+      A.q7_detail = '';
+    }
+    document.getElementById('nx7').disabled = false;
+  }
+
   async function submitForm(e){
     e.preventDefault();
     const email = document.getElementById('inp-email').value.trim();
@@ -2035,10 +2131,12 @@
           email,
           telefon: document.getElementById('inp-tel').value.trim(),
           answers: A,
-          allergien: A.q6,
-          waschen: A.q7,
-          monatInteresse: A.q8.join(', '),
-          monatSonstiges: A.q8_sonstiges,
+          alter: A.q6,
+          kinder: A.q7 === 'ja' ? ('ja' + (A.q7_detail ? ', ' + A.q7_detail : '')) : (A.q7 || '—'),
+          allergien: A.q8,
+          waschen: A.q9,
+          monatInteresse: A.q10.join(', '),
+          monatSonstiges: A.q10_sonstiges,
           resultType: rType,
           result: resultData,
           labels: labelsSummary,
@@ -2345,9 +2443,11 @@
     const typ       = document.getElementById('ri-typ').textContent.trim();
     const kopfhaut  = document.getElementById('ri-kopfhaut').textContent.trim();
     const ziel      = document.getElementById('ri-ziel').textContent.trim();
-    const allergien = A.q6 ? A.q6 : '—';
-    const waschen   = A.q7 ? A.q7 : '—';
-    const interesse = A.q8.length ? A.q8.join(', ') + (A.q8_sonstiges ? ' (' + A.q8_sonstiges + ')' : '') : '—';
+    const alter     = A.q6 || '—';
+    const kinder    = A.q7 === 'ja' ? ('Ja' + (A.q7_detail ? ' (' + A.q7_detail + ')' : '')) : (A.q7 ? 'Nein' : '—');
+    const allergien = A.q8 ? A.q8 : '—';
+    const waschen   = A.q9 ? A.q9 : '—';
+    const interesse = A.q10.length ? A.q10.join(', ') + (A.q10_sonstiges ? ' (' + A.q10_sonstiges + ')' : '') : '—';
 
     const msg =
       'Hallo Michaela!\n\n' +
@@ -2359,6 +2459,8 @@
       'Haartyp: ' + typ + '\n' +
       'Kopfhaut: ' + kopfhaut + '\n' +
       'Hauptziel: ' + ziel + '\n' +
+      'Alter: ' + alter + '\n' +
+      'Kinder: ' + kinder + '\n' +
       'Allergien / Unverträglichkeiten: ' + allergien + '\n' +
       'Waschen: ' + waschen + '\n' +
       'MONAT-Interesse: ' + interesse + '\n\n' +
@@ -2371,38 +2473,38 @@
   }
 
 
-  // pickQ8: wie pick(), aber nx8 bleibt immer aktiv (Q8 ist optional)
-  function pickQ8(btn, q, val){
+  // pickQ10: wie pick(), aber nx10 bleibt immer aktiv (Q10 ist optional)
+  function pickQ10(btn, q, val){
     pick(btn, q, val);
-    const nx8 = document.getElementById('nx8');
-    if(nx8) nx8.disabled = false;
+    const nx10 = document.getElementById('nx10');
+    if(nx10) nx10.disabled = false;
   }
 
   // toggleSonstiges: klappt Freitext-Feld auf/zu
   function toggleSonstiges(btn){
-    const idx = A.q8.indexOf('sonstiges');
+    const idx = A.q10.indexOf('sonstiges');
     if(idx >= 0){
-      A.q8.splice(idx, 1);
-      const bi = selectedOrder.q8.indexOf(btn);
-      if(bi >= 0) selectedOrder.q8.splice(bi, 1);
+      A.q10.splice(idx, 1);
+      const bi = selectedOrder.q10.indexOf(btn);
+      if(bi >= 0) selectedOrder.q10.splice(bi, 1);
       btn.classList.remove('sel');
       const inp = document.getElementById('inp-sonstiges');
-      if(inp){ inp.style.display='none'; inp.value=''; A.q8_sonstiges=''; }
+      if(inp){ inp.style.display='none'; inp.value=''; A.q10_sonstiges=''; }
     } else {
-      A.q8.push('sonstiges');
-      selectedOrder.q8.push(btn);
+      A.q10.push('sonstiges');
+      selectedOrder.q10.push(btn);
       btn.classList.add('sel');
       const inp = document.getElementById('inp-sonstiges');
       if(inp){ inp.style.display='block'; inp.focus(); }
     }
-    const nx8 = document.getElementById('nx8');
-    if(nx8) nx8.disabled = false;
+    const nx10 = document.getElementById('nx10');
+    if(nx10) nx10.disabled = false;
   }
 
   function restart(){
     // State zurücksetzen — alle Fragen sind Multi-Select (Arrays)
-    A.q1 = []; A.q2 = []; A.q3 = []; A.q4 = []; A.q5 = []; A.q6 = ''; A.q7 = ''; A.q8 = []; A.q8_sonstiges = '';
-    selectedOrder.q1 = []; selectedOrder.q2 = []; selectedOrder.q3 = []; selectedOrder.q4 = []; selectedOrder.q5 = []; selectedOrder.q8 = [];
+    A.q1 = []; A.q2 = []; A.q3 = []; A.q4 = []; A.q5 = []; A.q6 = ''; A.q7 = ''; A.q7_detail = ''; A.q8 = ''; A.q9 = ''; A.q10 = []; A.q10_sonstiges = '';
+    selectedOrder.q1 = []; selectedOrder.q2 = []; selectedOrder.q3 = []; selectedOrder.q4 = []; selectedOrder.q5 = []; selectedOrder.q10 = [];
 
     document.querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
     document.querySelectorAll('.btn-next').forEach(b => b.disabled = true);
@@ -2413,6 +2515,10 @@
     const _tel = document.getElementById('inp-tel'); if(_tel) _tel.value = '';
     const _al = document.getElementById('inp-allergien'); if(_al) _al.value = '';
     const _wa = document.getElementById('inp-waschen'); if(_wa) _wa.value = '';
+    const _kd = document.getElementById('inp-kinder-detail'); if(_kd) _kd.value = '';
+    const _kdw = document.getElementById('kinder-detail-wrap'); if(_kdw) _kdw.style.display='none';
+    const _kbj = document.getElementById('btn-kinder-ja'); if(_kbj) _kbj.classList.remove('sel');
+    const _kbn = document.getElementById('btn-kinder-nein'); if(_kbn) _kbn.classList.remove('sel');
     const _so = document.getElementById('inp-sonstiges'); if(_so){ _so.value=''; _so.style.display='none'; }
     const _bs = document.getElementById('btn-sonstiges'); if(_bs) _bs.classList.remove('sel');
     document.getElementById('r-multi-goal').style.display = 'none';
