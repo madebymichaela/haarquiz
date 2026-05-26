@@ -554,21 +554,32 @@ async function sendEmail({ apiKey, from, to, reply_to, subject, html, text }) {
  * Die Feldnamen müssen EXAKT denen in Airtable entsprechen (case-sensitive).
  * Multiple-Select-Felder erwarten Arrays von Option-Labels.
  */
-function buildAirtableFields({ name, email, answers, resultType }) {
+function buildAirtableFields({ name, email, telefon, answers, resultType, allergien, waschen, monatInteresse }) {
   const mapMulti = (ids, dict) =>
     (ids || []).map((id) => dict[id]).filter(Boolean);
 
-  return {
+  const fields = {
     Name: name || '',
     Email: email,
+    Telefon: telefon || '',
     'Primäres Ziel': LABELS.q5[resultType] || null,
     Struktur: mapMulti(answers.q1, LABELS.q1),
     Haartyp: mapMulti(answers.q2, LABELS.q2),
     Kopfhaut: mapMulti(answers.q3, LABELS.q3),
     Alltag: mapMulti(answers.q4, LABELS.q4),
     'Alle Wünsche': mapMulti(answers.q5, LABELS.q5),
+    Waschen: waschen || '',
+    Allergien: allergien || '',
+    'MONAT Interesse': monatInteresse || '',
     Status: 'Neu',
   };
+
+  // Leere Strings entfernen, damit Airtable keine leeren Felder erstellt
+  Object.keys(fields).forEach((k) => {
+    if (fields[k] === '') delete fields[k];
+  });
+
+  return fields;
 }
 
 /**
@@ -683,7 +694,7 @@ export default async (req) => {
         token: airtableToken,
         baseId: airtableBaseId,
         tableId: airtableTableId,
-        fields: buildAirtableFields({ name, email, answers, resultType }),
+        fields: buildAirtableFields({ name, email, telefon, answers, resultType, allergien, waschen, monatInteresse }),
       })
     );
   }
