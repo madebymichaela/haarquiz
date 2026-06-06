@@ -2003,6 +2003,10 @@
     document.getElementById('hero').style.display = 'none';
     document.getElementById('quiz-section').classList.add('active');
     scrollTop();
+    // Plausible-Event: Analyse gestartet (Klick auf "Analyse starten")
+    if (typeof plausible === 'function') {
+      plausible('Analyse gestartet');
+    }
   }
 
   function pick(btn, q, val){
@@ -2353,6 +2357,12 @@
 
   function showResult(type){
     const d = RESULTS[type] || RESULTS['mehr-glanz'];
+
+    // Plausible-Event: Analyse abgeschlossen (Ergebnis-/Danke-Seite erreicht)
+    if (typeof plausible === 'function') {
+      plausible('Analyse abgeschlossen', { props: { goal: type } });
+    }
+
     const name = document.getElementById('inp-name').value.trim();
 
     document.getElementById('r-name').textContent =
