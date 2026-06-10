@@ -1977,6 +1977,24 @@
 
 <!-- ═══════════ JAVASCRIPT ═══════════ -->
 <script>
+  // ── Partner-Erkennung (Mehr-Partner-Funnel) ─────────────────────────
+  // Die URL /team/{slug}/analyse bestimmt, zu wem Leads und WhatsApp gehen.
+  // Ohne Slug (nackte Domain) oder bei unbekanntem Slug → Default Michaela.
+  //
+  // Hinweis: Diese Map enthält nur Anzeigename + WhatsApp-Nummer (fürs Frontend).
+  // Die vollen Lead-Daten (E-Mail, Absender) liegen im Backend (submit-quiz.mjs).
+  // Stufe 1 (später): beide ziehen aus der Airtable-Tabelle "Partner".
+  const PARTNERS = {
+    'marianne-schaad': { name: 'Marianne Schaad', wa: '41795738616' },
+  };
+  const PARTNER = (function () {
+    const m = window.location.pathname.match(/\/team\/([^\/]+)/i);
+    const slug = m ? m[1].trim().toLowerCase() : null;
+    const p = slug && PARTNERS[slug];
+    if (p) return { slug, name: p.name, first: p.name.split(' ')[0], wa: p.wa };
+    return { slug: 'michaela', name: 'Michaela', first: 'Michaela', wa: '41767587551' };
+  })();
+
   // State
   // Alle 5 Fragen sind Multi-Select (array). Limits variieren pro Frage.
   const A = { q1: [], q2: [], q3: [], q4: [], q5: [], q6: '', q7: '', q7_detail: '', q8: '', q9: '', q10: [], q10_sonstiges: '' };
@@ -2131,6 +2149,7 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          partner: PARTNER.slug,
           name,
           email,
           telefon: document.getElementById('inp-tel').value.trim(),
@@ -2460,7 +2479,7 @@
     const interesse = A.q10.length ? A.q10.join(', ') + (A.q10_sonstiges ? ' (' + A.q10_sonstiges + ')' : '') : '—';
 
     const msg =
-      'Hallo Michaela!\n\n' +
+      'Hallo ' + PARTNER.first + '!\n\n' +
       'Ich habe gerade die Haar-Analyse gemacht und möchte mein Ergebnis mit dir besprechen.\n\n' +
       'Name: ' + name + '\n' +
       'E-Mail: ' + email + '\n' +
@@ -2477,7 +2496,7 @@
       'Ich freue mich auf deine persönliche Empfehlung.\n\n' +
       'Hier noch einige Bilder von meinen Haaren und meiner Kopfhaut.';
 
-    const url = 'https://wa.me/41767587551?text=' + encodeURIComponent(msg);
+    const url = 'https://wa.me/' + PARTNER.wa + '?text=' + encodeURIComponent(msg);
     window.open(url, '_blank', 'noopener');
     return false;
   }

@@ -65,6 +65,48 @@ const QUESTIONS = {
   q5: 'Wünsche',
 };
 
+// ── Partner-Verzeichnis (Stufe 0) ────────────────────────────────────
+// Mehr-Partner-Funnel: jeder Partner hat einen Slug aus der URL /team/{slug}/analyse.
+// Pro Partner: Anzeigename, echte Lead-E-Mail, WhatsApp-Nummer, Absender-Local-Part.
+//
+// Stufe 1 (spaeter): diese Map wird durch die Airtable-Tabelle "Partner" ersetzt,
+// damit Michaela neue Partner selbst erfassen kann — ohne Code anzufassen.
+const PARTNERS = {
+  'marianne-schaad': {
+    name:  'Marianne Schaad',
+    email: 'schaadmarianne@hotmail.com',
+    wa:    '41795738616',
+    from:  'marianne-schaad', // ergibt Absender marianne-schaad@haar-analyse.ch
+  },
+};
+
+// Default-/Fallback-Partner = Michaela (nackte Domain oder unbekannter Slug).
+// Verhaelt sich exakt wie bisher: Absender + Reply-To + Lead-Empfaenger aus den Env-Vars.
+function resolvePartner(slug) {
+  const p = slug && typeof slug === 'string' ? PARTNERS[slug.trim().toLowerCase()] : null;
+  if (p) {
+    return {
+      slug:      slug.trim().toLowerCase(),
+      isDefault: false,
+      name:      p.name,
+      first:     p.name.split(' ')[0],
+      email:     p.email,
+      wa:        p.wa,
+      from:      `${p.name} <${p.from}@haar-analyse.ch>`,
+    };
+  }
+  // Michaela (Default) — byte-identisch zum bisherigen Verhalten
+  return {
+    slug:      'michaela',
+    isDefault: true,
+    name:      'Michaela',
+    first:     'Michaela',
+    email:     process.env.MICHAELA_EMAIL || 'info@haar-analyse.ch',
+    wa:        '41767587551',
+    from:      process.env.RESEND_FROM || 'Michaela <hallo@haar-analyse.ch>',
+  };
+}
+
 // ── Helpers ──────────────────────────────────────────────────────────
 function formatLabels(ids, dict) {
   if (!Array.isArray(ids) || ids.length === 0) return '—';
@@ -103,9 +145,9 @@ function json(obj, status = 200) {
 }
 
 // ── E-Mail Templates ─────────────────────────────────────────────────
-function buildWaLink(name, email, labels, allergien, waschen, monatInteresse, alter, kinder) {
+function buildWaLink(partner, name, email, labels, allergien, waschen, monatInteresse, alter, kinder) {
   const msg =
-    'Hallo Michaela!\n\n' +
+    'Hallo ' + partner.first + '!\n\n' +
     'Ich habe gerade die Haar-Analyse gemacht und möchte mein Ergebnis mit dir besprechen.\n\n' +
     'Name: ' + (name || '—') + '\n' +
     'E-Mail: ' + (email || '—') + '\n' +
@@ -120,10 +162,10 @@ function buildWaLink(name, email, labels, allergien, waschen, monatInteresse, al
     'MONAT-Interesse: ' + (monatInteresse || '—') + '\n\n' +
     'Ich freue mich auf deine persönliche Empfehlung.\n\n' +
     'Hier noch einige Bilder von meinen Haaren und meiner Kopfhaut.';
-  return 'https://wa.me/41767587551?text=' + encodeURIComponent(msg);
+  return 'https://wa.me/' + partner.wa + '?text=' + encodeURIComponent(msg);
 }
 
-function customerHtml({ name, email, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }) {
+function customerHtml({ partner, name, email, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }) {
   const greeting = name ? `Hallo ${escapeHtml(name)}` : 'Hallo';
   const r = result || {};
   const lab = labels || {};
@@ -148,7 +190,7 @@ function customerHtml({ name, email, result, labels, multiGoals, allergien, wasc
             ? goals.slice(0, -1).join(', ') + ' und ' + goals[goals.length - 1]
             : goals[0])}</strong> genannt.
           Das ist häufig — dein Haar ist vielschichtig, und deine Empfehlung soll es auch sein.
-          Michaela berücksichtigt alle deine Wünsche in ihrer Sprachnachricht.
+          ${escapeHtml(partner.first)} berücksichtigt alle deine Wünsche in ihrer Sprachnachricht.
         </p>
       </div>`
     : '';
@@ -260,7 +302,7 @@ function customerHtml({ name, email, result, labels, multiGoals, allergien, wasc
       <p style="font-size:15px;line-height:1.7;color:#444444 !important;margin:0 0 28px;">
         Damit ich dir eine wirklich individuelle Beratung geben kann, brauche ich noch ein Foto deiner Haare — auch ohne Gesicht oder verdeckt, einfach von der Haarstruktur. Deine ausgefüllten Angaben werden automatisch mitgesendet.
       </p>
-      <a href="${buildWaLink(name, email, lab, allergien, waschen, monatInteresse, alter, kinder)}" style="display:inline-block;background-color:#25D366 !important;color:#ffffff !important;text-decoration:none;padding:16px 36px;border-radius:999px;font-weight:700;font-size:16px;-webkit-text-fill-color:#ffffff;">Jetzt per WhatsApp schreiben</a>
+      <a href="${buildWaLink(partner, name, email, lab, allergien, waschen, monatInteresse, alter, kinder)}" style="display:inline-block;background-color:#25D366 !important;color:#ffffff !important;text-decoration:none;padding:16px 36px;border-radius:999px;font-weight:700;font-size:16px;-webkit-text-fill-color:#ffffff;">Jetzt per WhatsApp schreiben</a>
     </div>
 
     <!-- Was als Nächstes passiert -->
@@ -293,23 +335,23 @@ function customerHtml({ name, email, result, labels, multiGoals, allergien, wasc
       Ich freue mich auf deine Nachricht.
     </p>
     <p style="font-size:15px;color:#2d342c !important;text-align:center;font-weight:600;margin:0 0 24px;">
-      Herzlich, Michaela
+      Herzlich, ${escapeHtml(partner.first)}
     </p>
 
     <!-- Footer -->
     <div style="text-align:center;padding:28px 20px 0;font-size:12px;color:#55605a;">
-      Michaelas MONAT Academy · <a href="https://haar-analyse.ch/impressum.html" style="color:#1d6a63;text-decoration:none;">Impressum</a> · <a href="https://haar-analyse.ch/datenschutz.html" style="color:#1d6a63;text-decoration:none;">Datenschutz</a>
+      MONAT Academy · <a href="https://haar-analyse.ch/impressum.html" style="color:#1d6a63;text-decoration:none;">Impressum</a> · <a href="https://haar-analyse.ch/datenschutz.html" style="color:#1d6a63;text-decoration:none;">Datenschutz</a>
     </div>
   </div>
 </body></html>`;
 }
 
-function customerText({ name, email, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }) {
+function customerText({ partner, name, email, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }) {
   const greeting = name ? `Hallo ${name}` : 'Hallo';
   const r = result || {};
   const lab = labels || {};
   const goals = Array.isArray(multiGoals) ? multiGoals : [];
-  const waLink = buildWaLink(name, email, lab, allergien, waschen, monatInteresse, alter, kinder);
+  const waLink = buildWaLink(partner, name, email, lab, allergien, waschen, monatInteresse, alter, kinder);
 
   const title = r.title ? String(r.title).replace(/\n/g, ' ') : '';
   const tipsText = Array.isArray(r.tips) && r.tips.length > 0
@@ -360,10 +402,10 @@ WAS ALS NÄCHSTES PASSIERT
 3. Nach unserer Beratung stelle ich dir die für dich passenden Produkte im Warenkorb zusammen — nach Absprache, damit du sie einfach bestellen kannst.
 
 Ich freue mich auf deine Nachricht.
-Herzlich, Michaela
+Herzlich, ${partner.first}
 
 —
-Michaelas MONAT Academy
+MONAT Academy
 Impressum:    https://haar-analyse.ch/impressum.html
 Datenschutz:  https://haar-analyse.ch/datenschutz.html`;
 }
@@ -515,7 +557,7 @@ function michaelaHtml({ name, email, telefon, answers, resultType, result, label
 </body></html>`;
 }
 
-function michaelaText({ name, email, telefon, answers, resultType, result, allergien, waschen, monatInteresse, alter, kinder }) {
+function michaelaText({ partner, name, email, telefon, answers, resultType, result, allergien, waschen, monatInteresse, alter, kinder }) {
   const lines = Object.keys(QUESTIONS)
     .map((q) => `${QUESTIONS[q]}: ${formatLabels(answers[q] || [], LABELS[q])}`)
     .join('\n');
@@ -551,7 +593,7 @@ PRIMÄRES ZIEL: ${primaryGoal}
 ${lines}${allergien ? '\nAllergien:        ' + allergien : ''}${waschen ? '\nWaschen:          ' + waschen : ''}${monatInteresse ? '\nMONAT-Interesse:  ' + monatInteresse : ''}
 
 Die Kundin wurde gebeten, dir per WhatsApp zu schreiben und 2-3 Fotos ihrer Haare hinzuzufügen.
-WhatsApp: https://wa.me/41767587551${resultBlock}`;
+WhatsApp: https://wa.me/${partner?.wa || '41767587551'}${resultBlock}`;
 }
 
 // ── Resend API Call ──────────────────────────────────────────────────
@@ -580,12 +622,13 @@ async function sendEmail({ apiKey, from, to, reply_to, subject, html, text }) {
  * Die Feldnamen müssen EXAKT denen in Airtable entsprechen (case-sensitive).
  * Multiple-Select-Felder erwarten Arrays von Option-Labels.
  */
-function buildAirtableFields({ name, email, telefon, answers, resultType, allergien, waschen, monatInteresse, alter, kinder }) {
+function buildAirtableFields({ partner, name, email, telefon, answers, resultType, allergien, waschen, monatInteresse, alter, kinder }) {
   const mapMulti = (ids, dict) =>
     (ids || []).map((id) => dict[id]).filter(Boolean);
 
   const fields = {
     Name: name || '',
+    Partner: partner?.name || 'Michaela',
     Email: email,
     Telefon: telefon || '',
     'Primäres Ziel': LABELS.q5[resultType] || null,
@@ -670,12 +713,17 @@ export default async (req) => {
   if (err) return json({ ok: false, error: err }, 400);
 
   const apiKey = process.env.RESEND_API_KEY;
-  const FROM = process.env.RESEND_FROM || 'Michaela <hallo@haar-analyse.ch>';
-  const MICHAELA = process.env.MICHAELA_EMAIL || 'info@haar-analyse.ch';
   const OWNER = process.env.OWNER_EMAIL || null;
 
-  // Lead-Empfänger: Michaela immer, Owner (Georgios) wenn konfiguriert
-  const leadRecipients = OWNER ? [MICHAELA, OWNER] : MICHAELA;
+  // Partner aus dem Slug aufloesen (Default = Michaela, byte-identisch zu frueher).
+  const partner = resolvePartner(data.partner);
+
+  // Absender pro Partner. Domain bleibt fix haar-analyse.ch (bei Resend verifiziert) —
+  // variabel sind nur Anzeigename und lokaler Teil der Adresse.
+  const FROM = partner.from;
+
+  // Lead-Empfänger: der jeweilige Partner, plus Owner (Georgios) wenn konfiguriert.
+  const leadRecipients = OWNER ? [partner.email, OWNER] : partner.email;
 
   if (!apiKey) {
     console.error('RESEND_API_KEY not configured');
@@ -694,10 +742,10 @@ export default async (req) => {
       apiKey,
       from: FROM,
       to: email,
-      reply_to: MICHAELA,
+      reply_to: partner.email,
       subject: 'Deine Haar-Auswertung — und was jetzt kommt',
-      html: customerHtml({ name, email, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }),
-      text: customerText({ name, email, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }),
+      html: customerHtml({ partner, name, email, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }),
+      text: customerText({ partner, name, email, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }),
     }),
     sendEmail({
       apiKey,
@@ -705,8 +753,8 @@ export default async (req) => {
       to: leadRecipients,
       reply_to: email,
       subject: `Neuer Lead: ${name || email}`,
-      html: michaelaHtml({ name, email, telefon, answers, resultType, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }),
-      text: michaelaText({ name, email, telefon, answers, resultType, result, allergien, waschen, monatInteresse, alter, kinder }),
+      html: michaelaHtml({ partner, name, email, telefon, answers, resultType, result, labels, multiGoals, allergien, waschen, monatInteresse, alter, kinder }),
+      text: michaelaText({ partner, name, email, telefon, answers, resultType, result, allergien, waschen, monatInteresse, alter, kinder }),
     }),
   ];
 
@@ -722,7 +770,7 @@ export default async (req) => {
         token: airtableToken,
         baseId: airtableBaseId,
         tableId: airtableTableId,
-        fields: buildAirtableFields({ name, email, telefon, answers, resultType, allergien, waschen, monatInteresse, alter, kinder }),
+        fields: buildAirtableFields({ partner, name, email, telefon, answers, resultType, allergien, waschen, monatInteresse, alter, kinder }),
       })
     );
   }

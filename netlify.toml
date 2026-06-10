@@ -62,6 +62,21 @@
   to = "/"
   status = 301
 
+# ── Partner-Funnel: /team/{slug}/analyse ─────────────────────────────
+# Mehr-Partner-Funnel. status=200 = Rewrite (URL bleibt sichtbar, /index.html
+# wird ausgeliefert). Das Quiz liest den Slug aus dem Pfad und ordnet den Lead zu.
+[[redirects]]
+  from = "/team/:slug/analyse"
+  to = "/index.html"
+  status = 200
+
+# Nackter Partner-Pfad /team/{slug} zeigt vorerst ebenfalls die Analyse
+# (Stufe 0). In Stufe 2 wird hier die editierbare Partner-Landingpage ausgeliefert.
+[[redirects]]
+  from = "/team/:slug"
+  to = "/index.html"
+  status = 200
+
 # ── API-Rewrite zur Netlify Function ─────────────────────────────────
 # Fallback für den Fall, dass `config.path` in der Function nicht greift.
 # Status 200 = Rewrite (URL bleibt sichtbar), nicht Redirect.
