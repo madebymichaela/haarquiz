@@ -1977,22 +1977,15 @@
 
 <!-- ═══════════ JAVASCRIPT ═══════════ -->
 <script>
-  // ── Partner-Erkennung (Mehr-Partner-Funnel) ─────────────────────────
+  // ── Partner-Erkennung (Mehr-Partner-Funnel, Stufe 1) ────────────────
   // Die URL /team/{slug}/analyse bestimmt, zu wem Leads und WhatsApp gehen.
-  // Ohne Slug (nackte Domain) oder bei unbekanntem Slug → Default Michaela.
-  //
-  // Hinweis: Diese Map enthält nur Anzeigename + WhatsApp-Nummer (fürs Frontend).
-  // Die vollen Lead-Daten (E-Mail, Absender) liegen im Backend (submit-quiz.mjs).
-  // Stufe 1 (später): beide ziehen aus der Airtable-Tabelle "Partner".
-  const PARTNERS = {
-    'marianne-schaad': { name: 'Marianne Schaad', wa: '41795738616' },
-  };
+  // Der Slug wird beim Absenden ans Backend geschickt; Name + WhatsApp-Nummer
+  // der Partnerin kommen NACH dem Absenden aus der Server-Antwort (Quelle: Airtable).
+  // Die first/wa unten sind nur Fallback, bis die Antwort da ist.
   const PARTNER = (function () {
     const m = window.location.pathname.match(/\/team\/([^\/]+)/i);
-    const slug = m ? m[1].trim().toLowerCase() : null;
-    const p = slug && PARTNERS[slug];
-    if (p) return { slug, name: p.name, first: p.name.split(' ')[0], wa: p.wa };
-    return { slug: 'michaela', name: 'Michaela', first: 'Michaela', wa: '41767587551' };
+    const slug = m ? m[1].trim().toLowerCase() : 'michaela-antoniadis';
+    return { slug, first: 'Michaela', wa: '41767587551' };
   })();
 
   // State
@@ -2171,6 +2164,11 @@
       document.getElementById('loader').classList.remove('active');
 
       if (result.ok) {
+        // Partner-Daten aus der Server-Antwort (Airtable) für den WhatsApp-Button übernehmen
+        if (result.partner) {
+          if (result.partner.first) PARTNER.first = result.partner.first;
+          if (result.partner.wa)    PARTNER.wa    = result.partner.wa;
+        }
         showResult(rType);
       } else {
         alert(result.error || 'Hoppla, da ist etwas schiefgelaufen. Bitte versuche es gleich nochmal.');

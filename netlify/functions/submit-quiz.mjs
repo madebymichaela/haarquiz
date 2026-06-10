@@ -65,46 +65,103 @@ const QUESTIONS = {
   q5: 'Wünsche',
 };
 
-// ── Partner-Verzeichnis (Stufe 0) ────────────────────────────────────
+// ── Partner-Verzeichnis (Stufe 1: live aus Airtable) ─────────────────
 // Mehr-Partner-Funnel: jeder Partner hat einen Slug aus der URL /team/{slug}/analyse.
-// Pro Partner: Anzeigename, echte Lead-E-Mail, WhatsApp-Nummer, Absender-Local-Part.
-//
-// Stufe 1 (spaeter): diese Map wird durch die Airtable-Tabelle "Partner" ersetzt,
-// damit Michaela neue Partner selbst erfassen kann — ohne Code anzufassen.
-const PARTNERS = {
-  'marianne-schaad': {
-    name:  'Marianne Schaad',
-    email: 'schaadmarianne@hotmail.com',
-    wa:    '41795738616',
-    from:  'marianne-schaad', // ergibt Absender marianne-schaad@haar-analyse.ch
-  },
-};
+// Die Partner-Daten kommen aus der Airtable-Tabelle "Partner" — eine neue Partnerin
+// anlegen = eine Airtable-Zeile, kein Code-Deploy mehr noetig.
+const PARTNER_TABLE = process.env.AIRTABLE_PARTNER_TABLE_ID || 'tblkzshCdPlNgQ2uF';
+const DEFAULT_SLUG  = 'michaela-antoniadis'; // nackte Domain / unbekannter Slug -> Michaela
 
-// Default-/Fallback-Partner = Michaela (nackte Domain oder unbekannter Slug).
-// Verhaelt sich exakt wie bisher: Absender + Reply-To + Lead-Empfaenger aus den Env-Vars.
-function resolvePartner(slug) {
-  const p = slug && typeof slug === 'string' ? PARTNERS[slug.trim().toLowerCase()] : null;
-  if (p) {
-    return {
-      slug:      slug.trim().toLowerCase(),
-      isDefault: false,
-      name:      p.name,
-      first:     p.name.split(' ')[0],
-      email:     p.email,
-      wa:        p.wa,
-      from:      `${p.name} <${p.from}@haar-analyse.ch>`,
-    };
-  }
-  // Michaela (Default) — byte-identisch zum bisherigen Verhalten
+// Kleiner In-Memory-Cache, damit warme Function-Instanzen Airtable nicht bei
+// jedem Aufruf neu abfragen. Slug -> { data, expires }.
+const partnerCache = new Map();
+const CACHE_TTL_MS = 5 * 60 * 1000;
+
+// WhatsApp-Nummer aus der Tabelle robust normalisieren:
+// "+41 79 573 86 16" / "079 573 86 16" / "0041 79..." -> "41795738616"
+function normalizeWa(raw) {
+  if (!raw) return '';
+  let s = String(raw).replace(/[^\d+]/g, '').replace(/^\+/, '');
+  if (s.startsWith('00')) s = s.slice(2);
+  else if (s.startsWith('0')) s = '41' + s.slice(1);
+  return s;
+}
+
+// Einen Partner-Datensatz per Slug aus Airtable holen (oder null).
+async function fetchPartnerRecord(slug) {
+  const token  = process.env.AIRTABLE_TOKEN;
+  const baseId = process.env.AIRTABLE_BASE_ID;
+  if (!token || !baseId) return null;
+  const safe = String(slug).toLowerCase().replace(/'/g, '');
+  const formula = `LOWER({Slug})='${safe}'`;
+  const url = `https://api.airtable.com/v0/${baseId}/${PARTNER_TABLE}?maxRecords=1&filterByFormula=${encodeURIComponent(formula)}`;
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+  if (!res.ok) throw new Error(`Airtable partner read ${res.status}`);
+  const data = await res.json();
+  return (data.records && data.records[0]) || null;
+}
+
+// Airtable-Datensatz -> Partner-Objekt, das der Rest der Funktion erwartet.
+function partnerFromRecord(rec) {
+  const f = rec.fields || {};
+  const vorname = (f['Vorname'] || '').trim();
+  const name    = (f['Name'] || `${vorname} ${(f['Nachname'] || '').trim()}`).trim();
+  const sender  = f['E-Mail Absender'] || `${(f['Slug'] || '').toLowerCase()}@haar-analyse.ch`;
+  const status  = (f['Status'] || '').toString().toLowerCase();
   return {
-    slug:      'michaela',
+    slug:      (f['Slug'] || '').toLowerCase(),
+    recordId:  rec.id,
+    isDefault: false,
+    name,
+    first:     vorname || name.split(' ')[0],
+    email:     f['E-Mail'] || process.env.MICHAELA_EMAIL || 'info@haar-analyse.ch',
+    wa:        normalizeWa(f['WhatsApp']) || '41767587551',
+    from:      `${name} <${sender}>`,
+    // Nur explizit "Pausiert"/"Inaktiv" greift nicht; leer oder "Aktiv" = aktiv.
+    active:    !status || status === 'aktiv',
+  };
+}
+
+// Minimaler Fallback, falls Airtable nicht erreichbar ist — Funnel bleibt funktionsfaehig.
+function hardcodedMichaela() {
+  return {
+    slug:      'michaela-antoniadis',
+    recordId:  null,
     isDefault: true,
     name:      'Michaela',
     first:     'Michaela',
     email:     process.env.MICHAELA_EMAIL || 'info@haar-analyse.ch',
     wa:        '41767587551',
     from:      process.env.RESEND_FROM || 'Michaela <hallo@haar-analyse.ch>',
+    active:    true,
   };
+}
+
+// Partner per Slug aufloesen. Unbekannt/pausiert -> Default (Michaela).
+// Airtable-Ausfall -> Hardcoded-Fallback. Ergebnis wird gecached.
+async function resolvePartner(slug) {
+  const wanted = (typeof slug === 'string' && slug.trim()) ? slug.trim().toLowerCase() : DEFAULT_SLUG;
+
+  const cached = partnerCache.get(wanted);
+  if (cached && cached.expires > Date.now()) return cached.data;
+
+  let partner = null;
+  try {
+    const rec = await fetchPartnerRecord(wanted);
+    let p = rec ? partnerFromRecord(rec) : null;
+    if (!p || !p.active) {
+      // unbekannter Slug oder pausierte Partnerin -> Default
+      const def = await fetchPartnerRecord(DEFAULT_SLUG);
+      p = def ? partnerFromRecord(def) : null;
+    }
+    partner = p;
+  } catch (e) {
+    console.warn('Partner-Lookup fehlgeschlagen, nutze Fallback:', e.message);
+  }
+  if (!partner) partner = hardcodedMichaela();
+
+  partnerCache.set(wanted, { data: partner, expires: Date.now() + CACHE_TTL_MS });
+  return partner;
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────
@@ -628,7 +685,6 @@ function buildAirtableFields({ partner, name, email, telefon, answers, resultTyp
 
   const fields = {
     Name: name || '',
-    Partner: partner?.name || 'Michaela',
     Email: email,
     Telefon: telefon || '',
     'Primäres Ziel': LABELS.q5[resultType] || null,
@@ -644,6 +700,13 @@ function buildAirtableFields({ partner, name, email, telefon, answers, resultTyp
     'MONAT Interesse': monatInteresse || '',
     Status: 'Neu',
   };
+
+  // Partner-Verknuepfung ueber die Airtable-Datensatz-ID (sauber, keine Dubletten).
+  // Faellt der Lookup auf den Hardcoded-Fallback zurueck (kein recordId), bleibt
+  // das Feld leer statt eine falsche Verknuepfung zu erzeugen.
+  if (partner && partner.recordId) {
+    fields['Partner'] = [partner.recordId];
+  }
 
   // Leere Strings entfernen, damit Airtable keine leeren Felder erstellt
   Object.keys(fields).forEach((k) => {
@@ -715,8 +778,8 @@ export default async (req) => {
   const apiKey = process.env.RESEND_API_KEY;
   const OWNER = process.env.OWNER_EMAIL || null;
 
-  // Partner aus dem Slug aufloesen (Default = Michaela, byte-identisch zu frueher).
-  const partner = resolvePartner(data.partner);
+  // Partner aus dem Slug aufloesen (live aus Airtable; Default = Michaela).
+  const partner = await resolvePartner(data.partner);
 
   // Absender pro Partner. Domain bleibt fix haar-analyse.ch (bei Resend verifiziert) —
   // variabel sind nur Anzeigename und lokaler Teil der Adresse.
@@ -798,7 +861,9 @@ export default async (req) => {
     console.warn('Airtable write failed (non-critical):', airtableResult.reason?.message);
   }
 
-  return json({ ok: true }, 200);
+  // Partner-Infos zurueckgeben, damit das Frontend den WhatsApp-Button korrekt
+  // baut (Name + Nummer kommen jetzt aus Airtable, nicht mehr aus dem Code).
+  return json({ ok: true, partner: { first: partner.first, wa: partner.wa } }, 200);
 };
 
 export const config = { path: '/api/submit-quiz' };
