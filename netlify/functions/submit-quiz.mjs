@@ -69,7 +69,7 @@ const QUESTIONS = {
 // Mehr-Partner-Funnel: jeder Partner hat einen Slug aus der URL /team/{slug}/analyse.
 // Die Partner-Daten kommen aus der Airtable-Tabelle "Partner" — eine neue Partnerin
 // anlegen = eine Airtable-Zeile, kein Code-Deploy mehr noetig.
-const PARTNER_TABLE = process.env.AIRTABLE_PARTNER_TABLE_ID || 'tblkzshCdPlNgQ2uF';
+const PARTNER_TABLE = process.env.AIRTABLE_PARTNER_TABLE_ID || 'tblkzshCdPINgQ2uF';
 const DEFAULT_SLUG  = 'michaela-antoniadis'; // nackte Domain / unbekannter Slug -> Michaela
 
 // Kleiner In-Memory-Cache, damit warme Function-Instanzen Airtable nicht bei
