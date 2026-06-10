@@ -1,0 +1,4 @@
+# Netlify-Redirects — werden im Publish-Ordner IMMER gelesen (jeder Deploy-Weg).
+# Mehr-Partner-Funnel: /team/{slug} und /team/{slug}/analyse liefern das Quiz aus.
+# 200 = Rewrite, die URL bleibt sichtbar; das Quiz liest den Slug aus dem Pfad.
+/team/*    /index.html    200

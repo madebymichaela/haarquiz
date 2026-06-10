@@ -62,18 +62,14 @@
   to = "/"
   status = 301
 
-# ── Partner-Funnel: /team/{slug}/analyse ─────────────────────────────
+# ── Partner-Funnel: /team/... ────────────────────────────────────────
 # Mehr-Partner-Funnel. status=200 = Rewrite (URL bleibt sichtbar, /index.html
-# wird ausgeliefert). Das Quiz liest den Slug aus dem Pfad und ordnet den Lead zu.
+# wird ausgeliefert). Splat (*) fängt /team/{slug} und /team/{slug}/analyse.
+# Das Quiz liest den Slug aus dem Pfad und ordnet den Lead zu.
+# Hinweis: Dieselbe Regel liegt zur Sicherheit auch in deploy/_redirects,
+# weil die Root-netlify.toml je nach Deploy-Weg (CLI) nicht immer greift.
 [[redirects]]
-  from = "/team/:slug/analyse"
-  to = "/index.html"
-  status = 200
-
-# Nackter Partner-Pfad /team/{slug} zeigt vorerst ebenfalls die Analyse
-# (Stufe 0). In Stufe 2 wird hier die editierbare Partner-Landingpage ausgeliefert.
-[[redirects]]
-  from = "/team/:slug"
+  from = "/team/*"
   to = "/index.html"
   status = 200
 
