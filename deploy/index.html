@@ -2023,7 +2023,7 @@
     scrollTop();
     // Plausible-Event: Analyse gestartet (Klick auf "Analyse starten")
     if (typeof plausible === 'function') {
-      plausible('Analyse gestartet');
+      plausible('Analyse gestartet', { props: { partner: PARTNER.slug } });
     }
   }
 
@@ -2128,7 +2128,7 @@
 
     // Plausible-Event (Conversion-Tracking), falls Script geladen
     if (typeof plausible === 'function') {
-      plausible('quiz-submitted', { props: { goal: rType } });
+      plausible('quiz-submitted', { props: { goal: rType, partner: PARTNER.slug } });
     }
 
     // Result-Daten und Labels für die E-Mail zusammenstellen (damit die Function
@@ -2379,7 +2379,7 @@
 
     // Plausible-Event: Analyse abgeschlossen (Ergebnis-/Danke-Seite erreicht)
     if (typeof plausible === 'function') {
-      plausible('Analyse abgeschlossen', { props: { goal: type } });
+      plausible('Analyse abgeschlossen', { props: { goal: type, partner: PARTNER.slug } });
     }
 
     const name = document.getElementById('inp-name').value.trim();
