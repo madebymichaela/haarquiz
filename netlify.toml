@@ -62,15 +62,25 @@
   to = "/"
   status = 301
 
-# ── Partner-Funnel: /team/... ────────────────────────────────────────
-# Mehr-Partner-Funnel. status=200 = Rewrite (URL bleibt sichtbar, /index.html
-# wird ausgeliefert). Splat (*) fängt /team/{slug} und /team/{slug}/analyse.
-# Das Quiz liest den Slug aus dem Pfad und ordnet den Lead zu.
-# Hinweis: Dieselbe Regel liegt zur Sicherheit auch in deploy/_redirects,
-# weil die Root-netlify.toml je nach Deploy-Weg (CLI) nicht immer greift.
+# ── Partner-Funnel + Landingpages: /team/... ─────────────────────────
+# Reihenfolge zaehlt (erste passende Regel gewinnt). status=200 = Rewrite,
+# die URL bleibt sichtbar. Dieselben Regeln liegen zur Sicherheit auch in
+# deploy/_redirects, weil die Root-netlify.toml je nach Deploy-Weg nicht greift.
+#
+# 1) Quiz-Funnel der Partnerin (unveraendert).
 [[redirects]]
-  from = "/team/*"
+  from = "/team/:slug/analyse"
   to = "/index.html"
+  status = 200
+# 2) Partner-Landingpage (server-seitig aus Airtable gerendert).
+[[redirects]]
+  from = "/team/:slug"
+  to = "/.netlify/functions/landingpage?slug=:slug"
+  status = 200
+# 3) Team-Uebersicht.
+[[redirects]]
+  from = "/team"
+  to = "/.netlify/functions/landingpage"
   status = 200
 
 # ── API-Rewrite zur Netlify Function ─────────────────────────────────
@@ -80,3 +90,14 @@
   from = "/api/submit-quiz"
   to = "/.netlify/functions/submit-quiz"
   status = 200
+
+# ── Netlify Image CDN: erlaubte Fremd-Bildquellen ────────────────────
+# Die Partner-Landingpage liefert Bilder ueber /.netlify/images aus.
+# Airtable-Anhaenge (temporaere URLs) muessen hier freigegeben sein.
+# Spaeter (Editor) werden Bilder in Netlify Blobs kopiert -> dann kann
+# die Airtable-Domain hier wieder raus.
+[images]
+  remote_images = [
+    "https://v5.airtableusercontent.com/.*",
+    "https://dl.airtable.com/.*"
+  ]

@@ -1,4 +1,9 @@
 # Netlify-Redirects — werden im Publish-Ordner IMMER gelesen (jeder Deploy-Weg).
-# Mehr-Partner-Funnel: /team/{slug} und /team/{slug}/analyse liefern das Quiz aus.
-# 200 = Rewrite, die URL bleibt sichtbar; das Quiz liest den Slug aus dem Pfad.
-/team/*    /index.html    200
+# Reihenfolge zaehlt: erste passende Regel gewinnt.
+#
+# 1) Quiz-Funnel der Partnerin (unveraendert): /team/{slug}/analyse -> Quiz.
+/team/:slug/analyse   /index.html                                   200
+# 2) Partner-Landingpage (server-seitig aus Airtable gerendert).
+/team/:slug           /.netlify/functions/landingpage?slug=:slug    200
+# 3) Team-Uebersicht.
+/team                 /.netlify/functions/landingpage               200
