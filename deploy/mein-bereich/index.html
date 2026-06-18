@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Mein Bereich · Haar-Analyse</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--primary:#735a31;--primary-hover:#5e4927;--container:#d4b483;--surface:#faf9f6;--low:#f4f3f1;--ink:#1a1c1a;--soft:#4d463b;--line:#d1c5b7}
+  body{font-family:'Montserrat',sans-serif;background:var(--surface);color:var(--ink);line-height:1.55}
+  h1,h2{font-family:'EB Garamond',serif;font-weight:600}
+  .wrap{max-width:680px;margin:0 auto;padding:24px 18px 80px}
+  header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  header h1{font-size:26px}
+  .muted{color:var(--soft);font-size:13px}
+  .pill{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;margin-right:6px}
+  .pill.ok{background:#d8ead8;color:#2f5d2f}.pill.warn{background:#f6dada;color:#8a2b2b}.pill.grey{background:#e7e2da;color:#4d463b}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:16px}
+  label{display:block;font-size:13px;font-weight:600;margin:12px 0 4px}
+  input,textarea,select{width:100%;font-family:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
+  textarea{min-height:84px;resize:vertical}
+  .row{display:flex;gap:10px}.row>div{flex:1}
+  .btn{background:var(--primary);color:#fff;border:none;font-family:inherit;font-weight:600;font-size:15px;padding:12px 22px;border-radius:999px;cursor:pointer}
+  .btn:hover{background:var(--primary-hover)}
+  .btn.ghost{background:transparent;color:var(--primary);border:1.5px solid var(--container)}
+  .btn.sm{font-size:13px;padding:7px 12px}
+  .sektion{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px;background:var(--low)}
+  .sektion .head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+  .savebar{position:sticky;bottom:0;background:rgba(250,249,246,.95);backdrop-filter:blur(6px);border-top:1px solid var(--line);padding:14px 18px;margin:24px -18px -80px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .result{font-size:13px;white-space:pre-wrap;padding:10px 12px;border-radius:9px;margin-top:10px;display:none}
+  .result.ok{background:#d8ead8;color:#2f5d2f;display:block}
+  .result.warn{background:#f6dada;color:#8a2b2b;display:block}
+  .result.info{background:#e7e2da;color:#4d463b;display:block}
+  #gate{text-align:center;padding:70px 20px}
+  #app{display:none}
+  .hint{font-size:12px;color:var(--soft);margin-top:4px}
+  a{color:var(--primary)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="gate">
+    <h1 style="font-size:30px;margin-bottom:10px">Mein Bereich</h1>
+    <p class="muted" style="margin-bottom:22px">Melde dich an, um deine Landingpage zu bearbeiten.</p>
+    <button class="btn" onclick="netlifyIdentity.open()">Anmelden</button>
+  </div>
+
+  <div id="app">
+    <header>
+      <h1>Meine Landingpage</h1>
+      <button class="btn ghost sm" onclick="netlifyIdentity.logout()">Abmelden</button>
+    </header>
+    <div id="status" class="muted" style="margin-bottom:4px"></div>
+    <div id="previewline" class="muted"></div>
+
+    <div class="card">
+      <h2 style="font-size:20px">Profil</h2>
+      <label>Anzeigename <span class="muted">(z.B. Franzi)</span></label>
+      <input id="Anzeigename" placeholder="Dein Vorname auf der Seite">
+      <label>Rolle</label>
+      <input id="Rolle" placeholder="MONAT Markenpartnerin">
+      <label>Intro <span class="muted">(kurzer Hero-Text)</span></label>
+      <textarea id="Intro" placeholder="Ein, zwei Sätze, die dich und dein Angebot vorstellen."></textarea>
+      <label>Über mich</label>
+      <textarea id="ueber" placeholder="Erzähl etwas über dich."></textarea>
+      <label>Instagram-Link <span class="muted">(optional)</span></label>
+      <input id="Instagram" placeholder="https://www.instagram.com/...">
+      <p class="hint">Profilfoto &amp; Titelbild legt aktuell Michaela in Airtable an (Self-Upload kommt als Nächstes).</p>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size:20px">Inhaltsblöcke</h2>
+      <p class="hint">Füge Blöcke hinzu, sortiere sie, lösche sie. Das Layout ist überall gleich.</p>
+      <div id="sektionen"></div>
+      <button class="btn ghost sm" style="margin-top:12px" onclick="addSektion()">+ Block hinzufügen</button>
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <div class="savebar">
+      <button class="btn" id="saveBtn" onclick="save()">Speichern &amp; prüfen</button>
+      <a class="btn ghost sm" id="previewBtn" href="#" target="_blank">Vorschau</a>
+      <span class="muted" id="savehint">Nach dem Speichern prüft die KI deinen Text. Freigeschaltet wird durch Michaela.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const TYPEN = ['Text + Button','Bild + Text','Vorher/Nachher','Zitat'];
+let SLUG = '';
+
+function el(id){return document.getElementById(id)}
+async function jwt(){ const u = netlifyIdentity.currentUser(); return u ? await u.jwt() : null; }
+
+function sektionHTML(s, i){
+  const opts = TYPEN.map(t=>`<option ${s.Typ===t?'selected':''}>${t}</option>`).join('');
+  return `<div class="sektion" data-id="${s.id||''}">
+    <div class="head">
+      <select class="s-typ">${opts}</select>
+      <span>
+        <button class="btn ghost sm" onclick="moveSektion(${i},-1)">↑</button>
+        <button class="btn ghost sm" onclick="moveSektion(${i},1)">↓</button>
+        <button class="btn ghost sm" onclick="delSektion(${i})">✕</button>
+      </span>
+    </div>
+    <label>Titel</label><input class="s-titel" value="${(s.Titel||'').replace(/"/g,'&quot;')}">
+    <label>Text</label><textarea class="s-text">${s.Text||''}</textarea>
+    <div class="row">
+      <div><label>Button-Text</label><input class="s-blabel" value="${(s['Button-Label']||'').replace(/"/g,'&quot;')}"></div>
+      <div><label>Button-Link</label><input class="s-blink" value="${(s['Button-Link']||'').replace(/"/g,'&quot;')}"></div>
+    </div>
+    <p class="hint">Tipp: Als Button-Link für die Haaranalyse <code>/team/${SLUG}/analyse</code> verwenden.</p>
+  </div>`;
+}
+let SEKT = [];
+function renderSekt(){ el('sektionen').innerHTML = SEKT.map((s,i)=>sektionHTML(s,i)).join(''); }
+function collectSekt(){
+  const nodes = [...document.querySelectorAll('.sektion')];
+  SEKT = nodes.map(n=>({
+    id: n.dataset.id || undefined,
+    Typ: n.querySelector('.s-typ').value,
+    Titel: n.querySelector('.s-titel').value,
+    Text: n.querySelector('.s-text').value,
+    'Button-Label': n.querySelector('.s-blabel').value,
+    'Button-Link': n.querySelector('.s-blink').value,
+    Aktiv: true,
+  }));
+}
+function addSektion(){ collectSekt(); SEKT.push({Typ:'Text + Button',Titel:'',Text:'',['Button-Label']:'',['Button-Link']:''}); renderSekt(); }
+function delSektion(i){ collectSekt(); SEKT.splice(i,1); renderSekt(); }
+function moveSektion(i,d){ collectSekt(); const j=i+d; if(j<0||j>=SEKT.length)return; [SEKT[i],SEKT[j]]=[SEKT[j],SEKT[i]]; renderSekt(); }
+
+function showResult(cls,msg){ const r=el('result'); r.className='result '+cls; r.textContent=msg; }
+
+async function load(){
+  el('gate').style.display='none'; el('app').style.display='block';
+  const t = await jwt();
+  const res = await fetch('/.netlify/functions/partner-me',{headers:{Authorization:'Bearer '+t}});
+  if(!res.ok){ const e=await res.json().catch(()=>({})); showResult('warn', e.error||'Konnte nicht laden.'); return; }
+  const d = await res.json();
+  const p = d.partner; SLUG = p.slug;
+  el('Anzeigename').value = p.Anzeigename || '';
+  el('Rolle').value = p.Rolle || '';
+  el('Intro').value = p.Intro || '';
+  el('ueber').value = p['Über mich'] || '';
+  el('Instagram').value = p.Instagram || '';
+  SEKT = d.sektionen || []; renderSekt();
+  const lp = p['LP-Status']||'Entwurf', cs = p['Compliance-Status']||'Ungeprüft';
+  const lpCls = lp==='Freigegeben'?'ok':'grey', csCls = cs==='OK'?'ok':(cs==='Warnung'?'warn':'grey');
+  el('status').innerHTML = `<span class="pill ${lpCls}">${lp}</span><span class="pill ${csCls}">Compliance: ${cs}</span>`;
+  el('previewline').innerHTML = SLUG ? `Deine Seite: <a href="/team/${SLUG}" target="_blank">haar-analyse.ch/team/${SLUG}</a>` : '';
+  el('previewBtn').href = SLUG ? '/team/'+SLUG : '#';
+  if(p['Compliance-Notiz'] && cs==='Warnung') showResult('warn', p['Compliance-Notiz']);
+}
+
+async function save(){
+  collectSekt();
+  el('saveBtn').disabled = true; el('saveBtn').textContent = 'Speichere…';
+  showResult('info','Speichere und prüfe…');
+  const t = await jwt();
+  const payload = { partner: {
+    Anzeigename: el('Anzeigename').value, Rolle: el('Rolle').value,
+    Intro: el('Intro').value, 'Über mich': el('ueber').value, Instagram: el('Instagram').value,
+  }, sektionen: SEKT };
+  try{
+    const res = await fetch('/.netlify/functions/partner-save',{method:'POST',headers:{Authorization:'Bearer '+t,'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const d = await res.json();
+    if(!res.ok){ showResult('warn', d.error||'Speichern fehlgeschlagen.'); }
+    else {
+      const c = d.compliance||{};
+      if(c.status==='OK') showResult('ok','Gespeichert. Compliance: OK. Michaela schaltet deine Seite frei.');
+      else if(c.status==='Warnung') showResult('warn','Gespeichert, aber bitte anpassen:\n'+(c.notiz||''));
+      else showResult('info','Gespeichert. '+(c.notiz||''));
+      await load();
+    }
+  }catch(e){ showResult('warn','Netzwerkfehler. Bitte erneut versuchen.'); }
+  el('saveBtn').disabled=false; el('saveBtn').textContent='Speichern & prüfen';
+}
+
+netlifyIdentity.on('init', u=>{ if(u) load(); });
+netlifyIdentity.on('login', ()=>{ netlifyIdentity.close(); load(); });
+netlifyIdentity.on('logout', ()=>{ el('app').style.display='none'; el('gate').style.display='block'; });
+netlifyIdentity.init();
+</script>
+</body>
+</html>
