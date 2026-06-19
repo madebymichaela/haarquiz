@@ -274,7 +274,7 @@ export const handler = async (event) => {
     const sektIds = partner.fields['Sektionen'] || [];
     let sektionen = [];
     if (sektIds.length) {
-      const all = await atList(T_SEKT, `pageSize=200&sort%5B0%5D%5Bfield%5D=Reihenfolge&sort%5B0%5D%5Bdirection%5D=asc`);
+      const all = await atList(T_SEKT, `pageSize=100&sort%5B0%5D%5Bfield%5D=Reihenfolge&sort%5B0%5D%5Bdirection%5D=asc`);
       const idset = new Set(sektIds);
       sektionen = all.filter(s => idset.has(s.id) && (s.fields['Aktiv'] === true || s.fields['Aktiv'] === undefined));
     }

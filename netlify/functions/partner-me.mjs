@@ -34,7 +34,8 @@ export const handler = async (event, context) => {
     let sektionen = [];
     const ids = f['Sektionen'] || [];
     if (ids.length) {
-      const all = await atList(T_SEKT, `pageSize=200&sort%5B0%5D%5Bfield%5D=Reihenfolge&sort%5B0%5D%5Bdirection%5D=asc`);
+      try {
+      const all = await atList(T_SEKT, `pageSize=100&sort%5B0%5D%5Bfield%5D=Reihenfolge&sort%5B0%5D%5Bdirection%5D=asc`);
       const set = new Set(ids);
       sektionen = all.filter(s => set.has(s.id)).map(s => ({
         id: s.id,
@@ -48,6 +49,7 @@ export const handler = async (event, context) => {
         Bild: firstUrl(s.fields['Bild']),
         'Bild 2': firstUrl(s.fields['Bild 2']),
       }));
+      } catch (e) { sektionen = []; }
     }
 
     return json(200, {
