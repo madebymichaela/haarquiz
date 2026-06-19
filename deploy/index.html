@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Identity-Tokens (Einladung / Passwort-Reset) landen auf der Startseite —
+       hier sofort zum Login-Bereich /mein-bereich/ weiterleiten, der das Widget hat. -->
+  <script>
+    (function(){
+      var h = window.location.hash || '';
+      if (/(invite_token|recovery_token|confirmation_token|email_change_token)=/.test(h)) {
+        window.location.replace('/mein-bereich/' + h);
+      }
+    })();
+  </script>
   <title>Dein Haar-Moment · MONAT Academy</title>
   <meta name="description" content="In 2 Minuten eine persönliche, ehrliche Pflege-Empfehlung für dein Haar — ohne Verkaufsdruck, ganz auf dich zugeschnitten." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />

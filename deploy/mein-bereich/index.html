@@ -46,6 +46,10 @@
     <h1 style="font-size:30px;margin-bottom:10px">Mein Bereich</h1>
     <p class="muted" style="margin-bottom:22px">Melde dich an, um deine Landingpage zu bearbeiten.</p>
     <button class="btn" onclick="netlifyIdentity.open()">Anmelden</button>
+    <p class="muted" style="max-width:380px;margin:20px auto 0;font-size:12px;line-height:1.6">
+      <strong>Zum ersten Mal hier?</strong> Du hast per E-Mail eine Einladung bekommen. Klick den Link darin,
+      setze ein eigenes Passwort, und du bist drin. Danach meldest du dich hier immer mit deiner E-Mail und diesem Passwort an.
+    </p>
   </div>
 
   <div id="app">
@@ -180,7 +184,10 @@ async function save(){
   el('saveBtn').disabled=false; el('saveBtn').textContent='Speichern & prüfen';
 }
 
-netlifyIdentity.on('init', u=>{ if(u) load(); });
+netlifyIdentity.on('init', u=>{
+  if(u){ load(); }
+  else if(/(invite_token|recovery_token)=/.test(location.hash)){ netlifyIdentity.open(); }
+});
 netlifyIdentity.on('login', ()=>{ netlifyIdentity.close(); load(); });
 netlifyIdentity.on('logout', ()=>{ el('app').style.display='none'; el('gate').style.display='block'; });
 netlifyIdentity.init();
