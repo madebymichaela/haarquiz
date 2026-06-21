@@ -1981,7 +1981,7 @@
 </div>
 
 <footer>
-  <p>© 2026 · MONAT Academy · <a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a> · <a href="mailto:info@haar-analyse.ch">Kontakt</a></p>
+  <p>© 2026 · MONAT Academy · <a id="footer-impressum" href="/impressum">Impressum</a> · <a id="footer-datenschutz" href="/datenschutz">Datenschutz</a> · <a href="mailto:info@haar-analyse.ch">Kontakt</a></p>
 </footer>
 
 <!-- ═══════════ JAVASCRIPT ═══════════ -->
@@ -1995,6 +1995,15 @@
     const m = window.location.pathname.match(/\/team\/([^\/]+)/i);
     const slug = m ? m[1].trim().toLowerCase() : 'michaela-antoniadis';
     return { slug, first: 'Michaela', wa: '41767587551' };
+  })();
+
+  // Footer-Rechtslinks partner-bewusst setzen: verantwortliche Stelle ist die
+  // Partnerin der jeweiligen Seite, nicht pauschal Michaela.
+  (function () {
+    const imp = document.getElementById('footer-impressum');
+    const ds  = document.getElementById('footer-datenschutz');
+    if (imp) imp.href = '/team/' + PARTNER.slug + '/impressum';
+    if (ds)  ds.href  = '/team/' + PARTNER.slug + '/datenschutz';
   })();
 
   // State

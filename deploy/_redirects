@@ -2,8 +2,18 @@
 # Reihenfolge zaehlt: erste passende Regel gewinnt.
 #
 # 1) Quiz-Funnel der Partnerin (unveraendert): /team/{slug}/analyse -> Quiz.
-/team/:slug/analyse   /index.html                                   200
+/team/:slug/analyse        /index.html                                              200
+# 1b) Partner-bewusste Rechtsseiten (recht.mjs) — VOR der Landingpage-Regel.
+/team/:slug/impressum      /.netlify/functions/recht?doc=impressum&slug=:slug       200
+/team/:slug/datenschutz    /.netlify/functions/recht?doc=datenschutz&slug=:slug     200
 # 2) Partner-Landingpage (server-seitig aus Airtable gerendert).
-/team/:slug           /.netlify/functions/landingpage?slug=:slug    200
+/team/:slug                /.netlify/functions/landingpage?slug=:slug               200
 # 3) Team-Uebersicht.
-/team                 /.netlify/functions/landingpage               200
+/team                      /.netlify/functions/landingpage                          200
+
+# 4) Rechtsseiten ohne Slug (nackte Domain -> Default Michaela). Eine Quelle: recht.mjs.
+#    .html mit ! (force), damit die alten statischen Dateien ueberschrieben werden.
+/impressum                 /.netlify/functions/recht?doc=impressum                  200
+/datenschutz               /.netlify/functions/recht?doc=datenschutz                200
+/impressum.html            /.netlify/functions/recht?doc=impressum                  200!
+/datenschutz.html          /.netlify/functions/recht?doc=datenschutz                200!

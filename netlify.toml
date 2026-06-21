@@ -72,11 +72,42 @@
   from = "/team/:slug/analyse"
   to = "/index.html"
   status = 200
+# 1b) Partner-bewusste Rechtsseiten (server-seitig, recht.mjs). VOR der Landingpage-Regel.
+[[redirects]]
+  from = "/team/:slug/impressum"
+  to = "/.netlify/functions/recht?doc=impressum&slug=:slug"
+  status = 200
+[[redirects]]
+  from = "/team/:slug/datenschutz"
+  to = "/.netlify/functions/recht?doc=datenschutz&slug=:slug"
+  status = 200
 # 2) Partner-Landingpage (server-seitig aus Airtable gerendert).
 [[redirects]]
   from = "/team/:slug"
   to = "/.netlify/functions/landingpage?slug=:slug"
   status = 200
+
+# ── Rechtsseiten ohne Slug (nackte Domain -> Default Michaela) ────────
+# Eine Quelle (recht.mjs) fuer alle Impressum/Datenschutz-Seiten. Die alten
+# statischen /impressum.html und /datenschutz.html werden per force ueberschrieben.
+[[redirects]]
+  from = "/impressum"
+  to = "/.netlify/functions/recht?doc=impressum"
+  status = 200
+[[redirects]]
+  from = "/datenschutz"
+  to = "/.netlify/functions/recht?doc=datenschutz"
+  status = 200
+[[redirects]]
+  from = "/impressum.html"
+  to = "/.netlify/functions/recht?doc=impressum"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/datenschutz.html"
+  to = "/.netlify/functions/recht?doc=datenschutz"
+  status = 200
+  force = true
 # 3) Team-Uebersicht.
 [[redirects]]
   from = "/team"

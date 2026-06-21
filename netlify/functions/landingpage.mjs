@@ -180,7 +180,7 @@ function renderLanding(partner, sektionen, slug) {
   </main>
   <footer>
     <div class="wrap">
-      © ${new Date().getFullYear()} · ${esc(name)} · <a href="/impressum.html">Impressum &amp; Datenschutz</a>
+      © ${new Date().getFullYear()} · ${esc(name)} · <a href="/team/${esc(slug)}/impressum">Impressum</a> &amp; <a href="/team/${esc(slug)}/datenschutz">Datenschutz</a>
       <p class="disclaimer">Diese Seite wird von einer unabhängigen MONAT Markenpartnerin betrieben und ist keine offizielle MONAT-Website.</p>
     </div>
   </footer>`;

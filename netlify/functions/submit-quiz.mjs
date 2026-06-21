@@ -397,7 +397,7 @@ function customerHtml({ partner, name, email, result, labels, multiGoals, allerg
 
     <!-- Footer -->
     <div style="text-align:center;padding:28px 20px 0;font-size:12px;color:#55605a;">
-      MONAT Academy · <a href="https://haar-analyse.ch/impressum.html" style="color:#1d6a63;text-decoration:none;">Impressum</a> · <a href="https://haar-analyse.ch/datenschutz.html" style="color:#1d6a63;text-decoration:none;">Datenschutz</a>
+      MONAT Academy · <a href="https://haar-analyse.ch/team/${partner.slug}/impressum" style="color:#1d6a63;text-decoration:none;">Impressum</a> · <a href="https://haar-analyse.ch/team/${partner.slug}/datenschutz" style="color:#1d6a63;text-decoration:none;">Datenschutz</a>
     </div>
   </div>
 </body></html>`;
@@ -463,8 +463,8 @@ Herzlich, ${partner.first}
 
 —
 MONAT Academy
-Impressum:    https://haar-analyse.ch/impressum.html
-Datenschutz:  https://haar-analyse.ch/datenschutz.html`;
+Impressum:    https://haar-analyse.ch/team/${partner.slug}/impressum
+Datenschutz:  https://haar-analyse.ch/team/${partner.slug}/datenschutz`;
 }
 
 // Telefonnummer auf internationales Format bringen (Schweiz: 0XX → 41XX, +41XX → 41XX)
