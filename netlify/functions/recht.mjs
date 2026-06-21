@@ -231,36 +231,27 @@ function renderDatenschutz(p) {
     <h3>Speicherdauer</h3>
     <p>Deine Daten werden so lange gespeichert, wie dies für die Beantwortung und eine allfällige Folgekommunikation erforderlich ist, höchstens jedoch 12 Monate — sofern du nicht in eine längere Aufbewahrung einwilligst (etwa im Rahmen einer Kundenbetreuung nach einem Kauf).</p>
 
-    <h2>4. E-Mail-Versand (Resend)</h2>
-    <p>Für den automatischen Versand der Bestätigungs-E-Mail (an dich) und der Lead-Benachrichtigung (an die Markenpartnerin, deren Seite du genutzt hast) wird der Dienst <strong>Resend</strong> (Resend, Inc., USA) als Auftragsverarbeiter eingesetzt. Der Versand erfolgt über Server in der EU (AWS Ireland). Resend ist nach dem EU-U.S. Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">resend.com/legal/privacy-policy</a>.</p>
-
-    <h2>5. Lead-Datenbank (Airtable)</h2>
-    <p>Damit deine Beraterin deine Anfrage strukturiert nachvollziehen und beantworten kann, wird dein Analyse-Eintrag in einer Airtable-Datenbank (Formagrid, Inc., USA) gespeichert: Vorname, E-Mail-Adresse, deine Analyse-Antworten, Eingangsdatum.</p>
+    <h2>4. Dienstleister (Auftragsverarbeiter)</h2>
+    <p>Für Betrieb, Hosting, Datenbank, E-Mail-Versand sowie das Laden von Schriftarten und einer Bild-Funktion setzen wir spezialisierte Dienstleister als Auftragsverarbeiter ein. Dabei werden technisch notwendige Daten (z.B. IP-Adresse, Zeitpunkt, Browser) und — bei Datenbank und E-Mail — deine Analyse-Angaben verarbeitet. Ein Teil dieser Dienstleister verarbeitet Daten in den <strong>USA</strong>; für diese Übermittlung bestehen anerkannte Garantien (EU-U.S. Data Privacy Framework bzw. EU-Standardvertragsklauseln).</p>
     <div class="highlight">
       <strong>Wer Zugriff hat</strong>
-      Andere Markenpartnerinnen haben keinen Zugriff auf deinen Eintrag. Die ${MIBO.name} betreibt das System technisch und hat als Auftragsverarbeiterin administrativen Zugriff, soweit das für Betrieb, Wartung und Support nötig ist. Sie ist zur Vertraulichkeit verpflichtet und verwendet deine Daten nicht für eigene Zwecke.
+      Deine Analyse-Daten sind nur deiner Beraterin zugänglich — andere Markenpartnerinnen haben keinen Zugriff. Die ${MIBO.name} betreibt das System technisch und hat als Auftragsverarbeiterin administrativen Zugriff, soweit das für Betrieb und Support nötig ist. Sie ist zur Vertraulichkeit verpflichtet und verwendet deine Daten nicht für eigene Zwecke.
     </div>
-    <p>Airtable ist nach dem EU-U.S. Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://airtable.com/privacy" target="_blank" rel="noopener">airtable.com/privacy</a>.</p>
+    <p>Die konkret eingesetzten Dienstleister nennen wir dir auf Anfrage jederzeit.</p>
 
-    <h2>6. Hosting (Netlify)</h2>
-    <p>Diese Website wird bei <strong>Netlify, Inc.</strong> (USA) gehostet. Beim Aufruf werden technisch notwendige Informationen (IP-Adresse, Zeitpunkt, aufgerufene Seite, Browser/Betriebssystem) temporär verarbeitet. Netlify ist nach dem EU-U.S. Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">netlify.com/privacy</a>.</p>
-
-    <h2>7. Schriftarten und Bibliotheken (Google Fonts, Cloudflare)</h2>
-    <p>Die Schriftarten <em>Lexend</em> und <em>Plus Jakarta Sans</em> werden über Google Fonts (Google LLC, USA) geladen; dabei wird deine IP-Adresse an Google übertragen. Für die Bildfunktion der Analyse wird die Open-Source-Bibliothek html2canvas über das Cloudflare-CDN geladen. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google</a>, <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare</a>.</p>
-
-    <h2>8. Cookies und Browser-Speicher</h2>
+    <h2>5. Cookies und Browser-Speicher</h2>
     <p>Diese Website setzt <strong>keine Cookies</strong> und speichert keine Daten in deinem Browser. Deine Analyse-Antworten existieren nur während der aktuellen Sitzung im Arbeitsspeicher und werden erst beim aktiven Absenden übertragen.</p>
 
-    <h2>9. Reichweiten-Messung (Plausible)</h2>
-    <p>Diese Website nutzt <strong>Plausible Analytics</strong> (Plausible Insights OÜ, Estland), eine datenschutzfreundliche Lösung, die in der EU gehostet wird: keine Cookies, keine IP-Speicherung, kein Nutzer-Profil, kein Cross-Site-Tracking. Erfasst werden nur aggregierte, anonyme Statistiken. Rechtsgrundlage: berechtigtes Interesse (DSG Art. 31 Abs. 2 lit. b, DSGVO Art. 6 Abs. 1 lit. f).</p>
+    <h2>6. Reichweiten-Messung</h2>
+    <p>Diese Website nutzt eine <strong>datenschutzfreundliche, cookie-freie Reichweiten-Messung</strong>, die in der EU gehostet wird und keine personenbezogenen Daten speichert: keine Cookies, keine IP-Speicherung, kein Nutzer-Profil, kein Cross-Site-Tracking. Erfasst werden nur aggregierte, anonyme Statistiken. Rechtsgrundlage: berechtigtes Interesse (DSG Art. 31 Abs. 2 lit. b, DSGVO Art. 6 Abs. 1 lit. f).</p>
 
-    <h2>10. Deine Rechte</h2>
+    <h2>7. Deine Rechte</h2>
     <p>Du hast jederzeit das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Widerruf einer Einwilligung sowie Datenübertragbarkeit. Deine Anfrage richtest du an deine Beraterin: <a href="mailto:${esc(p.email)}">${esc(p.email)}</a>. Bei rein technischen Anliegen erreichst du die Plattform unter <a href="mailto:${MIBO.mail}">${MIBO.mail}</a>. Zusätzlich hast du das Recht, dich beim <a href="https://www.edoeb.admin.ch" target="_blank" rel="noopener">EDÖB</a> zu beschweren.</p>
 
-    <h2>11. Externe Links</h2>
+    <h2>8. Externe Links</h2>
     <p>Diese Website verlinkt auf externe Dienste (insbesondere Instagram und Produktseiten von MONAT Global Corp.). Für die Datenverarbeitung auf diesen Seiten sind deren Betreiber verantwortlich.</p>
 
-    <h2>12. Anpassungen</h2>
+    <h2>9. Anpassungen</h2>
     <p>Diese Erklärung kann angepasst werden, um aktuellen rechtlichen oder technischen Anforderungen gerecht zu werden. Die aktuelle Fassung ist jederzeit über diese Seite abrufbar.</p>
 
     <p class="updated">Verantwortliche Stelle: ${esc(p.name)} &middot; Auftragsverarbeiterin: ${MIBO.name} &middot; Stand: ${stand()}</p>`;
