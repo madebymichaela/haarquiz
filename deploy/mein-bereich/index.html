@@ -156,7 +156,7 @@ async function load(){
   const lpCls = lp==='Freigegeben'?'ok':'grey', csCls = cs==='OK'?'ok':(cs==='Warnung'?'warn':'grey');
   el('status').innerHTML = `<span class="pill ${lpCls}">${lp}</span><span class="pill ${csCls}">Compliance: ${cs}</span>`;
   el('previewline').innerHTML = SLUG ? `Deine Seite: <a href="/team/${SLUG}" target="_blank">haar-analyse.ch/team/${SLUG}</a>` : '';
-  el('previewBtn').href = SLUG ? '/team/'+SLUG : '#';
+  el('previewBtn').href = SLUG ? '/team/'+SLUG+'?preview=1' : '#';
   if(p['Compliance-Notiz'] && cs==='Warnung') showResult('warn', p['Compliance-Notiz']);
 }
 

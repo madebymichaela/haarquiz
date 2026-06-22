@@ -143,7 +143,7 @@ function renderSection(f) {
   return `<section class="blk">${titel}${text}${btn}</section>`;
 }
 
-function renderLanding(partner, sektionen, slug) {
+function renderLanding(partner, sektionen, slug, isDraft) {
   const f = partner.fields;
   const name  = f['Anzeigename'] || f['Vorname'] || 'MONAT Beraterin';
   const rolle = f['Rolle'] || 'MONAT Markenpartnerin';
@@ -157,6 +157,7 @@ function renderLanding(partner, sektionen, slug) {
   const blocks = sektionen.map(s => renderSection(s.fields)).join('\n');
 
   const body = `
+  ${isDraft ? '<div style="background:#8a5a00;color:#fff;text-align:center;padding:10px 16px;font-family:Montserrat,sans-serif;font-size:13px">Vorschau – diese Seite ist noch nicht veröffentlicht. Öffentlich sichtbar wird sie erst nach der Freigabe.</div>' : ''}
   <div class="hero">
     <div class="hero-bg" ${heroBg ? `style="background-image:url('${heroBg}')"` : ''}></div>
     ${photo ? `<img class="hero-photo" src="${photo}" alt="${esc(name)}">` : '<div class="hero-photo"></div>'}
@@ -259,16 +260,22 @@ export const handler = async (event) => {
       return { statusCode: 200, headers: htmlHeaders, body: renderOverview(partners) };
     }
 
+    const preview = qs.preview === '1' || qs.preview === 'true';
+
     const found = await atList(T_PARTNER,
       `maxRecords=1&filterByFormula=${encodeURIComponent(`LOWER({Slug})='${slug.replace(/'/g, '')}'`)}`);
     const partner = found[0];
     const lpStatus = partner && ((partner.fields['LP-Status'] && partner.fields['LP-Status'].name) || partner.fields['LP-Status']);
 
-    if (!partner || lpStatus !== 'Freigegeben') {
-      // Noch keine freigegebene Landingpage -> wie bisher direkt zum Quiz
-      // (nicht-brechend: bestehende /team/{slug}-Links fuehren weiter zur Analyse).
+    // Unbekannter Slug -> wie bisher zum Quiz.
+    if (!partner) {
       return { statusCode: 302, headers: { Location: `/team/${encodeURIComponent(slug)}/analyse`, 'Cache-Control': 'no-cache' } };
     }
+    // Nicht freigegeben: oeffentlich zum Quiz weiterleiten — ABER im Vorschau-Modus den Entwurf zeigen.
+    if (lpStatus !== 'Freigegeben' && !preview) {
+      return { statusCode: 302, headers: { Location: `/team/${encodeURIComponent(slug)}/analyse`, 'Cache-Control': 'no-cache' } };
+    }
+    const isDraft = lpStatus !== 'Freigegeben';
 
     // Verknuepfte Sektionen laden (ueber den Rueck-Link "Sektionen" am Partner).
     const sektIds = partner.fields['Sektionen'] || [];
@@ -279,7 +286,10 @@ export const handler = async (event) => {
       sektionen = all.filter(s => idset.has(s.id) && (s.fields['Aktiv'] === true || s.fields['Aktiv'] === undefined));
     }
 
-    return { statusCode: 200, headers: htmlHeaders, body: renderLanding(partner, sektionen, slug) };
+    const headers = isDraft
+      ? { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' }
+      : htmlHeaders;
+    return { statusCode: 200, headers, body: renderLanding(partner, sektionen, slug, isDraft) };
   } catch (err) {
     return { statusCode: 502, headers: htmlHeaders, body: pageShell({ title: 'Fehler', desc: '', body: `<p style="padding:40px">Die Seite konnte gerade nicht geladen werden. Bitte später erneut versuchen.</p>` }) };
   }
