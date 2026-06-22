@@ -220,7 +220,7 @@ function renderDatenschutz(p) {
     <p>Es werden nur die Personendaten verarbeitet, die für die unten genannten Zwecke nötig sind. Deine Daten werden nicht zu Werbezwecken an Dritte weitergegeben oder verkauft.</p>
 
     <h2>3. Haaranalyse und Kontaktformular</h2>
-    <p>Wenn du die Haaranalyse ausfüllst und deine Kontaktdaten angibst, werden folgende Daten erhoben: Vorname (freiwillig), E-Mail-Adresse, optional Telefonnummer sowie deine Angaben zu Haarstruktur, Haartyp, Kopfhaut, Gewohnheiten und Pflege-Zielen.</p>
+    <p>Wenn du die Haaranalyse ausfüllst, werden folgende Daten erhoben: Vorname, E-Mail-Adresse und Mobilnummer (für die Beratung per WhatsApp) — diese drei sind Pflichtangaben — sowie deine Angaben zu Haarstruktur, Haartyp, Kopfhaut, Gewohnheiten und Pflege-Zielen.</p>
     <div class="highlight">
       <strong>Zweck</strong>
       Die Daten werden ausschliesslich dazu verwendet, dir eine persönliche, unverbindliche Produkt-Empfehlung durch ${esc(p.first)} zukommen zu lassen — in der Regel per Sprachnachricht via Instagram oder per E-Mail.
