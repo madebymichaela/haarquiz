@@ -1758,7 +1758,7 @@
           <div class="step-num" style="width:36px;height:36px;background:var(--primary-cont);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--primary-dim);">3</div>
           <div style="padding-top:6px;">
             <div style="font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--on-surface);margin-bottom:4px;">Klicke auf der Folgeseite auf den WhatsApp-Button.</div>
-            <div style="font-size:13px;color:var(--on-surface-soft);line-height:1.6;">Dein Profil geht direkt an Michaela. Füge einfach noch 2–3 Fotos deiner Haare und Kopfhaut dazu — so kann Michaela dir eine individuelle und vertiefte Empfehlung geben.</div>
+            <div style="font-size:13px;color:var(--on-surface-soft);line-height:1.6;">Dein Profil geht direkt an <span class="js-partner">deine persönliche Beraterin</span>. Füge einfach noch 2–3 Fotos deiner Haare und Kopfhaut dazu — so kann <span class="js-partner">deine Beraterin</span> dir eine individuelle und vertiefte Empfehlung geben.</div>
           </div>
         </div>
 
@@ -1808,7 +1808,7 @@
         </button>
 
         <p class="email-privacy">
-          Kein Spam. Deine Daten bleiben bei Michaela.<br/>
+          Kein Spam. Deine Daten bleiben bei <span class="js-partner">deiner Beraterin</span>.<br/>
           Du kannst dich jederzeit abmelden. <a href="/datenschutz.html">Datenschutz</a>
         </p>
       </form>
@@ -1965,7 +1965,7 @@
       </div>
       <div class="sc-step">
         <div class="sc-step-num">2</div>
-        <div class="sc-step-text"><strong>An Michaela senden</strong> — dieses Profil + 2–3 Fotos deiner Haare per Instagram-DM.</div>
+        <div class="sc-step-text"><strong>An <span class="js-partner">deine Beraterin</span> senden</strong> — dieses Profil + 2–3 Fotos deiner Haare per Instagram-DM.</div>
       </div>
       <div class="sc-step">
         <div class="sc-step-num">3</div>
@@ -2004,6 +2004,22 @@
     const ds  = document.getElementById('footer-datenschutz');
     if (imp) imp.href = '/team/' + PARTNER.slug + '/impressum';
     if (ds)  ds.href  = '/team/' + PARTNER.slug + '/datenschutz';
+  })();
+
+  // Vorname der Partnerin schon VOR dem Absenden laden, damit die CTA-Texte
+  // personalisiert sind (statt pauschal "Michaela"). Faellt still auf die
+  // neutralen Texte ("deine persönliche Beraterin") zurueck, wenn nichts
+  // aufgeloest wird (Airtable nicht erreichbar o.ae.). Quelle: Airtable via Slug.
+  function applyPartnerName(first) {
+    if (!first) return;
+    PARTNER.first = first;
+    document.querySelectorAll('.js-partner').forEach(function (el) { el.textContent = first; });
+  }
+  (function () {
+    fetch('/.netlify/functions/partner-name?slug=' + encodeURIComponent(PARTNER.slug))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { if (d && d.first) applyPartnerName(d.first); })
+      .catch(function () { /* neutrale Fallback-Texte bleiben stehen */ });
   })();
 
   // State
@@ -2430,7 +2446,13 @@
       multiGoalEl.style.display = 'none';
     }
 
-    document.getElementById('r-product-text').textContent = d.product;
+    // Produkt-Text: hardcodiertes "Michaela"/"Michaelas" durch die echte Partnerin
+    // ersetzen (Vorname steht zu diesem Zeitpunkt aus der Server-Antwort fest).
+    document.getElementById('r-product-text').textContent =
+      d.product.replace(/Michaela(s)?\b/g, function (_, s) { return PARTNER.first + (s || ''); });
+
+    // Falls der Vorname erst mit dem Absenden kam: CTA-/Share-Card-Spans nachziehen.
+    if (PARTNER.first) applyPartnerName(PARTNER.first);
 
     // Share card
     document.getElementById('sc-name').textContent =
