@@ -2096,6 +2096,10 @@
     document.getElementById('q' + cur).classList.remove('active');
     document.getElementById('q' + (cur+1)).classList.add('active');
     updateProgress(cur+1);
+    // Plausible: pro Frage messen, wo abgebrochen wird (Breakdown nach Prop "frage")
+    if (typeof plausible === 'function') {
+      plausible('Frage beantwortet', { props: { frage: String(cur), partner: PARTNER.slug } });
+    }
     scrollTop();
   }
 
@@ -2109,6 +2113,10 @@
   function goToEmail(){
     document.getElementById('quiz-section').classList.remove('active');
     document.getElementById('email-section').classList.add('active');
+    // Plausible: hat die Kontakt-/Angaben-Seite erreicht (nach Q10)
+    if (typeof plausible === 'function') {
+      plausible('Kontaktseite erreicht', { props: { partner: PARTNER.slug } });
+    }
     scrollTop();
   }
 
@@ -2534,6 +2542,10 @@
       'Ich freue mich auf deine persönliche Empfehlung.\n\n' +
       'Hier noch einige Bilder von meinen Haaren und meiner Kopfhaut.';
 
+    // Plausible: WhatsApp-Dialog geoeffnet (echte Kontakt-Absicht, letzter Funnel-Schritt)
+    if (typeof plausible === 'function') {
+      plausible('WhatsApp geöffnet', { props: { partner: PARTNER.slug } });
+    }
     const url = 'https://wa.me/' + PARTNER.wa + '?text=' + encodeURIComponent(msg);
     window.open(url, '_blank', 'noopener');
     return false;
