@@ -99,6 +99,7 @@
     <h1 style="font-size:30px;margin-bottom:10px">Mein Bereich</h1>
     <p class="muted" style="margin-bottom:22px">Melde dich an, um deine Landingpage zu bearbeiten.</p>
     <button class="btn" onclick="netlifyIdentity.open()">Anmelden</button>
+    <div id="gateMsg" class="result" style="max-width:420px;margin:18px auto 0;text-align:left"></div>
     <p class="muted" style="max-width:380px;margin:20px auto 0;font-size:12px;line-height:1.6">
       <strong>Zum ersten Mal hier?</strong> Du hast per E-Mail eine Einladung bekommen. Klick den Link darin,
       setze ein eigenes Passwort, und du bist drin. Danach meldest du dich hier immer mit deiner E-Mail und diesem Passwort an.
@@ -437,9 +438,33 @@ function setupLeadsUI(){
 overlay && document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDetail(); });
 document.addEventListener('click', function(e){ if(e.target===el('overlay')) closeDetail(); });
 
+// Token-Typ VOR der Widget-Initialisierung festhalten — das Widget entfernt ihn
+// sofort aus der URL, sonst koennten wir spaeter nicht mehr darauf reagieren.
+const HAD_RECOVERY = /recovery_token=/.test(location.hash);
+const HAD_INVITE   = /invite_token=/.test(location.hash);
+let widgetOpened = false;
+
+function gateMsg(kind, msg){
+  const g = el('gateMsg'); if(!g) return;
+  g.className = 'result ' + (kind||'info'); g.textContent = msg;
+}
+
 netlifyIdentity.on('init', u=>{
-  if(u){ setupLeadsUI(); load(); }
-  else if(/(invite_token|recovery_token)=/.test(location.hash)){ netlifyIdentity.open(); }
+  if(u){ setupLeadsUI(); load(); return; }
+  // Bei gueltiger Einladung/Recovery oeffnet das Widget sein Formular selbst.
+  // Oeffnet sich nach kurzer Zeit nichts, ist der Link abgelaufen oder schon benutzt.
+  if(HAD_RECOVERY || HAD_INVITE){
+    setTimeout(()=>{
+      if(!widgetOpened && !netlifyIdentity.currentUser()){
+        gateMsg('warn', 'Dein Link ist abgelaufen oder wurde schon benutzt. Diese Links gelten nur einmal und nur etwa eine Stunde. Klick auf „Anmelden“ und dann „Passwort vergessen“ — du bekommst sofort einen neuen Link.');
+      }
+    }, 2500);
+  }
+});
+netlifyIdentity.on('open', ()=>{ widgetOpened = true; });
+netlifyIdentity.on('error', err=>{
+  const m = (err && err.message) ? err.message : String(err||'');
+  gateMsg('warn', 'Es gab ein Problem mit dem Anmelde-Dienst' + (m?(' ('+m+')'):'') + '. Bitte fordere über „Anmelden“ → „Passwort vergessen“ einen neuen Link an.');
 });
 netlifyIdentity.on('login', ()=>{ netlifyIdentity.close(); setupLeadsUI(); load(); });
 netlifyIdentity.on('logout', ()=>{ el('app').style.display='none'; el('gate').style.display='block'; });
