@@ -38,6 +38,59 @@
   #app{display:none}
   .hint{font-size:12px;color:var(--soft);margin-top:4px}
   a{color:var(--primary)}
+
+  /* Tab-Umschaltung Landingpage / Leads */
+  .maintabs{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:11px;padding:3px;margin:14px 0 4px}
+  .maintab{font-size:14px;font-weight:600;color:var(--soft);padding:8px 16px;border-radius:8px;cursor:pointer;border:none;background:none;font-family:inherit}
+  .maintab.on{background:var(--primary);color:#fff}
+  .panel-view{display:none}
+  .panel-view.on{display:block}
+
+  /* Leads-Dashboard */
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:16px 0 14px}
+  .tabs{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:11px;padding:3px}
+  .tab{font-size:13px;font-weight:500;color:var(--soft);padding:7px 13px;border-radius:8px;cursor:pointer;border:none;background:none;font-family:inherit}
+  .tab.on{background:var(--primary);color:#fff}
+  .filterbox{display:flex;align-items:center;gap:8px}
+  .filterbox label{font-size:13px;color:var(--soft)}
+  .filterbox select{width:auto;height:38px;font-size:13px;padding:0 10px}
+  .range{display:none;gap:8px;align-items:center;margin-bottom:14px}
+  .range.on{display:flex}
+  .range input{width:auto;height:38px;font-size:13px}
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+  .kpi .k{font-size:12px;color:var(--soft)}
+  .kpi .v{font-family:'EB Garamond',serif;font-size:25px;font-weight:600;margin-top:2px}
+  .lpanel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  table.leads{width:100%;border-collapse:collapse}
+  table.leads thead th{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--soft);font-weight:600;text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  table.leads tbody td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
+  table.leads tbody tr:last-child td{border-bottom:none}
+  table.leads tbody tr{cursor:pointer}
+  table.leads tbody tr:hover{background:var(--low)}
+  .nm{font-weight:600;display:flex;align-items:center;gap:10px}
+  .nm .av{width:32px;height:32px;border-radius:50%;background:var(--container);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px;flex-shrink:0}
+  .muted2{color:var(--soft)}
+  .empty{padding:28px 16px;text-align:center;color:var(--soft);font-size:14px}
+  .lpill{font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;white-space:nowrap;display:inline-block}
+  .chev{color:var(--soft);text-align:right}
+  .overlay{position:fixed;inset:0;background:rgba(26,28,26,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+  .overlay.on{display:flex}
+  .modal{background:#fff;width:100%;max-width:460px;max-height:90vh;overflow:auto;border-radius:18px}
+  .mtop{background:var(--primary);padding:18px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0}
+  .mtop .av{width:44px;height:44px;border-radius:50%;background:var(--primary-hover);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px}
+  .mtop .nm2{color:#fff;font-family:'EB Garamond',serif;font-size:19px;font-weight:600}
+  .mtop .dt2{color:var(--container);font-size:12px;margin-top:1px}
+  .mtop .x{margin-left:auto;color:#fff;background:rgba(255,255,255,.18);border:none;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer}
+  .mbody{padding:18px 20px}
+  .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:14px}
+  .fact{background:var(--low);border-radius:11px;padding:9px 11px}
+  .fact .fl{font-size:11px;color:var(--soft)}
+  .fact .fv{font-size:14px;font-weight:600;margin-top:1px}
+  .lmeta{font-size:13.5px;color:var(--soft);display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+  .lmeta b{font-weight:600;color:var(--ink)}
+  .wa{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:600;color:#fff;background:#25D366;padding:11px 17px;border-radius:11px}
+  @media(max-width:640px){ .kpis{grid-template-columns:repeat(2,1fr)} .col-mail{display:none} }
 </style>
 </head>
 <body>
@@ -54,9 +107,16 @@
 
   <div id="app">
     <header>
-      <h1>Meine Landingpage</h1>
+      <h1>Mein Bereich</h1>
       <button class="btn ghost sm" onclick="netlifyIdentity.logout()">Abmelden</button>
     </header>
+
+    <div class="maintabs" id="maintabs">
+      <button class="maintab on" data-v="lp">Meine Landingpage</button>
+      <button class="maintab" data-v="leads">Meine Leads</button>
+    </div>
+
+    <div id="panel-lp" class="panel-view on">
     <div id="status" class="muted" style="margin-bottom:4px"></div>
     <div id="previewline" class="muted"></div>
 
@@ -89,8 +149,42 @@
       <a class="btn ghost sm" id="previewBtn" href="#" target="_blank">Vorschau</a>
       <span class="muted" id="savehint">Nach dem Speichern prüft die KI deinen Text. Freigeschaltet wird durch Michaela.</span>
     </div>
+    </div><!-- /panel-lp -->
+
+    <div id="panel-leads" class="panel-view">
+      <div class="controls">
+        <div class="tabs" id="periodTabs">
+          <button class="tab" data-p="woche">Woche</button>
+          <button class="tab on" data-p="monat">Monat</button>
+          <button class="tab" data-p="quartal">Quartal</button>
+          <button class="tab" data-p="frei">Frei</button>
+        </div>
+        <div class="filterbox">
+          <label for="statusFilter">Status</label>
+          <select id="statusFilter"></select>
+        </div>
+      </div>
+      <div class="range" id="range">
+        <input type="date" id="from">
+        <span style="color:var(--soft);font-size:13px">bis</span>
+        <input type="date" id="to">
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <div id="leadsMsg" class="muted" style="margin-bottom:12px"></div>
+      <div class="lpanel">
+        <table class="leads">
+          <thead><tr>
+            <th>Name</th><th>Tel-Nr.</th><th class="col-mail">E-Mail</th><th>Datum</th><th>Status</th><th></th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p class="hint" style="margin-top:12px">Der Zeitraum filtert nach <b>Eingangsdatum</b> des Leads. Kundinnen-/Partnerinnen-Quote = wie viele der in diesem Zeitraum eingegangenen Leads inzwischen Kundin bzw. Partnerin sind.</p>
+    </div><!-- /panel-leads -->
   </div>
 </div>
+
+<div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
 
 <script>
 const TYPEN = ['Text + Button','Bild + Text','Vorher/Nachher','Zitat'];
@@ -184,11 +278,170 @@ async function save(){
   el('saveBtn').disabled=false; el('saveBtn').textContent='Speichern & prüfen';
 }
 
+/* ─────────────── Meine Leads (Dashboard) ─────────────── */
+const PROZESS = ['Warten auf WhatsApp','WhatsApp erhalten','Beratungsphase','Kunde VIP','Kunde Einzelhandel','Markenpartner','Später','Kein Interesse'];
+const LCOLORS = {
+  'Warten auf WhatsApp':{bg:'#FAEEDA',fg:'#633806'},
+  'WhatsApp erhalten':  {bg:'#E6F1FB',fg:'#0C447C'},
+  'Beratungsphase':     {bg:'#EEEDFE',fg:'#3C3489'},
+  'Kunde VIP':          {bg:'#E1F5EE',fg:'#085041'},
+  'Kunde Einzelhandel': {bg:'#EAF3DE',fg:'#27500A'},
+  'Markenpartner':      {bg:'#FAECE7',fg:'#712B13'},
+  'Später':             {bg:'#F1EFE8',fg:'#444441'},
+  'Kein Interesse':     {bg:'#FCEBEB',fg:'#791F1F'}
+};
+const KUNDIN = ['Kunde VIP','Kunde Einzelhandel'];
+const PARTNERST = ['Markenpartner'];
+
+let LEADS = [];
+let lstate = {period:'monat', status:'Alle', loaded:false};
+
+function initials(name){
+  const parts = String(name||'').trim().split(/\s+/).filter(Boolean);
+  if(!parts.length) return '–';
+  return (parts[0][0] + (parts[1]?parts[1][0]:'')).toUpperCase();
+}
+function lpill(s){ const c=LCOLORS[s]||{bg:'#eee',fg:'#333'}; return '<span class="lpill" style="background:'+c.bg+';color:'+c.fg+'">'+(s||'—')+'</span>'; }
+function fact(l,v){ return '<div class="fact"><div class="fl">'+l+'</div><div class="fv">'+(v||'—')+'</div></div>'; }
+function fmtDate(iso){ if(!iso) return '—'; const d=String(iso).slice(0,10).split('-'); return d.length===3 ? d[2]+'.'+d[1]+'.'+d[0] : iso; }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function waPhone(raw){ if(!raw) return ''; let n=String(raw).replace(/[^\d+]/g,'').replace(/^\+/,''); if(n.startsWith('00'))n=n.slice(2); else if(n.startsWith('0'))n='41'+n.slice(1); return n; }
+
+function inPeriod(iso){
+  if(!iso) return false;
+  const d=new Date(String(iso).slice(0,10)); const now=new Date(); const p=lstate.period;
+  if(p==='woche'){ const w=new Date(now); w.setDate(w.getDate()-6); w.setHours(0,0,0,0); return d>=w; }
+  if(p==='monat'){ return d.getFullYear()===now.getFullYear() && d.getMonth()===now.getMonth(); }
+  if(p==='quartal'){ const q=Math.floor(now.getMonth()/3); return d.getFullYear()===now.getFullYear() && Math.floor(d.getMonth()/3)===q; }
+  if(p==='frei'){ const f=new Date(el('from').value), t=new Date(el('to').value); return d>=f && d<=t; }
+  return true;
+}
+
+function renderLeads(){
+  const periodLeads = LEADS.filter(L=>inPeriod(L.datum));
+  const rows = periodLeads.filter(L=> lstate.status==='Alle' || (L.prozess||'')===lstate.status);
+  const total = periodLeads.length;
+  const kundinnen = periodLeads.filter(L=>KUNDIN.indexOf(L.prozess)>=0).length;
+  const partner = periodLeads.filter(L=>PARTNERST.indexOf(L.prozess)>=0).length;
+  const kq = total? Math.round(kundinnen/total*100):0;
+  const pq = total? Math.round(partner/total*100):0;
+  el('kpis').innerHTML =
+     '<div class="kpi"><div class="k">Leads</div><div class="v">'+total+'</div></div>'
+    +'<div class="kpi"><div class="k">Kundinnen</div><div class="v">'+kundinnen+'</div></div>'
+    +'<div class="kpi"><div class="k">Partnerinnen</div><div class="v">'+partner+'</div></div>'
+    +'<div class="kpi"><div class="k">Kundinnen-Quote</div><div class="v">'+kq+'%</div></div>'
+    +'<div class="kpi"><div class="k">Partnerinnen-Quote</div><div class="v">'+pq+'%</div></div>';
+  const tb=el('rows');
+  if(!rows.length){ tb.innerHTML='<tr><td colspan="6"><div class="empty">Keine Leads in diesem Zeitraum / Status.</div></td></tr>'; return; }
+  tb.innerHTML='';
+  rows.forEach(function(L){
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td><div class="nm"><span class="av">'+initials(L.name)+'</span>'+esc(L.name||'—')+'</div></td>'
+      +'<td class="muted2">'+esc(L.telefon||'—')+'</td>'
+      +'<td class="muted2 col-mail">'+esc(L.email||'—')+'</td>'
+      +'<td class="muted2">'+fmtDate(L.datum)+'</td>'
+      +'<td>'+lpill(L.prozess)+'</td>'
+      +'<td class="chev">›</td>';
+    tr.addEventListener('click', function(){ openDetail(L); });
+    tb.appendChild(tr);
+  });
+}
+
+const overlay=()=>el('overlay'), modalEl=()=>el('modal');
+function openDetail(L){
+  const opts = PROZESS.map(s=>'<option'+((L.prozess||'')===s?' selected':'')+'>'+s+'</option>').join('');
+  const wp = waPhone(L.telefon);
+  const waMsg = encodeURIComponent('Hallo '+(L.name||'')+'! Ich melde mich bezüglich deiner Haar-Analyse.');
+  modalEl().innerHTML =
+    '<div class="mtop"><div class="av">'+initials(L.name)+'</div>'
+      +'<div><div class="nm2">'+esc(L.name||'—')+'</div><div class="dt2">Analyse am '+fmtDate(L.datum)+'</div></div>'
+      +'<button class="x" id="closeX" aria-label="Schliessen">×</button></div>'
+    +'<div class="mbody">'
+      +'<div style="margin-bottom:14px">'+lpill(L.prozess)+(L.abschluss?' <span class="muted2" style="font-size:12px">· Abschluss '+fmtDate(L.abschluss)+'</span>':'')+'</div>'
+      +'<div class="facts">'+fact('Struktur',esc(L.struktur))+fact('Haar-Zustand',esc(L.haartyp))+fact('Kopfhaut',esc(L.kopfhaut))+fact('Hauptziel',esc(L.ziel))+fact('Alter',esc(L.alter))+fact('Kinder',esc(L.kinder))+fact('Allergien',esc(L.allergien))+fact('Waschen',esc(L.waschen))+'</div>'
+      +'<div class="lmeta"><div>✉︎ <b>'+esc(L.email||'—')+'</b></div><div>☎︎ <b>'+esc(L.telefon||'—')+'</b></div><div>MONAT-Interesse: <b>'+esc(L.monat||'—')+'</b></div>'+(L.wuensche?'<div>Alle Wünsche: <b>'+esc(L.wuensche)+'</b></div>':'')+'</div>'
+      +'<label>Status</label><select id="mSel">'+opts+'</select>'
+      +'<label>Notiz</label><textarea id="mNote" rows="3" placeholder="z. B. Sprachnachricht geschickt, meldet sich nach den Ferien…">'+esc(L.notizen||'')+'</textarea>'
+      +'<div id="mResult" class="result" style="margin-top:0;margin-bottom:12px"></div>'
+      +'<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">'
+        +'<button class="btn" id="mSave">Speichern</button>'
+        +(wp?'<a class="wa" target="_blank" href="https://wa.me/'+wp+'?text='+waMsg+'">WhatsApp schreiben</a>':'<span class="muted2" style="font-size:13px">Keine Telefonnummer</span>')
+      +'</div>'
+    +'</div>';
+  overlay().classList.add('on');
+  el('closeX').addEventListener('click', closeDetail);
+  el('mSave').addEventListener('click', function(){ saveLead(L); });
+}
+function closeDetail(){ overlay().classList.remove('on'); }
+
+async function saveLead(L){
+  const sel=el('mSel'), note=el('mNote'), btn=el('mSave'), res=el('mResult');
+  btn.disabled=true; btn.textContent='Speichere…';
+  res.className='result info'; res.textContent='Speichere…';
+  try{
+    const t=await jwt();
+    const r=await fetch('/.netlify/functions/partner-lead-save',{method:'POST',headers:{Authorization:'Bearer '+t,'Content-Type':'application/json'},body:JSON.stringify({id:L.id, prozess:sel.value, notizen:note.value})});
+    const d=await r.json();
+    if(!r.ok){ res.className='result warn'; res.textContent=d.error||'Speichern fehlgeschlagen.'; }
+    else{
+      L.prozess=d.lead.prozess; L.notizen=d.lead.notizen; L.abschluss=d.lead.abschluss;
+      res.className='result ok'; res.textContent='Gespeichert.';
+      renderLeads();
+      const pillHost=modalEl().querySelector('.mbody > div'); if(pillHost) pillHost.innerHTML=lpill(L.prozess)+(L.abschluss?' <span class="muted2" style="font-size:12px">· Abschluss '+fmtDate(L.abschluss)+'</span>':'');
+    }
+  }catch(e){ res.className='result warn'; res.textContent='Netzwerkfehler. Bitte erneut versuchen.'; }
+  btn.disabled=false; btn.textContent='Speichern';
+}
+
+async function loadLeads(){
+  el('leadsMsg').textContent='Lade Leads…';
+  try{
+    const t=await jwt();
+    const r=await fetch('/.netlify/functions/partner-leads',{headers:{Authorization:'Bearer '+t}});
+    const d=await r.json();
+    if(!r.ok){ el('leadsMsg').textContent=d.error||'Konnte Leads nicht laden.'; return; }
+    LEADS=d.leads||[]; lstate.loaded=true;
+    el('leadsMsg').textContent = LEADS.length? '' : 'Noch keine Leads — sobald jemand deine Analyse abschickt, erscheint sie hier.';
+    renderLeads();
+  }catch(e){ el('leadsMsg').textContent='Netzwerkfehler beim Laden der Leads.'; }
+}
+
+let leadsUIReady=false;
+function setupLeadsUI(){
+  if(leadsUIReady) return; leadsUIReady=true;
+  const sf=el('statusFilter');
+  sf.innerHTML='<option>Alle</option>'+PROZESS.map(s=>'<option>'+s+'</option>').join('');
+  sf.addEventListener('change', function(){ lstate.status=sf.value; renderLeads(); });
+  el('periodTabs').addEventListener('click', function(e){
+    if(e.target.tagName!=='BUTTON') return;
+    lstate.period=e.target.getAttribute('data-p');
+    document.querySelectorAll('#periodTabs .tab').forEach(t=>t.classList.toggle('on', t===e.target));
+    el('range').classList.toggle('on', lstate.period==='frei');
+    renderLeads();
+  });
+  // Frei-Zeitraum auf aktuellen Monat vorbelegen
+  const now=new Date(), y=now.getFullYear(), m=String(now.getMonth()+1).padStart(2,'0');
+  el('from').value=y+'-'+m+'-01'; el('to').value=now.toISOString().slice(0,10);
+  el('from').addEventListener('change', renderLeads);
+  el('to').addEventListener('change', renderLeads);
+  // Tab-Umschaltung Landingpage / Leads
+  el('maintabs').addEventListener('click', function(e){
+    if(e.target.tagName!=='BUTTON') return;
+    const v=e.target.getAttribute('data-v');
+    document.querySelectorAll('.maintab').forEach(t=>t.classList.toggle('on', t===e.target));
+    el('panel-lp').classList.toggle('on', v==='lp');
+    el('panel-leads').classList.toggle('on', v==='leads');
+    if(v==='leads' && !lstate.loaded) loadLeads();
+  });
+}
+overlay && document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDetail(); });
+document.addEventListener('click', function(e){ if(e.target===el('overlay')) closeDetail(); });
+
 netlifyIdentity.on('init', u=>{
-  if(u){ load(); }
+  if(u){ setupLeadsUI(); load(); }
   else if(/(invite_token|recovery_token)=/.test(location.hash)){ netlifyIdentity.open(); }
 });
-netlifyIdentity.on('login', ()=>{ netlifyIdentity.close(); load(); });
+netlifyIdentity.on('login', ()=>{ netlifyIdentity.close(); setupLeadsUI(); load(); });
 netlifyIdentity.on('logout', ()=>{ el('app').style.display='none'; el('gate').style.display='block'; });
 netlifyIdentity.init();
 </script>
